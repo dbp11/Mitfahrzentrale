@@ -12,3 +12,5 @@ gem "rspec-rails", ">= 2.6.1", :group => [:development, :test]
 gem "factory_girl_rails", ">= 1.1.rc1", :group => :test
 gem "devise", ">= 1.4.2"
 gem "rails-footnotes", ">= 3.7", :group => :development
+gem "cancan"
+gem "shoulda-matchers", :group => :test
