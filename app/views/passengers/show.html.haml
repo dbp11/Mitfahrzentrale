@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @passenger.user
+%p
+  %b Trip:
+  = @passenger.trip
+%p
+  %b Confirmed:
+  = @passenger.confirmed
+
+= link_to 'Edit', edit_passenger_path(@passenger)
+\|
+= link_to 'Back', passengers_path

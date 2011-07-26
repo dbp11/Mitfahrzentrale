@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Starts at:
+  = @request.starts_at
+%p
+  %b Ends at:
+  = @request.ends_at
+%p
+  %b Start time:
+  = @request.start_time
+%p
+  %b End time:
+  = @request.end_time
+%p
+  %b Baggage:
+  = @request.baggage
+%p
+  %b Comment:
+  = @request.comment
+
+= link_to 'Edit', edit_request_path(@request)
+\|
+= link_to 'Back', requests_path

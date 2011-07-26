@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Text:
+  = @rating.text
+%p
+  %b Mark:
+  = @rating.mark
+%p
+  %b Written by:
+  = @rating.written_by_id
+%p
+  %b Sent to:
+  = @rating.sent_to_id
+%p
+  %b Trip:
+  = @rating.trip
+
+= link_to 'Edit', edit_rating_path(@rating)
+\|
+= link_to 'Back', ratings_path

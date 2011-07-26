@@ -1,0 +1,28 @@
+= form_for @request do |f|
+  -if @request.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@request.errors.count, "error")} prohibited this request from being saved:"
+      %ul
+        - @request.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :starts_at
+    = f.text_field :starts_at
+  .field
+    = f.label :ends_at
+    = f.text_field :ends_at
+  .field
+    = f.label :start_time
+    = f.datetime_select :start_time
+  .field
+    = f.label :end_time
+    = f.datetime_select :end_time
+  .field
+    = f.label :baggage
+    = f.check_box :baggage
+  .field
+    = f.label :comment
+    = f.text_field :comment
+  .actions
+    = f.submit 'Save'

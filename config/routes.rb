@@ -1,4 +1,12 @@
 Mitfahrzentrale::Application.routes.draw do
+  resources :requests
+
+  resources :passengers
+
+  resources :trips
+
+  resources :ratings
+
   #get \"users\/show\"
 
   root :to => "home#index"
