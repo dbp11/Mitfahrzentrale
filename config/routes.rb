@@ -1,4 +1,6 @@
 Mitfahrzentrale::Application.routes.draw do
+  resources :cars
+
   resources :requests
 
   resources :passengers

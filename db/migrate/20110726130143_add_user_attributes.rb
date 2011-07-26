@@ -7,6 +7,7 @@ class AddUserAttributes < ActiveRecord::Migration
     add_column :users, :zipcode, :integer
     add_column :users, :phone, :integer
     add_column :users, :instantmessenger, :string
+    add_column :users, :city, :string
 
     end   
   
@@ -18,6 +19,7 @@ class AddUserAttributes < ActiveRecord::Migration
     remove_column :users, :zipcode, :integer
     remove_column :users, :phone, :integer
     remove_column :users, :instantmessenger, :string
+    remove_column :users, :city, :string
   end
 end
 
