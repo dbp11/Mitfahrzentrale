@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726141949) do
+ActiveRecord::Schema.define(:version => 20110726142610) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(:version => 20110726141949) do
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
+
+  create_table "ignore", :id => false, :force => true do |t|
+    t.integer "ignoring_id"
+    t.integer "ignored_id"
+  end
 
   create_table "passengers", :force => true do |t|
     t.integer  "user_id"
