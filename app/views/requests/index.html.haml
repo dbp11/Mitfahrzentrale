@@ -14,8 +14,10 @@
 
   - @requests.each do |request|
     %tr
-      %td= request.starts_at
-      %td= request.ends_at
+      %td= request.starts_at_N
+      %td= request.starts_at_E
+      %td= request.ends_at_N
+      %td= request.ends_at_E
       %td= request.start_time
       %td= request.end_time
       %td= request.baggage

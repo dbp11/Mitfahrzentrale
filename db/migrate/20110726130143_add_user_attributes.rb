@@ -4,6 +4,8 @@ class AddUserAttributes < ActiveRecord::Migration
     add_column :users, :age, :integer
     add_column :users, :sex, :boolean
     add_column :users, :address, :string
+    add_column :users, :addressN, :float
+    add_column :users, :addressE, :float
     add_column :users, :zipcode, :integer
     add_column :users, :phone, :integer
     add_column :users, :instantmessenger, :string
@@ -16,6 +18,8 @@ class AddUserAttributes < ActiveRecord::Migration
     remove_column :users, :age, :integer
     remove_column :users, :sex, :boolean
     remove_column :users, :address, :string
+    remove_column :users, :addressN, :float
+    remove_column :users, :addressE, :float
     remove_column :users, :zipcode, :integer
     remove_column :users, :phone, :integer
     remove_column :users, :instantmessenger, :string
