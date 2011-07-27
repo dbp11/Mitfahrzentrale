@@ -9,10 +9,11 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :trips
   has_many :passengers
-  has_and_belongs_to_many :requests
+  has_many :requests
 
   has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id" 
 
  has_and_belongs_to_many :ignored, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
+
 
 end

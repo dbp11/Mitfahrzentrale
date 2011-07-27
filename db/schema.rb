@@ -10,18 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726142610) do
+ActiveRecord::Schema.define(:version => 20110727131756) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
     t.integer  "seats"
     t.string   "trunk"
-    t.string   "type"
     t.string   "licence"
     t.float    "fuel_consumption"
     t.boolean  "smoker"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110726142610) do
   add_index "passengers", ["user_id"], :name => "index_passengers_on_user_id"
 
   create_table "ratings", :force => true do |t|
-    t.string   "text"
+    t.string   "comment"
     t.integer  "mark"
     t.integer  "written_by_id"
     t.integer  "sent_to_id"
@@ -54,28 +54,25 @@ ActiveRecord::Schema.define(:version => 20110726142610) do
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
 
-  create_table "requests", :force => true do |t|
-    t.float    "starts_at"
-    t.float    "ends_at"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.boolean  "baggage"
-    t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "requests" because of following StandardError
+#   Unknown type 'user' for column 'user'
 
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
     t.integer  "car_id"
-    t.float    "starts_at"
-    t.float    "ends_at"
+    t.float    "starts_at_N"
+    t.float    "starts_at_E"
+    t.float    "ends_at_E"
+    t.float    "ends_at_N"
+    t.string   "address_start"
+    t.string   "address_end"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "trunk"
+    t.integer  "baggage"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "trunk"
   end
 
   add_index "trips", ["car_id"], :name => "index_trips_on_car_id"
@@ -102,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20110726142610) do
     t.integer  "zipcode"
     t.integer  "phone"
     t.string   "instantmessenger"
+    t.string   "city"
     t.boolean  "email_notifications"
     t.boolean  "visible_phone"
     t.boolean  "visible_email"
