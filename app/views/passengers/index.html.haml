@@ -1,0 +1,23 @@
+%h1 Listing passengers
+
+%table
+  %tr
+    %th User
+    %th Trip
+    %th Confirmed
+    %th
+    %th
+    %th
+
+  - @passengers.each do |passenger|
+    %tr
+      %td= passenger.user
+      %td= passenger.trip
+      %td= passenger.confirmed
+      %td= link_to 'Show', passenger
+      %td= link_to 'Edit', edit_passenger_path(passenger)
+      %td= link_to 'Destroy', passenger, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Passenger', new_passenger_path

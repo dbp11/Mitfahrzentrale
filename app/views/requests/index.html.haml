@@ -1,0 +1,29 @@
+%h1 Listing requests
+
+%table
+  %tr
+    %th Starts at
+    %th Ends at
+    %th Start time
+    %th End time
+    %th Baggage
+    %th Comment
+    %th
+    %th
+    %th
+
+  - @requests.each do |request|
+    %tr
+      %td= request.starts_at
+      %td= request.ends_at
+      %td= request.start_time
+      %td= request.end_time
+      %td= request.baggage
+      %td= request.comment
+      %td= link_to 'Show', request
+      %td= link_to 'Edit', edit_request_path(request)
+      %td= link_to 'Destroy', request, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Request', new_request_path
