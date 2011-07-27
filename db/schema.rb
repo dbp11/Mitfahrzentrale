@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726141949) do
+ActiveRecord::Schema.define(:version => 20110726142610) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(:version => 20110726141949) do
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
 
+  create_table "ignore", :id => false, :force => true do |t|
+    t.integer "ignoring_id"
+    t.integer "ignored_id"
+  end
+
   create_table "passengers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
@@ -38,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110726141949) do
   add_index "passengers", ["user_id"], :name => "index_passengers_on_user_id"
 
   create_table "ratings", :force => true do |t|
-    t.string   "text"
+    t.string   "comment"
     t.integer  "mark"
     t.integer  "written_by_id"
     t.integer  "sent_to_id"
@@ -67,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20110726141949) do
     t.float    "ends_at"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "trunk"
+    t.integer  "baggage"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -94,9 +99,12 @@ ActiveRecord::Schema.define(:version => 20110726141949) do
     t.integer  "age"
     t.boolean  "sex"
     t.string   "address"
+    t.float    "addressN"
+    t.float    "addressE"
     t.integer  "zipcode"
     t.integer  "phone"
     t.string   "instantmessenger"
+    t.string   "city"
     t.boolean  "email_notifications"
     t.boolean  "visible_phone"
     t.boolean  "visible_email"
@@ -108,8 +116,5 @@ ActiveRecord::Schema.define(:version => 20110726141949) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_trips", :force => true do |t|
-  end
 
 end

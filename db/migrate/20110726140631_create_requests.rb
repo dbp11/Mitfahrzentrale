@@ -8,7 +8,7 @@ class CreateRequests < ActiveRecord::Migration
       t.boolean :baggage
       t.string :comment
 
-      t.timestamps
+      t.timestamps 
     end
   end
 end
