@@ -10,18 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20110727131756) do
+=======
 ActiveRecord::Schema.define(:version => 20110727124133) do
+>>>>>>> 8b11b40209f430aacb4d6af5f311c610bbcf33bc
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
     t.integer  "seats"
     t.string   "trunk"
-    t.string   "type"
     t.string   "licence"
     t.float    "fuel_consumption"
     t.boolean  "smoker"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
@@ -54,6 +58,10 @@ ActiveRecord::Schema.define(:version => 20110727124133) do
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
 
+<<<<<<< HEAD
+# Could not dump table "requests" because of following StandardError
+#   Unknown type 'user' for column 'user'
+=======
   create_table "requests", :force => true do |t|
     t.float    "starts_at_N"
     t.float    "starts_at_E"
@@ -68,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20110727124133) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+>>>>>>> 8b11b40209f430aacb4d6af5f311c610bbcf33bc
 
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
