@@ -10,11 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20110727131756) do
-=======
-ActiveRecord::Schema.define(:version => 20110727124133) do
->>>>>>> 8b11b40209f430aacb4d6af5f311c610bbcf33bc
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -58,35 +54,14 @@ ActiveRecord::Schema.define(:version => 20110727124133) do
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
 
-<<<<<<< HEAD
 # Could not dump table "requests" because of following StandardError
 #   Unknown type 'user' for column 'user'
-=======
-  create_table "requests", :force => true do |t|
-    t.float    "starts_at_N"
-    t.float    "starts_at_E"
-    t.float    "ends_at_N"
-    t.float    "ends_at_E"
-    t.string   "address_start"
-    t.string   "address_end"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.boolean  "baggage"
-    t.string   "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
->>>>>>> 8b11b40209f430aacb4d6af5f311c610bbcf33bc
 
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
     t.integer  "car_id"
-    t.float    "starts_at_N"
-    t.float    "starts_at_E"
-    t.float    "ends_at_E"
-    t.float    "ends_at_N"
-    t.string   "address_start"
-    t.string   "address_end"
+    t.float    "starts_at"
+    t.float    "ends_at"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "baggage"
