@@ -21,8 +21,9 @@ Mitfahrzentrale::Application.routes.draw do
   devise_for :users do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
+  match "users/edit_profile" => "users#edit_profil"
 
-  resources :users, :only => [:show, :edit, :update]
+  resources :users, :only => [:show, :edit, :edit_profil, :update]
 
 
   # The priority is based upon order of creation:

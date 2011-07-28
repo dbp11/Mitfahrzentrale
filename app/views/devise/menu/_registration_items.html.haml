@@ -1,6 +1,8 @@
 - if user_signed_in?
   %li
     = link_to('Edit account', edit_user_registration_path)
+    = link_to('Edit Profile', "/users/edit_profile")
+    // Unschöner Stil, besser die helper benutzen, guides.rubyonrails.org/routing.html
 - else
   %li
     = link_to('Sign up', new_user_registration_path)

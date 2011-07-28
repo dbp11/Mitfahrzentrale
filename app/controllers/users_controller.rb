@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+  def edit_profil
+    @user = current_user
+  end
 
 
   # PUT /users/1
