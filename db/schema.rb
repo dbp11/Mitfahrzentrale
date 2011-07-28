@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728111907) do
+ActiveRecord::Schema.define(:version => 20110728115640) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -103,11 +103,8 @@ ActiveRecord::Schema.define(:version => 20110728111907) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "user_type"
-    t.integer  "age"
     t.boolean  "sex"
     t.string   "address"
-    t.float    "addressN"
-    t.float    "addressE"
     t.integer  "zipcode"
     t.integer  "phone"
     t.string   "instantmessenger"
@@ -119,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20110728111907) do
     t.boolean  "visible_age"
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
+    t.date     "birthday"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
