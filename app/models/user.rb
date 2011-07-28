@@ -23,11 +23,4 @@ class User < ActiveRecord::Base
     name
   end
 
-  def validate
-     if validate_uniqueness_of:email 
-       then "Alles Okay"
-       else  
-  end
-
-end
 end
