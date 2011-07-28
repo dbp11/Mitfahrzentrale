@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728062829) do
+ActiveRecord::Schema.define(:version => 20110728065439) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
 
 # Could not dump table "requests" because of following StandardError
 #   Unknown type 'user' for column 'user'
+
+  create_table "tests", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.integer  "zahl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
