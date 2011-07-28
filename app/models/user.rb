@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   
   has_many :passengers
   has_many :requests
-  has_many :passenger_trips, :class_name => "Trip", :through => :passengers
-  has_many :driver_trips, :class_name =>"Trip"
+  has_many :passenger_trips, :class_name => "Trip", :through => :passengers, :source => :trip 
+  has_many :driver_trips, :class_name => "Trip", :foreign_key => "user_id"
  
   #Selbstreferenzierende Beziehung User ignores User
   has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id" 
