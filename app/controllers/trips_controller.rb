@@ -4,15 +4,17 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     #Dummy. Wird entfernt
-    @trips = Trip.all
+    temp = current_user
+    @trips = temp.driven
     #Alle Fahrten, die ich als Fahrer noch absolvieren muss
-    @future_trips = Trip.all
+    @future_trips = temp.driven
     #Alle Fahrten, die ich als Fahrer absolviert habe
-    @completed_trips = Trip.all
+    @completed_trips = temp.to_drive
     #Alle Fahrten, in denen ich Mitfahrer war
-    @ridden_trips = Trip.all
-    #Alle Fahrten, in denen ich Mitfahrer noch teilnehme
-    @future_ridden_trips = Trip.all
+    #@ridden_trips = temp.driven_with
+    #driven_with und to_drive_with funktioniert noch nicht -> undefined local variable or method `passenger_trip'
+    #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
+    #@future_ridden_trips = temp.to_drive_with
 
     respond_to do |format|
       format.html # index.html.erb
