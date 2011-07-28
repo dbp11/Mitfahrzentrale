@@ -10,21 +10,21 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
-  
-  has_many :passengers
-  has_many :requests
-  has_many :trips, :through => :passengers
+  has_many :cars, :dependent => :destroy
+  has_many :passengers, :dependent => :destroy 
+  has_many :requests, :dependent => :destroy
+  has_many :trips, :through => :passengers, :dependent => :destroy
 
  
   #Selbstreferenzierende Beziehung User ignores User
-  has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id" 
+  has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id"  
   has_and_belongs_to_many :ignored, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
   
   #Beziehung User schreibt User Nachricht/Rating
-  has_many :received_messages, :class_name => "Message", :as =>"receiver"
-  has_many :written_messages,  :class_name => "Message", :as =>"writer"
-  has_many :s_ratings, :class_name => "Rating", :as => "rater"
-  has_many :r_ratings, :class_name => "Rating", :as => "rated"
+  has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
+  has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
+  has_many :s_ratings, :class_name => "Rating", :as => "rater", :dependent => :destroy
+  has_many :r_ratings, :class_name => "Rating", :as => "rated", :dependent => :destroy
  
 
   def to_s
