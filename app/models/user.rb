@@ -10,18 +10,12 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
-<<<<<<< HEAD
-  has_many :passengers
-  has_many :requests
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, :source => :trip 
   has_many :driver_trips, :class_name => "Trip", :foreign_key => "user_id"
-=======
   has_many :cars, :dependent => :destroy
   has_many :passengers, :dependent => :destroy 
   has_many :requests, :dependent => :destroy
-  has_many :trips, :through => :passengers, :dependent => :destroy
 
->>>>>>> de8be3895514e44fac32d9014c23bcbbcfdaeed1
  
   #Selbstreferenzierende Beziehung User ignores User
   has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id"  
