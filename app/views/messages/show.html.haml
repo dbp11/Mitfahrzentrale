@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Message:
+  = @message.message
+%p
+  %b Writer:
+  = @message.writer
+%p
+  %b Receiver:
+  = @message.receiver
+
+= link_to 'Edit', edit_message_path(@message)
+\|
+= link_to 'Back', messages_path
