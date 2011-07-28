@@ -10,11 +10,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
-  
   has_many :passengers
   has_many :requests
-  has_many :trips, :through => :passengers
-
+  has_many :passenger_trips, :class_name => "Trip", :through => :passengers
+  has_many :driver_trips, :class_name =>"Trip"
  
   #Selbstreferenzierende Beziehung User ignores User
   has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id" 
@@ -26,9 +25,47 @@ class User < ActiveRecord::Base
   has_many :s_ratings, :class_name => "Rating", :as => "rater"
   has_many :r_ratings, :class_name => "Rating", :as => "rated"
  
+  #Methoden
 
   def to_s
     name
+  end
+  
+  def driven
+   erg [] 
+   trip.driver_trips.each do |x|
+     if x.end_time < Time.now
+       then erg = erg + x
+     end
+    return erg
+   end
+  end
+
+  def to_drive
+    erg []
+    trip.driver_trips.each do |x|
+      if x.end_time > Time.now
+        then erg = erg + x
+      end
+    end
+  end
+
+  def driven_with
+    erg []
+    trip.passenger_trip.each do |x|
+      if x.end_time < Time.now
+        then erg = erg + x
+      end
+    end
+  end
+
+  def to_drive_with
+    erg []
+    trip.passenger_trip.each do |x|
+      if x.end_time > Time.now
+        then erg = erg + x
+      end
+    end
   end
 
 end
