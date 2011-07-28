@@ -107,8 +107,6 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
     t.integer  "age"
     t.boolean  "sex"
     t.string   "address"
-    t.float    "addressN"
-    t.float    "addressE"
     t.integer  "zipcode"
     t.integer  "phone"
     t.string   "instantmessenger"

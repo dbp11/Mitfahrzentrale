@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :trips
   has_many :passengers
-  has_many :requests
+  has_many :requests, :dependent => :destroy
+  has_many :cars, :dependent => :destroy
 
   has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id" 
 
@@ -23,11 +24,5 @@ class User < ActiveRecord::Base
     name
   end
 
-  def validate
-     if validate_uniqueness_of:email 
-       then "Alles Okay"
-       else  
-  end
-
-end
+ end
 end
