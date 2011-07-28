@@ -5,6 +5,9 @@ class Car < ActiveRecord::Base
   #Beziehung
   belongs_to :user
 
+
+   validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}
+
   def to_s
     "Besitzer: " + user + "\n" +
     "Typ:" + description + "\n" +
