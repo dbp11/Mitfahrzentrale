@@ -1,4 +1,4 @@
--#
+-# Der Standard-Kram
   %h1 Listing trips
 
   %table
@@ -111,37 +111,36 @@
 
 %br/
 %br/
--#
-  %h3 Noch offene Mitfahrten
-  %table{:border => "1"}
-    - number = 1
-    -# Variablenname steht noch nicht fest
-    - @aa.each do |trip|
-      %tr
-        %td= number
-        %td
-          %table{:border => "1"}
-            %tr
-              %th
-              %th Adresse
-              %th Datum
-              %th Uhrzeit
-            %tr
-              %td Abfahrt:
-              %td
-                %input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
-              %td
-                %input{:type => "date", :readonly => "readonly", :value => trip.start_time.to_date}/
-              %td
-                %input{:type => "time", :readonly => "readonly", :value => trip.start_time.to_time}/
-            %tr
-              %td Ankunft:
-              %td
-                %input{:type => "text", :readonly => "readonly", :value => trip.address_end}/
-              %td
-                %input{:type => "date", :readonly => "readonly", :value => trip.end_time.to_date}/
-              %td
-                %input{:type => "time", :readonly => "readonly", :value => trip.end_time.to_time}/
+
+%h3 Noch offene Mitfahrten
+%table{:border => "1"}
+  - number = 1
+  - @future_ridden_trips.each do |trip|
+    %tr
+      %td= number
+      %td
+        %table{:border => "1"}
+          %tr
+            %th
+            %th Adresse
+            %th Datum
+            %th Uhrzeit
+          %tr
+            %td Abfahrt:
+            %td
+              %input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
+            %td
+              %input{:type => "date", :readonly => "readonly", :value => trip.start_time.to_date}/
+            %td
+              %input{:type => "time", :readonly => "readonly", :value => trip.start_time.to_time}/
+          %tr
+            %td Ankunft:
+            %td
+              %input{:type => "text", :readonly => "readonly", :value => trip.address_end}/
+            %td
+              %input{:type => "date", :readonly => "readonly", :value => trip.end_time.to_date}/
+            %td
+              %input{:type => "time", :readonly => "readonly", :value => trip.end_time.to_time}/
 
 %br/
 %br/
