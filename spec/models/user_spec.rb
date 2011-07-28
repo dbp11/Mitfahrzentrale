@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe User do
@@ -7,10 +8,47 @@ describe User do
       :name => "Example User",
       :email => "user@example.com",
       :password => "foobar",
-      :password_confirmation => "foobar"
+      :password_confirmation => "foobar",
+      :age => 55,
+      :sex => true,
+      :address => "bla Strasse 20 blahausen 4444",
+      :addressN => 45646,
+      :addressE => 12313,
+      :zipcode => 4444
     }
+    @attr_alternativ = { 
+      :name => "Example User",
+      :email => "balabla@fdnjf.com",
+      :password => "foobar",
+      :password_confirmation => "foobar",
+      :age => 55,
+      :sex => true,
+      :address => "bla Strasse 20 blahausen 4444",
+      :addressN => 45646,
+      :addressE => 12313,
+      :zipcode => 4444
+    }
+   @user = User.create!(@attr_alternativ) 
   end
-  
+
+  it "Kontrolle ob die Methode driven richtig funktioniert" do
+    past = Time.now - 1.day
+    old = Trip.new
+    old.user = @user
+    old.end_time = past
+    old.save
+    @user.driven.include? old
+  end
+
+  it "Kontrolle ob die Methode to_drive richtig funktioniert" do
+    future = Time.now + 1.day
+    newtrip = Trip.new
+    newtrip.user = @user
+    newtrip.end_time = future    
+    newtrip.save
+    @user.to_drive.include? future
+  end
+
   it "should create a new instance given a valid attribute" do
     User.create!(@attr)
   end
