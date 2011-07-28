@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :r_ratings, :class_name => "Rating", :as => "rated"
  
 
- def to_s
+  def to_s
     name
   end
 

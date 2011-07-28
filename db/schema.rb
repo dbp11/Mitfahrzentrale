@@ -65,8 +65,21 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
 
-# Could not dump table "requests" because of following StandardError
-#   Unknown type 'user' for column 'user'
+  create_table "requests", :force => true do |t|
+    t.float    "starts_at_N"
+    t.float    "starts_at_E"
+    t.float    "ends_at_N"
+    t.float    "ends_at_E"
+    t.string   "address_start"
+    t.string   "address_end"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "baggage"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
@@ -107,6 +120,8 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
     t.integer  "age"
     t.boolean  "sex"
     t.string   "address"
+    t.float    "addressN"
+    t.float    "addressE"
     t.integer  "zipcode"
     t.integer  "phone"
     t.string   "instantmessenger"
@@ -122,8 +137,5 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_trips", :force => true do |t|
-  end
 
 end
