@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727131756) do
+ActiveRecord::Schema.define(:version => 20110728062829) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(:version => 20110727131756) do
     t.integer "ignoring_id"
     t.integer "ignored_id"
   end
+
+  create_table "messages", :force => true do |t|
+    t.text     "message"
+    t.integer  "writer_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
+  add_index "messages", ["writer_id"], :name => "index_messages_on_writer_id"
 
   create_table "passengers", :force => true do |t|
     t.integer  "user_id"
