@@ -3,9 +3,9 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     @trips = Trip.all
-    #@future_trips 
-    #@completed_trips
-    #@ridden_trips
+    @future_trips = Trips.all
+    @completed_trips = Trips.all
+    @ridden_trips = Trips.all
 
     respond_to do |format|
       format.html # index.html.erb
