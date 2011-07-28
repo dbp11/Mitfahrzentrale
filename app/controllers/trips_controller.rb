@@ -1,8 +1,18 @@
 class TripsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /trips
   # GET /trips.json
   def index
+    #Dummy. Wird entfernt
     @trips = Trip.all
+    #Alle Fahrten, die ich als Fahrer noch absolvieren muss
+    @future_trips = Trip.all
+    #Alle Fahrten, die ich als Fahrer absolviert habe
+    @completed_trips = Trip.all
+    #Alle Fahrten, in denen ich Mitfahrer war
+    @ridden_trips = Trip.all
+    #Alle Fahrten, in denen ich Mitfahrer noch teilnehme
+    @future_ridden_trips = Trip.all
 
     respond_to do |format|
       format.html # index.html.erb

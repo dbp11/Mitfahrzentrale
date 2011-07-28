@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728062829) do
+ActiveRecord::Schema.define(:version => 20110728111907) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -79,11 +79,10 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
     t.string   "address_end"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "baggage"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "trunk"
+    t.boolean  "baggage"
   end
 
   add_index "trips", ["car_id"], :name => "index_trips_on_car_id"
@@ -124,5 +123,8 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_trips", :force => true do |t|
+  end
 
 end
