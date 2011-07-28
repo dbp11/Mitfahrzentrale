@@ -10,18 +10,18 @@
   %tr
     %td{:class=>"label"}Geburtsdatum
     %td 
-      = f.date :required=>"required" :value=>@profildaten.gebdatum
+      = f.date :birthday :required=>"required"
     %td{:class=>"label"}sichtbar
     %td
       = f.checkbox :value=>"sichtbar"
   %tr
     %td{:class=>"label"}Geschlecht
     %td 
-      = f.select_tag "Geschlecht", options_for_select(["Maennlich", "Weiblich"], "Weiblich")
+      = f.select_tag :sex "Geschlecht", options_for_select(["Maennlich", "Weiblich"], @user.sex? ? "Maennlich" : "Weiblich")
   %tr
     %td{:class=>"label"}Strasse und Hausnummer
     %td
-      = f.text :required="required"
+      = f.text :address :required="required" 
     %td{:class=>"label"}sichtbar
     %td
       = f.checkbox :value=>"sichtbar"
@@ -29,7 +29,7 @@
   %tr
     %td{:class=>"label"}PLZ
     %td
-      = f.number :required="required"
+      = f.number :zipcode :required="required"
     %td{:class=>"label"}sichtbar
     %td
       = f.checkbox :value=>"sichtbar"
@@ -38,7 +38,7 @@
   %tr
     %td{:class=>"label"}Ort
     %td
-      = f.text :required="required"
+      = f.text :city :required="required"
     %td{:class=>"label"}sichtbar
     %td
       = f.checkbox :value=>"sichtbar"
@@ -46,7 +46,7 @@
   %tr
     %td{:class=>"label"}InstantMassengerDaten
     %td
-      = f.text :required="required"
+      = f.text :instantmassenger :required="required"
     %td{:class=>"label"}sichtbar
     %td
       = f.checkbox :value=>"sichtbar"
