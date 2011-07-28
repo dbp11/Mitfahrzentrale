@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728062829) do
+ActiveRecord::Schema.define(:version => 20110728111907) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
   add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
   add_index "messages", ["writer_id"], :name => "index_messages_on_writer_id"
 
+  create_table "nachrichts", :force => true do |t|
+    t.string   "text"
+    t.integer  "test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "nachrichts", ["test_id"], :name => "index_nachrichts_on_test_id"
+
   create_table "passengers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
@@ -68,6 +77,14 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
 # Could not dump table "requests" because of following StandardError
 #   Unknown type 'user' for column 'user'
 
+  create_table "tests", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.integer  "zahl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
     t.integer  "car_id"
@@ -79,11 +96,10 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
     t.string   "address_end"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "baggage"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "trunk"
+    t.boolean  "baggage"
   end
 
   add_index "trips", ["car_id"], :name => "index_trips_on_car_id"
@@ -107,8 +123,6 @@ ActiveRecord::Schema.define(:version => 20110728062829) do
     t.integer  "age"
     t.boolean  "sex"
     t.string   "address"
-    t.float    "addressN"
-    t.float    "addressE"
     t.integer  "zipcode"
     t.integer  "phone"
     t.string   "instantmessenger"

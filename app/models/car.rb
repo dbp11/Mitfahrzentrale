@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class Car < ActiveRecord::Base
+  
+  #Beziehung
   belongs_to :user
 
 
