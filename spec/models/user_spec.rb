@@ -31,18 +31,22 @@ describe User do
    @user = User.create!(@attr_alternativ) 
   end
 
-  it "klajsdlfkjasölkdjf" do
+  it "Kontrolle ob die Methode driven richtig funktioniert" do
     past = Time.now - 1.day
-    future = Time.now + 1.day
     old = Trip.new
     old.user = @user
     old.end_time = past
+    old.save
+    @user.driven.include? old
+  end
+
+  it "Kontrolle ob die Methode to_drive richtig funktioniert" do
+    future = Time.now + 1.day
     newtrip = Trip.new
     newtrip.user = @user
-    newtrip.end_time = future
-    old.save
+    newtrip.end_time = future    
     newtrip.save
-    @user.driven.include? old
+    @user.to_drive.include? future
   end
 
   
