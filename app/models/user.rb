@@ -34,40 +34,43 @@ class User < ActiveRecord::Base
   end
   
   def driven
-   erg [] 
-   trip.driver_trips.each do |x|
+   erg=[] 
+   driver_trips.each do |x|
      if x.end_time < Time.now
-       then erg = erg + x
+       then erg = erg << x
      end
-    return erg
    end
+   return erg
   end
 
   def to_drive
-    erg []
-    trip.driver_trips.each do |x|
+    erg=[]
+    driver_trips.each do |x|
       if x.end_time > Time.now
-        then erg = erg + x
+        then erg = erg << x
       end
     end
+    return erg
   end
 
   def driven_with
-    erg []
-    trip.passenger_trip.each do |x|
+    erg=[]
+    passenger_trip.each do |x|
       if x.end_time < Time.now
-        then erg = erg + x
+        then erg = erg << x
       end
     end
+    return erg
   end
 
   def to_drive_with
-    erg []
-    trip.passenger_trip.each do |x|
+    erg=[]
+    passenger_trip.each do |x|
       if x.end_time > Time.now
-        then erg = erg + x
+        then erg = erg << x
       end
     end
+    return erg
   end
 
 end
