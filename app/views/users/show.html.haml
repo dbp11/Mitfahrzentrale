@@ -1,24 +1,53 @@
-%tr
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
+%table.data_table
 
-%p
-  Geschlecht: #{@user.sex? ? "Maennlich" : "Weiblich"}
+  %tr.data_table_row
+    %td.data_table_left
+      User: 
+    %td.data_table_right
+      #{@user.name}
+  %tr.data_table_row
+    %td.data_table_left
+      Email:
+    %td.data_table_right
+      #{@user.email if @user.email}
 
-%p
-  Adresse: #{@user.visible_address? ? @user.address : "versteckt"}
+  %tr.data_table_row
+    %td.data_table_left
+      Geschlecht:
+    %td.data_table_right
+      #{@user.sex? ? "Maennlich" : "Weiblich"}
 
-%p
-  PLZ: #{@user.zipcode}
-%p
-  Ort: #{@user.city}
+  %tr.data_table_row
+    %td.data_table_left
+      Adresse: 
+    %td.data_table_right
+      #{@user.visible_address? ? @user.address : "versteckt"}
 
-%p
-  Alter: #{@user.visible_birthdate? ? @user.birthdate : "versteckt"}
+  %tr.data_table_row
+    %td.data_table_left
+      PLZ: 
+    %td.data_table_right
+      #{@user.zipcode}
+  %tr.data_table_row
+    %td.data_table_left
+      Ort: 
+    %td.data_table_right
+      #{@user.city}
 
-%p
-  InstantMassengerDaten: #{@user.visible_im? ? @user.instantmassenger : "versteckt"}
+  %tr.data_table_row
+    %td.data_table_left
+      Alter: 
+    %td.data_table_right
+      #{@user.visible_age? ? @user.age : "versteckt"}
 
-%p
-  Telefon: #{@user.visible_phone? ? @user.phone : "versteckt"}
+  %tr.data_table_row
+    %td.data_table_left
+      InstantMassenger: 
+    %td.data_table_right 
+      #{@user.visible_im? ? @user.instantmassenger : "versteckt"}
+
+  %tr.data_table_row
+    %td.data_table_left
+      Telefon: 
+    %td.data_table_right 
+      #{@user.visible_phone? ? @user.phone : "versteckt"}
