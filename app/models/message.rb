@@ -1,6 +1,5 @@
 class Message < ActiveRecord::Base
  
-  
    
    #Beziehung Message zu User als writer oder receiver
    belongs_to  :writer, :class_name => "User"
@@ -8,5 +7,7 @@ class Message < ActiveRecord::Base
    def to_s
      writer+ " an " +receiver+ ": " +message
    end
+
+
 
 end
