@@ -60,8 +60,12 @@ ActiveRecord::Schema.define(:version => 20110727131756) do
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
     t.integer  "car_id"
-    t.float    "starts_at"
-    t.float    "ends_at"
+    t.float    "starts_at_N"
+    t.float    "starts_at_E"
+    t.float    "ends_at_E"
+    t.float    "ends_at_N"
+    t.string   "address_start"
+    t.string   "address_end"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "baggage"
@@ -109,8 +113,5 @@ ActiveRecord::Schema.define(:version => 20110727131756) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_trips", :force => true do |t|
-  end
 
 end
