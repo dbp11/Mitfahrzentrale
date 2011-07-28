@@ -1,5 +1,33 @@
 %h1 New rating
 
-= render 'form'
-
-= link_to 'Back', ratings_path
+= form_for @rating do |f|
+	-if @rating.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@rating.errors.count, "error")} prohibited this rating from being saved:"
+			%ul
+				- @rating.errors.full_messages.each do |msg|
+					%li= msg
+	%p
+		= 'Bewertung für '
+		- if @rating.rated == @rating.trip.user
+			= 'Fahrer '
+		- else
+			= 'Mitfahrer '
+		= @rating.rated.name
+		= ' auf der Fahrt '
+		= @rating.trip
+	%table.form_table
+		%tr.form_table_row
+			%td.form_table_left
+				= f.label :mark
+			%td.form_table_right
+				= f.select("mark",{"1" => "1", "2" => "2"})
+		%tr.form_table_row
+			%td.form_table_left
+				= f.label :comment
+			%td.form_table_right
+				= f.text_area :comment
+		%tr.form_table_row
+			%td.form_table_left
+			%td.form_tanle_right
+				= f.submit 'Bewerten'
