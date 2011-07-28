@@ -24,8 +24,8 @@ class User < ActiveRecord::Base
   #Beziehung User schreibt User Nachricht/Rating
   has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
   has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
-  has_many :s_ratings, :class_name => "Rating", :as => "rater", :dependent => :destroy
-  has_many :r_ratings, :class_name => "Rating", :as => "rated", :dependent => :destroy
+  has_many :s_ratings, :class_name => "Rating", :as => "rater", :foreign_key => "written_by_id", :dependent => :destroy
+  has_many :r_ratings, :class_name => "Rating", :as => "rated", :foreign_key => "sent_to_id", :dependent => :destroy
  
   #Methoden
 
