@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
  has_and_belongs_to_many :ignored, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
 
+ belongs_to :message
+
   def to_s
     name
   end
