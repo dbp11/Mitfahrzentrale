@@ -53,9 +53,10 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.json
   def create
-    
+    #Die eingehenden Daten empfangen und an eine Methode übergeben, die ein Array an möglichen Orten zurückgeben
+    #Redirecten mit Parametern? An die new Action?
     @trip = Trip.new(params[:trip])
-    
+     
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
