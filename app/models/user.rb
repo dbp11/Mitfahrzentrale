@@ -24,8 +24,8 @@ class User < ActiveRecord::Base
   #Beziehung User schreibt User Nachricht/Rating
   has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
   has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
-  has_many :s_ratings, :class_name => "Rating", :as => "rater", :dependent => :destroy
-  has_many :r_ratings, :class_name => "Rating", :as => "rated", :dependent => :destroy
+  has_many :s_ratings, :class_name => "Rating", :as => "rater", :foreign_key => "written_by_id", :dependent => :destroy
+  has_many :r_ratings, :class_name => "Rating", :as => "rated", :foreign_key => "sent_to_id", :dependent => :destroy
  
   #Methoden
 
@@ -34,40 +34,43 @@ class User < ActiveRecord::Base
   end
   
   def driven
-   erg [] 
-   trip.driver_trips.each do |x|
+   erg=[] 
+   driver_trips.each do |x|
      if x.end_time < Time.now
-       then erg = erg + x
+       then erg = erg << x
      end
-    return erg
    end
+   return erg
   end
 
   def to_drive
-    erg []
-    trip.driver_trips.each do |x|
+    erg=[]
+    driver_trips.each do |x|
       if x.end_time > Time.now
-        then erg = erg + x
+        then erg = erg << x
       end
     end
+    return erg
   end
 
   def driven_with
-    erg []
-    trip.passenger_trip.each do |x|
+    erg=[]
+    passenger_trip.each do |x|
       if x.end_time < Time.now
-        then erg = erg + x
+        then erg = erg << x
       end
     end
+    return erg
   end
 
   def to_drive_with
-    erg []
-    trip.passenger_trip.each do |x|
+    erg=[]
+    passenger_trip.each do |x|
       if x.end_time > Time.now
-        then erg = erg + x
+        then erg = erg << x
       end
     end
+    return erg
   end
 
 end
