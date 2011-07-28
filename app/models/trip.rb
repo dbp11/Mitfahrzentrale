@@ -14,7 +14,17 @@ class Trip < ActiveRecord::Base
   end
 
   def get_similar_requests
-    #geocoder...
+    distance = distance_between [starts_at_N, starts_at_E] [ends_at_N, ends_at_E] {:km}
+    erg = {}
+    @trips = Requests.all.each do |t|
+      distance_start = distance_between [t.starts_at_N, t.starts_at_E] [starts_at_N, starts_at_E] {:km}
+      distance_end =  distance_between [t.ends_at_N, t.ends_at_E] [ends_at_N, ends_at_E] {:km}
+      distance_t =  distance_between [t.starts_at_N, t.start_at_E] [t.ends_at_N, t.ends_at_E] {:km}
+      difference = distance_t + distance_start + distance_end - distance
+      erg[t.id] = difference
+    end
+
+    erg.sort{|a,b| a[1] <=> b[1]}
   end
   
 end
