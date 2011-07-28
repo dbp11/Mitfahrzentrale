@@ -12,5 +12,9 @@ class Trip < ActiveRecord::Base
   def to_s
     id 
   end
+
+  def get_similar_requests
+    #geocoder...
+  end
   
 end
