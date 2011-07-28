@@ -2,3 +2,23 @@
   User: #{@user.name}
 %p
   Email: #{@user.email if @user.email}
+
+%p
+  Geschlecht: #{@user.sex? ? "Maennlich" : "Weiblich"}
+
+%p
+  Adresse: #{@user.visible_address? ? @user.address : "versteckt"}
+
+%p
+  PLZ: #{@user.zipcode}
+%p
+  Ort: #{@user.city}
+
+%p
+  Alter: #{@user.visible_birthdate? ? @user.birthdate : "versteckt"}
+
+%p
+  InstantMassengerDaten: #{@user.visible_im? ? @user.instantmassenger : "versteckt"}
+
+%p
+  Telefon: #{@user.visible_phone? ? @user.phone : "versteckt"}
