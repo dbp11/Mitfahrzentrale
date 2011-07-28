@@ -1,11 +1,12 @@
 class TripsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /trips
   # GET /trips.json
   def index
     @trips = Trip.all
-    @future_trips = Trips.all
-    @completed_trips = Trips.all
-    @ridden_trips = Trips.all
+    @future_trips = Trip.all
+    @completed_trips = Trip.all
+    @ridden_trips = Trip.all
 
     respond_to do |format|
       format.html # index.html.erb
