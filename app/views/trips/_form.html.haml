@@ -1,4 +1,5 @@
-= form_for @trip do |f|
+-#
+  = form_for @trip do |f|
   -if @trip.errors.any?
     #error_explanation
       %h2= "#{pluralize(@trip.errors.count, "error")} prohibited this trip from being saved:"
@@ -38,3 +39,44 @@
     = f.text_area :comment
   .actions
     = f.submit 'Save'
+-# Beispiel für Datenübergabe an action new
+  = form_tag("new", :method => "post") do
+    = text_field_tag(:temp)
+    = submit_tag "Schick den Mist ins Nirvana!"
+
+
+= form_tag("new", :method => "post") do
+  %table.form_table
+    %tr.form_table_row
+      %td.form_left Start-Ort
+      -# entweder das textfield unten oder eine select-box
+      %td.form_right
+        = text_field_tag(:address_start, nil, :required => "required")
+    %tr
+      %td Ziel-Ort
+      -# entweder das textfield unten oder eine select-box
+      %td
+        = text_field_tag(:address_end, nil, :required => "required")
+    %tr
+      %td Abfahrt-Datum
+      %td
+        %input{:name => "date_start", :required => "required", :type => "date"}/
+    %tr
+      %td Abfahrt-Uhrzeit
+      %td
+        %input{:name => "time_start", :required => "required", :type => "time"}/
+    %tr
+      %td Fahrzeug
+      %td
+        %select{:name => "car", :required => "required"}
+          - @fahrzeuge.each do |f|
+            %option{:value => f} f.description
+    %tr
+    %tr
+      %td
+        = submit_tag("Erstellen")
+
+
+
+
+

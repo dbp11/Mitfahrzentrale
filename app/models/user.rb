@@ -3,15 +3,16 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+  #Validations:
   # Stat. Integrität: Email muss vorhanden, unique und min 8 char lang sein
   validates :email, :uniqueness => true, :presence => true, :length => {:minimum => 8}
-  
+  #Vermeidung von Nullwerten 
   validates_presence_of :name, :address, :zipcode, :city, :birthday 
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :birthday, :address, :zipcode, :city
   
+  #Beziehungen:
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, :source => :trip 
   has_many :driver_trips, :class_name => "Trip", :foreign_key => "user_id"
   has_many :cars, :dependent => :destroy
@@ -29,12 +30,13 @@ class User < ActiveRecord::Base
   has_many :written_ratings, :class_name => "Rating", :as => "writer", :dependent => :destroy
   has_many :received_ratings, :class_name => "Rating", :as => "receiver", :dependent => :destroy
  
-  #Methoden
-
+  #Methoden:
+  #toString Methode für User
   def to_s
     name
   end
   
+  #Vergangene angebotene Trips des Users
   def driven
    erg=[] 
    driver_trips.each do |x|
@@ -45,6 +47,7 @@ class User < ActiveRecord::Base
    return erg
   end
 
+  #Noch nicht vergangene angebotene Trips des Users
   def to_drive
     erg=[]
     driver_trips.each do |x|
@@ -55,6 +58,7 @@ class User < ActiveRecord::Base
     return erg
   end
 
+  #Vergangene Suchen des Users
   def driven_with
     erg=[]
     passenger_trips.each do |x|
@@ -65,6 +69,7 @@ class User < ActiveRecord::Base
     return erg
   end
 
+  #Noch laufende Suchen des Users
   def to_drive_with
     erg=[]
     passenger_trips.each do |x|
@@ -74,5 +79,4 @@ class User < ActiveRecord::Base
     end
     return erg
   end
-
 end
