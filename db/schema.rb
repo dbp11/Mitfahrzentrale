@@ -56,11 +56,11 @@ ActiveRecord::Schema.define(:version => 20110728111907) do
   create_table "ratings", :force => true do |t|
     t.string   "comment"
     t.integer  "mark"
-    t.integer  "written_by_id"
-    t.integer  "sent_to_id"
     t.integer  "trip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
+    t.integer  "receiver_id"
   end
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
@@ -103,7 +103,6 @@ ActiveRecord::Schema.define(:version => 20110728111907) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "user_type"
-    t.integer  "age"
     t.boolean  "sex"
     t.string   "address"
     t.float    "addressN"
@@ -119,9 +118,13 @@ ActiveRecord::Schema.define(:version => 20110728111907) do
     t.boolean  "visible_age"
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
+    t.date     "birthday"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_trips", :force => true do |t|
+  end
 
 end
