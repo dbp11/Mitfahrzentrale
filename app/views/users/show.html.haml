@@ -21,7 +21,7 @@
     %td.data_table_left#form_table_left
       Adresse: 
     %td.data_table_right#form_table_right
-      #{@user.visible_address? ? @user.address : "versteckt"}
+      #{@user.visible_address? ? "versteckt" : @user.address}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
@@ -38,16 +38,16 @@
     %td.data_table_left#form_table_left
       Alter: 
     %td.data_table_right#form_table_right
-      #{@user.visible_age? ? @user.age : "versteckt"}
+      #{@user.visible_age? ? "versteckt" : @user.birthday}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       InstantMassenger: 
     %td.data_table_right#form_table_right
-      #{@user.visible_im? ? @user.instantmassenger : "versteckt"}
+      #{@user.visible_im? ? "versteckt" : @user.instantmessenger}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       Telefon: 
     %td.data_table_right#form_table_right 
-      #{@user.visible_phone? ? @user.phone : "versteckt"}
+      #{@user.visible_phone? ? "versteckt" : @user.phone}

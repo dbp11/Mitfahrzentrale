@@ -37,21 +37,19 @@
         = f.number_field:zipcode, :required=>"required"
       %td{:class=>"label"}sichtbar
       %td
-        = f.check_box:visible_zipcode
+        = f.check_box:visible_zip
 
 
     %tr#form_table_row
       %td{:class=>"label"}Ort
       %td
         = f.text_field:city, :required=>"required"
-      %td{:class=>"label"}sichtbar
-      %td
-        = f.check_box:visible_city
+
 
     %tr#form_table_row
       %td{:class=>"label", :id=>"form_table_left"}Telefon
       %td
-        = f.number_field:phone, :required=>"required"
+        = f.number_field:phone 
       %td{:class=>"label"}sichtbar
       %td
         = f.check_box:visible_phone
@@ -61,7 +59,7 @@
     %tr#form_table_row
       %td{:class=>"label"}InstantMassengerDaten
       %td
-        = f.text_field:instantmassenger, :required=>"required"
+        = f.text_field:instantmessenger
       %td{:class=>"label"}sichtbar
       %td
         = f.check_box:visible_im
