@@ -1,6 +1,8 @@
+
+
 class Trip < ActiveRecord::Base
 
-  #Modellierung der Beziehungen
+#Modellierung der Beziehungen
   belongs_to :user
   belongs_to :car 
   has_many :users, :class_name => "User", :as => "passenger_trip", :through => :passengers, :source => :user, :dependent => :destroy
@@ -13,4 +15,24 @@ class Trip < ActiveRecord::Base
     id 
   end
   
+
+  def get_commited_passengers  
+    erg []
+    self.passengers.each do |x|
+      if x.commited? 
+        erg = erg << x.user_id
+      end
+    end
+    return erg
+  end
+
+  def get_uncommited_passengers
+     erg []
+     self.passengers.each do |x|
+      if x.commited? 
+        erg = erg << x.user_id
+      end
+     end
+     return erg
+  end  
 end
