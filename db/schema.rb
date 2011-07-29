@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729110837) do
+ActiveRecord::Schema.define(:version => 20110729124114) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -68,13 +68,17 @@ ActiveRecord::Schema.define(:version => 20110729110837) do
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
 
-# Could not dump table "requests" because of following StandardError
-#   Unknown type 'user' for column 'user'
-
-  create_table "tests", :force => true do |t|
-    t.string   "email"
-    t.string   "name"
-    t.integer  "zahl"
+  create_table "requests", :force => true do |t|
+    t.float    "starts_at_N"
+    t.float    "starts_at_E"
+    t.float    "ends_at_N"
+    t.float    "ends_at_E"
+    t.string   "address_start"
+    t.string   "address_end"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "baggage"
+    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -130,8 +134,13 @@ ActiveRecord::Schema.define(:version => 20110729110837) do
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
     t.date     "birthday"
-    t.boolean  "visible_zip"
     t.string   "role"
+    t.boolean  "visible_zip"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.boolean  "visible_city"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
