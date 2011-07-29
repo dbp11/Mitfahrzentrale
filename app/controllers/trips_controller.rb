@@ -11,10 +11,10 @@ class TripsController < ApplicationController
     #Alle Fahrten, die ich als Fahrer absolviert habe
     @completed_trips = temp.to_drive
     #Alle Fahrten, in denen ich Mitfahrer war
-    #@ridden_trips = temp.driven_with
+    @ridden_trips = temp.driven_with
     #driven_with und to_drive_with funktioniert noch nicht -> undefined local variable or method `passenger_trip'
     #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
-    #@future_ridden_trips = temp.to_drive_with
+    @future_ridden_trips = temp.to_drive_with
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,6 +37,8 @@ class TripsController < ApplicationController
   # GET /trips/new.json
   def new
     @trip = Trip.new
+    @fahrzeuge = current_user.cars
+    flash[:notice] = params[:temp]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,8 +54,10 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.json
   def create
+    #Die eingehenden Daten empfangen und an eine Methode übergeben, die ein Array an möglichen Orten zurückgeben
+    #Redirecten mit Parametern? An die new Action?
     @trip = Trip.new(params[:trip])
-
+     
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
