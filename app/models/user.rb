@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   def driven
    erg=[] 
    driver_trips.each do |x|
-     if x.end_time < Time.now
+     if x.start_time < Time.now
        then erg = erg << x
      end
    end
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   def to_drive
     erg=[]
     driver_trips.each do |x|
-      if x.end_time > Time.now
+      if x.start_time > Time.now
         then erg = erg << x
       end
     end
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   def driven_with
     erg=[]
     passenger_trips.each do |x|
-      if x.end_time < Time.now
+      if x.start_time < Time.now
         then erg = erg << x
       end
     end
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   def to_drive_with
     erg=[]
     passenger_trips.each do |x|
-      if x.end_time > Time.now
+      if x.start_time > Time.now
         then erg = erg << x
       end
     end

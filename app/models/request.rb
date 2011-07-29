@@ -13,13 +13,13 @@ class Request < ActiveRecord::Base
     end_f = end_time.to_f
     erg = {}
 
-    Trips.all.each do |t|
+    Trip.all.each do |t|
       if t.start_time.to_f.between?(start_f, end_f) then  
         distance_start = Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
                                                                  [starts_at_N, starts_at_E], :units => :km
         distance_end = Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
                                                                [ends_at_N, ends_at_E], :units => :km
-        distance_t = Geocoder::Calculations.distance_between [t.starts_at_N, t.start_at_E], 
+        distance_t = Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
                                                              [t.ends_at_N, t.ends_at_E], :units => :km
         difference = distance + distance_start + distance_end - distance_t
         erg[t.id] = difference
