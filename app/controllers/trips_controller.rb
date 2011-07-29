@@ -14,7 +14,7 @@ class TripsController < ApplicationController
     #@ridden_trips = temp.driven_with
     #driven_with und to_drive_with funktioniert noch nicht -> undefined local variable or method `passenger_trip'
     #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
-    #@future_ridden_trips = temp.to_drive_with
+    @future_ridden_trips = temp.to_drive_with
 
     respond_to do |format|
       format.html # index.html.erb
