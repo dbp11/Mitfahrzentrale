@@ -6,57 +6,57 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
-%table.data_table#form_table
-  %tr#form_table_row
-    %td{:class=>"label" :id=>"form_table_first"}Geburtsdatum
-    %td 
-      = f.date:birthday :required=>"required", :id=>"form_table_second"
-    %td{:class=>"label" :id=>"form_table_"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar". :id=>"form_table_fourth"
-  %tr#form_table_row
-    %td{:class=>"label" :id=>"form_table_first"}Geschlecht
-    %td 
-      = f.select_tag:sex "Geschlecht", options_for_select(["Maennlich", "Weiblich"], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
-  %tr#form_table_row
-    %td{:class=>"label" :id=>"form_table_first"}Strasse und Hausnummer
-    %td
-      = f.text :address :required="required" 
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
-        
-  %tr#form_table_row
-    %td{:class=>"label" :id=>"form_table_left"}PLZ
-    %td
-      = f.number:zipcode :required="required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
+  %table.data_table#form_table
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_first"}Geburtsdatum
+      %td 
+        = f.date_select :birthday,
+                        :start_year => 1970,
+                        :end_year => 2009,
+                        :order => [:day, :month, :year],
+                        :use_month_numbers => true,
+                        :include_blank => true        
+      %td{:class=>"label", :id=>"form_table_"}sichtbar
+      %td
+        = f.checkbox:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_first"}Geschlecht
+      %td 
+        = f.select_tag:sex, "Geschlecht", options_for_select(["Maennlich", "Weiblich"], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_first"}Strasse und Hausnummer
+      %td
+        = f.text:address, :required=>"required" 
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.checkbox :value=>"sichtbar"
+          
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_left"}PLZ
+      %td
+        = f.number:zipcode, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.checkbox :value=>"sichtbar"
 
 
-  %tr#form_table_row
-    %td{:class=>"label"}Ort
-    %td
-      = f.text:city :required="required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
+    %tr#form_table_row
+      %td{:class=>"label"}Ort
+      %td
+        = f.text:city, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.checkbox :value=>"sichtbar"
 
-  %tr#form_table_row
-    %td{:class=>"label"}InstantMassengerDaten
-    %td
-      = f.text:instantmassenger :required="required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
--#%table.data_table#pic_table
-  %td{:class=>"droparea spot", :width=>"460", :height=>"345", :type=>"jpg", :drop=>"true", :quality=>"60", :folder=>"sample"}
+    %tr#form_table_row
+      %td{:class=>"label"}InstantMassengerDaten
+      %td
+        = f.text:instantmassenger, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.checkbox :value=>"sichtbar"
 
--#%script
-  $('.droparea').droparea({'post' : '/data/dev/droparea/upload.php'});
-.action
-    = f.submit 'Save'
+      = f.submit 'Save'
 
 
 
