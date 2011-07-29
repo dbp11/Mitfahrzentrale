@@ -8,6 +8,8 @@ class Car < ActiveRecord::Base
   #Kontrolle ob das Kennzeichen eine Gülitige Länge hat
   validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}
 
+  has_attached_file :carpic, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
+
   #to String Methode für Cars
   def to_s
     "Besitzer: " + user + "\n" +
