@@ -47,7 +47,7 @@ class Trip < ActiveRecord::Base
   def get_commited_passengers  
     erg []
     self.passengers.each do |x|
-      if x.commited? 
+      if x.confirmed? 
         erg = erg << x.user_id
       end
     end
@@ -55,12 +55,16 @@ class Trip < ActiveRecord::Base
   end
 
   def get_uncommited_passengers
-     erg []
+     erg = []
      self.passengers.each do |x|
-      if x.commited? 
+      if !x.confirmed? 
         erg = erg << x.user_id
       end
      end
      return erg
-  end  
+  end
+
+  def get_free_seats
+    self.free_seats - self.get_commited_passengers.length
+  end
 end
