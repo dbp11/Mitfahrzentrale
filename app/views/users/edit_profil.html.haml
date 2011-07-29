@@ -10,7 +10,7 @@
   %tr#form_table_row
     %td{:class=>"label" :id=>"form_table_first"}Geburtsdatum
     %td 
-      = f.number:age :required=>"required", :id=>"form_table_second"
+      = f.date:birthday :required=>"required", :id=>"form_table_second"
     %td{:class=>"label" :id=>"form_table_"}sichtbar
     %td
       = f.checkbox :value=>"sichtbar". :id=>"form_table_fourth"
