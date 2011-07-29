@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(:version => 20110729093446) do
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
     t.date     "birthday"
+    t.string   "role"
+    t.integer  "roles_mask"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
