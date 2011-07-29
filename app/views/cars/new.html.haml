@@ -1,5 +1,47 @@
-%h1 New car
+= stylesheet_link_tag :cars
+%h1 Neues Auto hinzuf&uuml;gen
 
-= render 'form'
+= form_for :car, :html => { :multipart => true } do |f|
+  -if @car.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@car.errors.count, "error")} prohibited this car from being saved:"
+      %ul
+        - @car.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :user, "Fahrzeughalter" 
+    %br 
+    = f.text_field :user, :size => 30
+  .field
+    = f.label :seats, "Sitzplätze" 
+    %br
+    = f.number_field :seats, :size => 30, :value => 5, :min => 0, :max =>40
+  .field
+    = f.label :trunk, "Kofferraum"
+    %br
+    = f.text_field :trunk
+  .field
+    = f.label :description, "Beschreibung des Fahrzeuges"
+    %br
+    = f.text_field :description
+  .field
+    = f.label :licence, "Kennzeichen"
+    %br
+    = f.text_field :licence
+  .field
+    = f.label :fuel_consumption, "Kraftstoffverbrauch"
+    %br
+    = f.number_field :fuel_consumption
+  .field
+    = f.label :smoker, "Raucher"
+    %br
+    = f.text_field :smoker
+  .field
+    = f.label :avatar, "Bild hochladen"
+    %br
+    = f.file_field :avatar
+    
+  .actions
+    = f.submit 'Save'
 
 = link_to 'Back', cars_path

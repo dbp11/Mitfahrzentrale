@@ -1,3 +1,4 @@
+= stylesheet_link_tag :cars
 = form_for @car do |f|
   -if @car.errors.any?
     #error_explanation
@@ -7,10 +8,10 @@
           %li= msg
 
   .field
-    = f.label :user
+    Fahrzeughalter
     = f.text_field :user
   .field
-    = f.label :seats
+    = f.label ("Sitzplaetze") :seats
     = f.number_field :seats
   .field
     = f.label :trunk
@@ -23,7 +24,7 @@
     = f.text_field :licence
   .field
     = f.label :fuel_consumption
-    = f.text_field :fuel_consumption
+    = f.number_field :fuel_consumption
   .field
     = f.label :smoker
     = f.text_field :smoker
