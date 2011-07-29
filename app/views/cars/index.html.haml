@@ -1,11 +1,13 @@
 = stylesheet_link_tag :cars
 .cars
   %h1 Dein Fuhrpark
+
+  
   
   %table
     %tr
       %th Bild
-      %th Typ
+      %th Bezeichnung
       %th Anzahl der Sitzpl&auml;tze
       %th Verbrauch
       %th Raucher
@@ -16,15 +18,15 @@
 
     - @cars.each do |car|
       %tr
-        %td= car.carpic
+        %td= image_tag car.carpic.url(:thumb)
         %td= car.description
         %td= car.seats
         %td= car.fuel_consumption
         %td= car.smoker
         %td= car.licence
-        %td= link_to 'show', car
-        %td= link_to 'edit', edit_car_path(car)
-        %td= link_to 'destroy', car, :confirm => 'Bist du sicher?', :method => :delete
+        %td= link_to 'Details', car
+        %td= link_to 'Bearbeiten', edit_car_path(car)
+        %td= link_to 'Löschen', car, :confirm => 'Bist du sicher?', :method => :delete
 
 %a{:href => "/cars/new"}
   Auto hinzuf&uuml;gen
