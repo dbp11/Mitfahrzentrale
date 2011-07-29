@@ -53,7 +53,7 @@ header nav {
 	margin: 0;
 	border:1px solid $nav_border_color_1;
 	position: relative;
-	background-color: #6a6a6a;
+	background-color: black;
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -66,6 +66,8 @@ header nav ul li {
 	float: left;
 	list-style-type: none;
 }
+
+
 header nav ul:after {
 	content: ".";
 	height: 0;
@@ -79,6 +81,7 @@ header nav ul li a {
 	border-left: 1px solid $nav_border_color_2;
 	border-right: 1px solid $nav_border_color_1;
 	text-decoration: none;
+  text-shadow: 1px 2px 2px black;
 }
 header nav ul li a:focus {
 	outline: none;
@@ -101,15 +104,28 @@ header nav ul li a:visited {
 	-webkit-border-radius: 4px;
 	border-radius: 4px;*/
 }
-.cssgradients header nav {
+/*.cssgradients header nav {
 	background: -moz-linear-gradient(0% 22px 90deg, $nav_border_color_1, $nav_border_color_2);
 	background: -webkit-gradient(linear, 0% 0%, 0% 70%, from($nav_border_color_2), to($nav_border_color_1));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_1, $nav_border_color_2);*/
-}
-.cssgradients header nav li:hover {
+//}
+/*.cssgradients header nav li:hover {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
+//}
+header nav ul li a:hover{
+  -webkit-animation-name: abutton;
+  -webkit-animation-duration: 500ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+}
+@-webkit-keyframes abutton {
+  from{background: black; color: white;}
+  //25%{background: #555;}
+  to{background: #303030; color: #E0E0E0;}
+  //75%{background: #555;}
+  //100%{background: black;}
 }
 .boxshadow.rgba header nav {
 	-moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
