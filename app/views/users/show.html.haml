@@ -1,53 +1,53 @@
-%table.data_table
+%table.data_table#form_table
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       User: 
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.name}
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       Email:
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.email if @user.email}
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       Geschlecht:
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.sex? ? "Maennlich" : "Weiblich"}
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       Adresse: 
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.visible_address? ? @user.address : "versteckt"}
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       PLZ: 
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.zipcode}
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       Ort: 
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.city}
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       Alter: 
-    %td.data_table_right
+    %td.data_table_right#form_table_right
       #{@user.visible_age? ? @user.age : "versteckt"}
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       InstantMassenger: 
-    %td.data_table_right 
+    %td.data_table_right#form_table_right
       #{@user.visible_im? ? @user.instantmassenger : "versteckt"}
 
-  %tr.data_table_row
-    %td.data_table_left
+  %tr.data_table_row#form_table_row
+    %td.data_table_left#form_table_left
       Telefon: 
-    %td.data_table_right 
+    %td.data_table_right#form_table_right 
       #{@user.visible_phone? ? @user.phone : "versteckt"}
