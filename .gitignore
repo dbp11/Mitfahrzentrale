@@ -62,4 +62,5 @@ tmp/*
 /*.tmpproj
 
 # vim artifacts
+**.sw*
 **.swp
