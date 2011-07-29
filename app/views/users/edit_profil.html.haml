@@ -22,6 +22,7 @@
       %td{:class=>"label", :id=>"form_table_first"}Geschlecht
       %td 
         = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], !@user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+
     %tr#form_table_row
       %td{:class=>"label", :id=>"form_table_first"}Strasse und Hausnummer
       %td
@@ -43,12 +44,16 @@
       %td{:class=>"label"}Ort
       %td
         = f.text_field:city, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_city
+
 
 
     %tr#form_table_row
       %td{:class=>"label", :id=>"form_table_left"}Telefon
       %td
-        = f.number_field:phone 
+        = f.phone_field:phone 
       %td{:class=>"label"}sichtbar
       %td
         = f.check_box:visible_phone
@@ -62,8 +67,10 @@
       %td{:class=>"label"}sichtbar
       %td
         = f.check_box:visible_im
-
-      = f.submit 'Save'
+    %tr
+      %td
+      %td
+        = f.submit 'Save'
 
 
 
