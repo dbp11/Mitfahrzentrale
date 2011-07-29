@@ -6,6 +6,12 @@ class UsersController < ApplicationController
 
   end
 
+  #GET /users/1/edit_profil
+  def edit_profil
+    @user = User.find(params[:id])
+  end
+
+
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
@@ -16,8 +22,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if @user.update_attributes(params[:trip])
-      redirect_to @user, notice: 'Trip was successfully updated.' 
+    if @user.update_attributes(params[:user])
+      redirect_to @user, notice: 'User was successfully updated.' 
     else
       render action: "edit" 
     end
