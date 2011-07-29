@@ -1,0 +1,133 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+$bg_color1: #BBBBBB;
+$bg_color2: #FFFFFF;
+textarea {
+	width: 300px;
+	height: 6em;
+}
+label {
+	font-weight: bold;
+}
+.form_table_left {
+	padding: 5px;
+	vertical-align: top;
+	width: 100px;
+}
+.form_table_right {
+	text-align: right;
+	padding: 5px;
+	vertical-align: top;
+}
+.container {
+/*	margin-left: 10em;*/
+/*	margin-right: 10em;*/
+	width: 1000px;
+}
+#main {
+	min-height: 600px;
+	background:-moz-linear-gradient(top, $bg_color1, $bg_color2); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from($bg_color1), to($bg_color2)); /* Safari, Chrome */
+	background:-webkit-linear-gradient(top, $bg_color1, $bg_color2); /* Safari, Chrome - neue Syntax! */
+	background:-o-linear-gradient(top, $bg_color1, $bg_color2); /* Opera */
+	background:-ms-linear-gradient(top, $bg_color1, $bg_color2); /* IE */
+	background:linear-gradient(top, $bg_color1, $bg_color2); /* W3C Standard */
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-top: 1em;
+	padding-bottom: 2em;
+}
+
+
+$nav_border_color_1: #222222;
+$nav_border_color_2: #999999;
+$nav_font_color: #EEEEEE;
+$nav_bg_color: #6A6A6A;
+header nav {
+	display: block;
+	margin: 0;
+	border:1px solid $nav_border_color_1;
+	position: relative;
+	background-color: #6a6a6a;
+	font-size: 16px;
+	font-weight: bold;
+}
+header nav ul {
+	margin: 0;
+	padding: 0;
+}
+header nav ul li {
+	position: relative;
+	float: left;
+	list-style-type: none;
+}
+header nav ul:after {
+	content: ".";
+	height: 0;
+	clear: both;
+	display: block;
+	visibility: hidden;
+}
+header nav ul li a {
+	display: block;
+	padding: 10px 20px;
+	border-left: 1px solid $nav_border_color_2;
+	border-right: 1px solid $nav_border_color_1;
+	text-decoration: none;
+}
+header nav ul li a:focus {
+	outline: none;
+	text-decoration: underline;
+}
+header nav ul li:first-child a {
+	border-left: none;
+}
+header nav ul li:last-child a {
+	border-right: none;
+}
+header nav ul li a:link {
+	color: $nav_font_color;
+}
+header nav ul li a:visited {
+	color: $nav_font_color;
+}
+.borderradius header nav {
+/*	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;*/
+}
+.cssgradients header nav {
+	background: -moz-linear-gradient(0% 22px 90deg, $nav_border_color_1, $nav_border_color_2);
+	background: -webkit-gradient(linear, 0% 0%, 0% 70%, from($nav_border_color_2), to($nav_border_color_1));
+/*	background: -webkit-linear-gradient(90deg, $nav_border_color_1, $nav_border_color_2);*/
+}
+.cssgradients header nav li:hover {
+	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
+/*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
+}
+.boxshadow.rgba header nav {
+	-moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
+}
+
+
+#flash_notice, #flash_alert {
+	padding: 5px 8px;
+	margin: 0em;
+}
+#flash_notice {
+	background-color: #CFC;
+	border: solid 1px #6C6;
+}
+#flash_alert {
+	background-color: #FCC;
+	border: solid 1px #C66;
+}
+

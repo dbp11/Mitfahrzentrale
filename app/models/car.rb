@@ -2,12 +2,15 @@
 
 class Car < ActiveRecord::Base
   
-  #Beziehung
+  #Beziehung: user_has_cars
   belongs_to :user
 
+  #Kontrolle ob das Kennzeichen eine Gülitige Länge hat
+  validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}
 
-   validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}
+  has_attached_file :carpic, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
 
+  #to String Methode für Cars
   def to_s
     "Besitzer: " + user + "\n" +
     "Typ:" + description + "\n" +
