@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729124114) do
+ActiveRecord::Schema.define(:version => 20110729131009) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20110729124114) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "baggage"
+    t.integer  "free_seats"
   end
 
   add_index "trips", ["car_id"], :name => "index_trips_on_car_id"
