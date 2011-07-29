@@ -2,9 +2,67 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require "normalize"
  *= require_self
- *= require_tree . 
+ *= require_tree .
 */
+
+/* =============================================================================
+	 General settings in application.css.scss
+	 ========================================================================== */
+body {
+	background-color: #fff;
+	color: #333;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+p, ol, ul, td {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+pre {
+	background-color: #eee;
+	padding: 10px;
+	font-size: 11px;
+}
+
+/* =============================================================================
+	 Links
+	 ========================================================================== */
+a {
+/*		color: #00e;*/
+}
+
+a:visited {
+/*		color: #551a8b;*/
+}
+
+/*
+ * Addresses outline displayed oddly in Chrome
+ */
+
+a:focus {
+		outline: thin dotted;
+}
+
+/*
+ * Improves readability when focused and also mouse hovered in all browsers
+ * people.opera.com/patrickl/experiments/keyboard/test
+ */
+
+a:hover,
+a:active {
+		outline: 0;
+}
+
+
+
+
+
 $bg_color1: #BBBBBB;
 $bg_color2: #FFFFFF;
 textarea {
@@ -23,6 +81,9 @@ label {
 	text-align: right;
 	padding: 5px;
 	vertical-align: top;
+}
+body {
+	margin: 0;
 }
 .container {
 /*	margin-left: 10em;*/
@@ -44,6 +105,9 @@ label {
 }
 
 
+/* =============================================================================
+	 Navigation bar
+	 ========================================================================== */
 $nav_border_color_1: #222222;
 $nav_border_color_2: #999999;
 $nav_font_color: #EEEEEE;
@@ -56,48 +120,43 @@ header nav {
 	background-color: black;
 	font-size: 16px;
 	font-weight: bold;
-}
-header nav ul {
-	margin: 0;
-	padding: 0;
-}
-header nav ul li {
-	position: relative;
-	float: left;
-	list-style-type: none;
-}
-
-
-header nav ul:after {
-	content: ".";
-	height: 0;
-	clear: both;
-	display: block;
-	visibility: hidden;
-}
-header nav ul li a {
-	display: block;
-	padding: 10px 20px;
-	border-left: 1px solid $nav_border_color_2;
-	border-right: 1px solid $nav_border_color_1;
-	text-decoration: none;
-  text-shadow: 1px 2px 2px black;
-}
-header nav ul li a:focus {
-	outline: none;
-	text-decoration: underline;
-}
-header nav ul li:first-child a {
-	border-left: none;
-}
-header nav ul li:last-child a {
-	border-right: none;
-}
-header nav ul li a:link {
-	color: $nav_font_color;
-}
-header nav ul li a:visited {
-	color: $nav_font_color;
+	ul {
+		margin: 0;
+		padding: 0;
+		&:after {
+			content: ".";
+			height: 0;
+			clear: both;
+			display: block;
+			visibility: hidden;
+		}
+		li {
+			position: relative;
+			float: left;
+			list-style-type: none;
+			a {
+				display: block;
+				padding: 10px 20px;
+				border-left: 1px solid $nav_border_color_2;
+				border-right: 1px solid $nav_border_color_1;
+				text-decoration: none;
+        text-shadow: black 2px 2px 2px;
+				&:focus {
+					outline: none;
+					text-decoration: underline;
+				}
+				&:link, &:visited {
+					color: $nav_font_color;
+				}
+			}
+		}
+		li:first-child a {
+			border-left: none;
+		}
+		li:last-child a {
+			border-right: none;
+		}
+	}
 }
 .borderradius header nav {
 /*	-moz-border-radius: 4px;
@@ -114,26 +173,27 @@ header nav ul li a:visited {
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
 //}
-header nav ul li a:hover{
+header nav ul li a:hover {
   -webkit-animation-name: abutton;
-  -webkit-animation-duration: 500ms;
+  -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: ease-in;
 }
 @-webkit-keyframes abutton {
   from{background: black; color: white;}
-  //25%{background: #555;}
-  to{background: #303030; color: #E0E0E0;}
-  //75%{background: #555;}
-  //100%{background: black;}
+  to{background:#00688B; color: #C0C0C0;}
 }
 .boxshadow.rgba header nav {
-	-moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
-	-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 	box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 }
 
 
+/* =============================================================================
+	 notices
+	 ========================================================================== */
 #flash_notice, #flash_alert {
 	padding: 5px 8px;
 	margin: 0em;
@@ -146,4 +206,33 @@ header nav ul li a:hover{
 	background-color: #FCC;
 	border: solid 1px #C66;
 }
-
+#notice {
+	color: green;
+}
+.field_with_errors {
+	padding: 2px;
+	background-color: red;
+	display: table;
+}
+#error_explanation {
+	width: 450px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 0;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+	h2 {
+		text-align: left;
+		font-weight: bold;
+		padding: 5px 5px 5px 15px;
+		font-size: 12px;
+		margin: -7px;
+		margin-bottom: 0px;
+		background-color: #c00;
+		color: #fff;
+	}
+	ul li {
+		font-size: 12px;
+		list-style: square;
+	}
+}
