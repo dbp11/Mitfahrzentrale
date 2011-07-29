@@ -5,21 +5,21 @@
   %table
     %tr
       %th Bild
-      %th Bezeichnung
+      %th Typ
       %th Anzahl der Sitzpl&auml;tze
-      %th Kofferraum
+      %th Verbrauch
       %th Raucher
       %th Kennzeichen
-      %th Anzeigen
+      %th Anzeigen  
       %th Editieren
       %th Löschen
 
     - @cars.each do |car|
       %tr
-        %td= car.picture
+        %td= car.carpic
         %td= car.description
         %td= car.seats
-        %td= car.trunk
+        %td= car.fuel_consumption
         %td= car.smoker
         %td= car.licence
         %td= link_to 'show', car

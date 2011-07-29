@@ -9,17 +9,17 @@
         - @car.errors.full_messages.each do |msg|
           %li= msg
   .field
-    = f.label :seats, "Sitzplätze" 
+    = f.label :seats, "Sitzplätze*" 
     %br
     = f.number_field :seats, :size => 30, :value => 5, :min => 0, :max =>40
   .field
-    = f.label :description, "Beschreibung des Fahrzeuges"
+    = f.label :description, "Beschreibung des Fahrzeuges*"
     %br
-    = f.text_field :description
+    = f.text_field :description, :required => true
   .field
-    = f.label :licence, "Kennzeichen"
+    = f.label :licence, "Kennzeichen*"
     %br
-    = f.text_field :licence
+    = f.text_field :licence, :required => true 
   .field
     = f.label :fuel_consumption, "Kraftstoffverbrauch"
     %br
@@ -29,11 +29,11 @@
     %br
     = f.check_box :smoker
   .field
-    = f.label :avatar, "Bild hochladen"
+    = f.label :carpic, "Bild hochladen"
     %br
-    = f.file_field :avatar
+    = f.file_field :carpic
     
   .actions
     = f.submit 'Save'
-
+  Mit * gekennzeichnete Felder sind Pflichtfelder
 = link_to 'Back', cars_path
