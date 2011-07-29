@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729074702) do
+ActiveRecord::Schema.define(:version => 20110729093446) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(:version => 20110729074702) do
     t.string   "address_start"
     t.string   "address_end"
     t.datetime "start_time"
-    t.datetime "end_time"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
