@@ -1,4 +1,5 @@
-= form_for @trip do |f|
+-#
+  = form_for @trip do |f|
   -if @trip.errors.any?
     #error_explanation
       %h2= "#{pluralize(@trip.errors.count, "error")} prohibited this trip from being saved:"
@@ -38,3 +39,7 @@
     = f.text_area :comment
   .actions
     = f.submit 'Save'
+
+= form_tag("new", :method => "post") do
+  = text_field_tag(:temp)
+  = submit_tag "Schick den Mist ins Nirvana!"
