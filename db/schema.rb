@@ -134,13 +134,9 @@ ActiveRecord::Schema.define(:version => 20110729110837) do
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
     t.date     "birthday"
-<<<<<<< HEAD
     t.string   "role"
     t.integer  "roles_mask"
-=======
     t.boolean  "visible_zip"
-    t.string   "role"
->>>>>>> 5385365366ff1a83f5c50d768da0b857825591ca
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
