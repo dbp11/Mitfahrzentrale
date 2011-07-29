@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :birthday, :address, :zipcode, :city
   
+  has_attached_file :picture, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
+
   #Beziehungen:
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, :source => :trip 
   has_many :driver_trips, :class_name => "Trip", :foreign_key => "user_id"

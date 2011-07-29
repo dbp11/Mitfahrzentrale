@@ -1,49 +1,13 @@
 -#
-  = form_for @trip do |f|
-  -if @trip.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@trip.errors.count, "error")} prohibited this trip from being saved:"
-      %ul
-        - @trip.errors.full_messages.each do |msg|
-          %li= msg
+  Übergebene Variablen:
+  - @fahrzeuge [Array aller Fahrzeuge des aktuellen Benutzers]
 
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :car
-    = f.text_field :car
-  .field
-    = f.label :starts_at_N
-    = f.text_field :starts_at_N
-  .field
-    = f.label :starts_at_E
-    = f.text_field :starts_at_E
-  .field
-    = f.label :ends_at_N
-    = f.text_field :ends_at_N
-  .field
-    = f.label :ends_at_E
-    = f.text_field :ends_at_E
-  .field
-    = f.label :start_time
-    = f.datetime_select :start_time
-  .field
-    = f.label :end_time
-    = f.datetime_select :end_time
-  .field
-    = f.label :baggage
-    = f.check_box :baggage
-  .field
-    = f.label :comment
-    = f.text_area :comment
-  .actions
-    = f.submit 'Save'
--# Beispiel für Datenübergabe an action new
-  = form_tag("new", :method => "post") do
-    = text_field_tag(:temp)
-    = submit_tag "Schick den Mist ins Nirvana!"
-
+  to do:
+  - Zusammenspiel mit Controller absprechen
+    # Erster Schritt: Nutzer gibt Daten ein
+    # Zweiter Schritt: Nutzer bekommt Formular mit Dropdown-Boxen
+      für Start und Ziel (enthalten sind alle Matches für die Eingaben).
+      Nutzer wählt den gewünschten Startpunkt und das gewünschte Ziel.
 
 = form_tag("new", :method => "post") do
   %table.form_table
