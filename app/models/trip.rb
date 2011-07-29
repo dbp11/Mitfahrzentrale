@@ -31,7 +31,7 @@ class Trip < ActiveRecord::Base
                                                                  [starts_at_N, starts_at_E], :units => :km
         distance_end = Geocoder::Calculations.distance_between [r.ends_at_N, r.ends_at_E], 
                                                                [ends_at_N, ends_at_E], :units => :km
-        distance_r = Geocoder::Calculations.distance_between [r.starts_at_N, r.start_at_E], 
+        distance_r = Geocoder::Calculations.distance_between [r.starts_at_N, r.starts_at_E], 
                                                              [r.ends_at_N, r.ends_at_E], :units => :km
         difference = distance_r + distance_start + distance_end - distance
         erg[r.id] = difference
