@@ -14,15 +14,14 @@
                         :start_year => 1970,
                         :end_year => 2009,
                         :order => [:day, :month, :year],
-                        :use_month_numbers => true,
-                        :include_blank => true        
-      %td{:class=>"label", :id=>"form_table_", :checked=>"true"}sichtbar
+                        :use_month_numbers => true
+      %td{:class=>"label", :id=>"form_table_", :checked_value=>"1"}sichtbar
       %td
         = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
     %tr#form_table_row
       %td{:class=>"label", :id=>"form_table_first"}Geschlecht
       %td 
-        = f.select:sex,  options_for_select(["Maennlich", "Weiblich"], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], !@user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
     %tr#form_table_row
       %td{:class=>"label", :id=>"form_table_first"}Strasse und Hausnummer
       %td
