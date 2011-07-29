@@ -15,4 +15,5 @@ gem "rails-footnotes", ">= 3.7", :group => :development
 gem "cancan"
 gem "shoulda-matchers", :group => :test
 gem "geocoder"
+gem "paperclip"
 #gem "metric_fu"
