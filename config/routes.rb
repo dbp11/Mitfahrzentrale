@@ -7,7 +7,10 @@ Mitfahrzentrale::Application.routes.draw do
 
   resources :passengers
 
-  resources :trips
+  resources :trips 
+
+  #Post Request an new/create schicken
+  match "/trips/new" => "trips#new"
 
   resources :ratings
 

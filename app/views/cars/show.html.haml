@@ -4,6 +4,11 @@
   %b User:
   = @car.user
 %p
+  %b Bild:
+  = image_tag @car.avatar.url
+  = image_tag @car.avatar.url(:medium)
+  = image_tag @car.avatar.url(:thumb)
+%p
   %b Seats:
   = @car.seats
 %p
