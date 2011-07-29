@@ -1,16 +1,31 @@
 = stylesheet_link_tag :cars
 .cars
-  %h1 Listing cars#Index
+  %h1 Dein Fuhrpark
+  
+  %table
+    %tr
+      %th Bild
+      %th Bezeichnung
+      %th Anzahl der Sitzpl&auml;tze
+      %th Kofferraum
+      %th Raucher
+      %th Kennzeichen
+      %th Anzeigen
+      %th Editieren
+      %th Löschen
 
+    - @cars.each do |car|
+      %tr
+        %td= car.picture
+        %td= car.description
+        %td= car.seats
+        %td= car.trunk
+        %td= car.smoker
+        %td= car.licence
+        %td= link_to 'show', car
+        %td= link_to 'edit', edit_car_path(car)
+        %td= link_to 'destroy', car, :confirm => 'Bist du sicher?', :method => :delete
 
 %a{:href => "/cars/new"}
-  Create new car
-
-
-
-
-    
-
-
-%br
+  Auto hinzuf&uuml;gen
 
