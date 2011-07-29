@@ -6,3 +6,27 @@ body.cars {
   // Add the cars class to your body tag
   // Then, place scoped styles here.
 }
+
+#main {
+  background-color: #9ACD32;
+  height: 100%;
+  width: 100%;
+
+
+  h1 {
+    font-size: 25;
+    margin: 0px 20 10 0;#
+    text-align: center;
+  }
+  a {
+    position: bottom;
+  }
+}
+
+
+  
+  
+a {
+  color: blue;
+  &:hover { color: yellow; }
+}

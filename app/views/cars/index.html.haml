@@ -1,31 +1,16 @@
-%h1 Listing cars#Index
+= stylesheet_link_tag :cars
+.cars
+  %h1 Listing cars#Index
 
-%table
-  %tr
-    %th User <br>
-    %th Seats <br>
-    %th Trunk <br>
-    %th Type <br>
-    %th Licence <br>
-    %th Fuel consumption <br>
-    %th Smoker 
-    %th
-    %th
-    %th
 
-  - @cars.each do |car|
-    %tr
-      %td= car.user
-      %td= car.seats
-      %td= car.trunk
-      %td= car.description
-      %td= car.licence
-      %td= car.fuel_consumption
-      %td= car.smoker
-      %td= link_to 'Show', car
-      %td= link_to 'Edit', edit_car_path(car)
-      %td= link_to 'Destroy', car, :confirm => 'Are you sure?', :method => :delete
+%a{:href => "/cars/new"}
+  Create new car
+
+
+
+
+    
+
 
 %br
 
-= link_to 'New Car', new_car_path

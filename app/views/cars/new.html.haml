@@ -1,5 +1,43 @@
-%h1 New car
+= stylesheet_link_tag :cars
+%h1 Create New Car
 
-= render 'form'
+= form_for @car do |f|
+  -if @car.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@car.errors.count, "error")} prohibited this car from being saved:"
+      %ul
+        - @car.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    Fahrzeughalter <br>
+    = f.text_field :user
+  .field
+    = f.label :seats 
+    <br>
+    = f.number_field :seats
+  .field
+    = f.label :trunk
+    %br
+    = f.text_field :trunk
+  .field
+    = f.label :description
+    %br
+    = f.text_field :description
+  .field
+    = f.label :licence
+    %br
+    = f.text_field :licence
+  .field
+    = f.label :fuel_consumption
+    %br
+    = f.number_field :fuel_consumption
+  .field
+    = f.label :smoker
+    %br
+    = f.text_field :smoker
+  .field
+
+  .actions
+    = f.submit 'Save'
 
 = link_to 'Back', cars_path
