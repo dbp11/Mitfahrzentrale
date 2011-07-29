@@ -4,8 +4,12 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require "normalize"
  *= require_self
+ *= require_tree .
 */
 
+/* =============================================================================
+	 General settings in application.css.scss
+	 ========================================================================== */
 body {
 	background-color: #fff;
 	color: #333;
