@@ -9,15 +9,11 @@
         - @car.errors.full_messages.each do |msg|
           %li= msg
   .field
-    = f.label :user, "Fahrzeughalter" 
-    %br 
-    = f.text_field :user, :size => 30
-  .field
     = f.label :seats, "Sitzplätze" 
     %br
     = f.number_field :seats, :size => 30, :value => 5, :min => 0, :max =>40
   .field
-    = f.label :trunk, "Kofferraum"
+    = f.label :trunk, "Kofferraum (ja/nein)"
     %br
     = f.text_field :trunk
   .field
