@@ -15,7 +15,6 @@ class TripsController < ApplicationController
     #driven_with und to_drive_with funktioniert noch nicht -> undefined local variable or method `passenger_trip'
     #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
     @future_ridden_trips = temp.to_drive_with
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @trips }
@@ -26,6 +25,7 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
+    @triprole = 0
 
     respond_to do |format|
       format.html # show.html.erb
