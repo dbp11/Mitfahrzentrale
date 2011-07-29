@@ -10,11 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20110728111907) do
-=======
-ActiveRecord::Schema.define(:version => 20110728131810) do
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -46,18 +42,6 @@ ActiveRecord::Schema.define(:version => 20110728131810) do
   add_index "messages", ["receiver_id"], :name => "index_messages_on_receiver_id"
   add_index "messages", ["writer_id"], :name => "index_messages_on_writer_id"
 
-<<<<<<< HEAD
-  create_table "nachrichts", :force => true do |t|
-    t.string   "text"
-    t.integer  "test_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "nachrichts", ["test_id"], :name => "index_nachrichts_on_test_id"
-
-=======
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
   create_table "passengers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
@@ -72,19 +56,11 @@ ActiveRecord::Schema.define(:version => 20110728131810) do
   create_table "ratings", :force => true do |t|
     t.string   "comment"
     t.integer  "mark"
-<<<<<<< HEAD
-    t.integer  "written_by_id"
-    t.integer  "sent_to_id"
-    t.integer  "trip_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-=======
     t.integer  "trip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id"
     t.integer  "receiver_id"
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
   end
 
   add_index "ratings", ["trip_id"], :name => "index_ratings_on_trip_id"
@@ -92,17 +68,6 @@ ActiveRecord::Schema.define(:version => 20110728131810) do
 # Could not dump table "requests" because of following StandardError
 #   Unknown type 'user' for column 'user'
 
-<<<<<<< HEAD
-  create_table "tests", :force => true do |t|
-    t.string   "email"
-    t.string   "name"
-    t.integer  "zahl"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-=======
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
     t.integer  "car_id"
@@ -138,10 +103,6 @@ ActiveRecord::Schema.define(:version => 20110728131810) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "user_type"
-<<<<<<< HEAD
-    t.integer  "age"
-=======
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
     t.boolean  "sex"
     t.string   "address"
     t.integer  "zipcode"
@@ -155,19 +116,13 @@ ActiveRecord::Schema.define(:version => 20110728131810) do
     t.boolean  "visible_age"
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
-<<<<<<< HEAD
-=======
     t.date     "birthday"
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-<<<<<<< HEAD
-=======
   create_table "users_trips", :force => true do |t|
   end
 
->>>>>>> 9d70478c0b1d6a58cbb7032d4b8c047542227d54
 end
