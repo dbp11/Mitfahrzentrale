@@ -10,18 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729074702) do
+ActiveRecord::Schema.define(:version => 20110729110837) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
     t.integer  "seats"
-    t.string   "trunk"
     t.string   "licence"
     t.float    "fuel_consumption"
     t.boolean  "smoker"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.string   "carpic_file_name"
+    t.string   "carpic_content_type"
+    t.integer  "carpic_file_size"
+    t.datetime "carpic_updated_at"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
@@ -91,7 +94,6 @@ ActiveRecord::Schema.define(:version => 20110729074702) do
     t.string   "address_start"
     t.string   "address_end"
     t.datetime "start_time"
-    t.datetime "end_time"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -132,6 +134,8 @@ ActiveRecord::Schema.define(:version => 20110729074702) do
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
     t.date     "birthday"
+    t.boolean  "visible_zip"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
