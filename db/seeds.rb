@@ -49,4 +49,6 @@ tri3 = Trip.create! :user_id => 3, :car_id => 3, :starts_at_N => 33, :starts_at_
 tri4 = Trip.create! :user_id => 4, :car_id => 4, :starts_at_N => 22, :starts_at_E => 65, :ends_at_E => 23, :ends_at_N => 2, :address_start => "aha straße 2 ahahausen 32323"   , :address_end => "aha straße 2 blahausen 32323", :start_time => Time.now-1.day, :comment => "feff", :baggage => true
 tri5 = Trip.create! :user_id => 5, :car_id => 5, :starts_at_N => 11, :starts_at_E => 77, :ends_at_E => 33, :ends_at_N => 1, :address_start => "aha straße 2 ahahausen 32323"   , :address_end => "aha straße 2 blahausen 32323", :start_time => Time.now-1.day, :comment => "fefe", :baggage => false
 
-
+user1.ignorings << user2
+user1.ignorings << user3
+user1.ignorings << user4
