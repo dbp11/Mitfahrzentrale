@@ -1,6 +1,8 @@
+
+
 class Trip < ActiveRecord::Base
 
-  #Modellierung der Beziehungen
+#Modellierung der Beziehungen
   belongs_to :user
   belongs_to :car 
   has_many :users, :class_name => "User", :as => "passenger_trip", :through => :passengers, :source => :user, :dependent => :destroy
@@ -41,4 +43,28 @@ class Trip < ActiveRecord::Base
     erg.sort{|a,b| a[1] <=> b[1]}
   end
   
+
+  def get_commited_passengers  
+    erg []
+    self.passengers.each do |x|
+      if x.confirmed? 
+        erg = erg << x.user_id
+      end
+    end
+    return erg
+  end
+
+  def get_uncommited_passengers
+     erg = []
+     self.passengers.each do |x|
+      if !x.confirmed? 
+        erg = erg << x.user_id
+      end
+     end
+     return erg
+  end
+
+  def get_free_seats
+    self.free_seats - self.get_commited_passengers.length
+  end
 end

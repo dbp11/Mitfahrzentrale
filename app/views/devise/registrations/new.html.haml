@@ -17,5 +17,39 @@
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation
+  %p
+    %br/
+    = f.label :birthday
+  %p
+    %br/
+    = f.date_select :birthday,
+                    :start_year => 1970,
+                    :end_year => 2011,
+                    :order => [:day, :month, :year],
+                    :use_month_numbers => true
+  %p
+    %br
+    = f.label :address
+  %p
+    %br
+    = f.text_field:address, :required=>"required"
+
+  %p
+    %br
+    = f.label :zipcode
+  %p
+    %br
+    = f.number_field:zipcode, :required=>"required",
+                              :min=>"10000",
+                              :max=>"99999",
+
+  %p
+    %br
+    = f.label :city
+  %p
+    %br
+    = f.text_field:city, :required=>"required"
+
+
   %p= f.submit "Sign up"
 = render :partial => "devise/shared/links"

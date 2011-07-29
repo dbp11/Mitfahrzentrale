@@ -15,8 +15,8 @@
     %tr
       %td= rating.comment
       %td= rating.mark
-      %td= rating.written_by_id
-      %td= rating.sent_to_id
+      %td= rating.author
+      %td= rating.receiver
       %td= rating.trip
       %td= link_to 'Show', rating
       %td= link_to 'Edit', edit_rating_path(rating)

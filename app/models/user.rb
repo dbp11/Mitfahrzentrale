@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :address, :zipcode, :city, :birthday 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city
   
+  has_attached_file :picture, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
+
   #Beziehungen:
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, :source => :trip 
   has_many :driver_trips, :class_name => "Trip", :foreign_key => "user_id"

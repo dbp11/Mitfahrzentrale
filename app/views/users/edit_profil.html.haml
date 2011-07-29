@@ -6,52 +6,64 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
-.table
-  %tr
-    %td{:class=>"label"}Geburtsdatum
-    %td 
-      = f.date :birthday :required=>"required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
-  %tr
-    %td{:class=>"label"}Geschlecht
-    %td 
-      = f.select_tag :sex "Geschlecht", options_for_select(["Maennlich", "Weiblich"], @user.sex? ? "Maennlich" : "Weiblich")
-  %tr
-    %td{:class=>"label"}Strasse und Hausnummer
-    %td
-      = f.text :address :required="required" 
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
-        
-  %tr
-    %td{:class=>"label"}PLZ
-    %td
-      = f.number :zipcode :required="required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
+  %table.data_table#form_table
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_first"}Geburtsdatum
+      %td 
+        = f.date_select :birthday,
+                        :start_year => 1970,
+                        :end_year => 2009,
+                        :order => [:day, :month, :year],
+                        :use_month_numbers => true
+      %td{:class=>"label", :id=>"form_table_", :checked_value=>"1"}sichtbar
+      %td
+        = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_first"}Geschlecht
+      %td 
+        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], !@user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_first"}Strasse und Hausnummer
+      %td
+        = f.text_field:address, :required=>"required" 
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_address 
+          
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_left"}PLZ
+      %td
+        = f.number_field:zipcode, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_zip
 
 
-  %tr
-    %td{:class=>"label"}Ort
-    %td
-      = f.text :city :required="required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
+    %tr#form_table_row
+      %td{:class=>"label"}Ort
+      %td
+        = f.text_field:city, :required=>"required"
 
-  %tr
-    %td{:class=>"label"}InstantMassengerDaten
-    %td
-      = f.text :instantmassenger :required="required"
-    %td{:class=>"label"}sichtbar
-    %td
-      = f.checkbox :value=>"sichtbar"
-  .action
-    = f.submit 'Save'
+
+    %tr#form_table_row
+      %td{:class=>"label", :id=>"form_table_left"}Telefon
+      %td
+        = f.number_field:phone 
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_phone
+
+
+
+    %tr#form_table_row
+      %td{:class=>"label"}InstantMassengerDaten
+      %td
+        = f.text_field:instantmessenger
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_im
+
+      = f.submit 'Save'
 
 
 
