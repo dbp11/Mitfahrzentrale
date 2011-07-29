@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729110410) do
+ActiveRecord::Schema.define(:version => 20110729110837) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20110729110410) do
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
     t.date     "birthday"
+    t.boolean  "visible_zip"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
