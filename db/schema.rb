@@ -10,18 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729093446) do
+ActiveRecord::Schema.define(:version => 20110729110837) do
 
   create_table "cars", :force => true do |t|
     t.integer  "user_id"
     t.integer  "seats"
-    t.string   "trunk"
     t.string   "licence"
     t.float    "fuel_consumption"
     t.boolean  "smoker"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.string   "carpic_file_name"
+    t.string   "carpic_content_type"
+    t.integer  "carpic_file_size"
+    t.datetime "carpic_updated_at"
   end
 
   add_index "cars", ["user_id"], :name => "index_cars_on_user_id"
@@ -67,6 +70,15 @@ ActiveRecord::Schema.define(:version => 20110729093446) do
 
 # Could not dump table "requests" because of following StandardError
 #   Unknown type 'user' for column 'user'
+
+  create_table "tests", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.integer  "zahl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "trips", :force => true do |t|
     t.integer  "user_id"
@@ -118,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20110729093446) do
     t.boolean  "visible_im"
     t.boolean  "visible_cars"
     t.date     "birthday"
+    t.boolean  "visible_zip"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
