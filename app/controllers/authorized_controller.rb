@@ -4,7 +4,7 @@ class AuthorizedController < ApplicationController
   load_and_authorize_resource
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = exception.message
+    flash[:error] = "Access denied!"
     redirect_to root_url
   end
 end
