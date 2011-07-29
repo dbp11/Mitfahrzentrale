@@ -18,14 +18,14 @@ class User < ActiveRecord::Base
 
  
   #Selbstreferenzierende Beziehung User ignores User
-  has_and_belongs_to_many :ignoring, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id"  
-  has_and_belongs_to_many :ignored, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
+  has_and_belongs_to_many :ignorings, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id"  
+  has_and_belongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
   
   #Beziehung User schreibt User Nachricht/Rating
   has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
   has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
-  has_many :s_ratings, :class_name => "Rating", :as => "rater", :dependent => :destroy
-  has_many :r_ratings, :class_name => "Rating", :as => "rated", :dependent => :destroy
+  has_many :written_ratings, :class_name => "Rating", :as => "author", :dependent => :destroy
+  has_many :received_ratings, :class_name => "Rating", :as => "receiver", :dependent => :destroy
  
   #Methoden
 
