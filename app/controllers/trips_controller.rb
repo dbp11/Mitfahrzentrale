@@ -37,6 +37,7 @@ class TripsController < ApplicationController
   # GET /trips/new.json
   def new
     @trip = Trip.new
+    @fahrzeuge = current_user.cars
     flash[:notice] = params[:temp]
 
     respond_to do |format|
