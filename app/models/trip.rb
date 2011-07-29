@@ -1,8 +1,6 @@
-
-
 class Trip < ActiveRecord::Base
 
-#Modellierung der Beziehungen
+  #Modellierung der Beziehungen
   belongs_to :user
   belongs_to :car 
   has_many :users, :class_name => "User", :as => "passenger_trip", :through => :passengers, :source => :user, :dependent => :destroy
@@ -25,7 +23,7 @@ class Trip < ActiveRecord::Base
     start_f = start_time.to_f
     erg = {}
 
-    Requests.all.each do |r|
+    Request.all.each do |r|
       r_start_f = r.start_time.to_f
       r_end_f = r.end_time.to_f
       if start_f.between?(r_start_f, r_end_f) then  
@@ -43,28 +41,4 @@ class Trip < ActiveRecord::Base
     erg.sort{|a,b| a[1] <=> b[1]}
   end
   
-
-  def get_commited_passengers  
-    erg []
-    self.passengers.each do |x|
-      if x.confirmed? 
-        erg = erg << x.user_id
-      end
-    end
-    return erg
-  end
-
-  def get_uncommited_passengers
-     erg = []
-     self.passengers.each do |x|
-      if !x.confirmed? 
-        erg = erg << x.user_id
-      end
-     end
-     return erg
-  end
-
-  def get_free_seats
-    self.free_seats - self.get_commited_passengers.length
-  end
 end
