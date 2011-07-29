@@ -49,7 +49,6 @@ describe User do
     @user.to_drive.include? future
   end
 
-  
   it "should create a new instance given a valid attribute" do
     User.create!(@attr)
   end
