@@ -1,30 +1,73 @@
-%p#notice= notice
+-# Der Standard-Kram
+  %p#notice= notice
 
-%p
-  %b User:
-  = @trip.user
-%p
-  %b Car:
-  = @trip.car
-%p
-  %b Starts at:
-  = @trip.starts_at
-%p
-  %b Ends at:
-  = @trip.ends_at
-%p
-  %b Start time:
-  = @trip.start_time
-%p
-  %b End time:
-  = @trip.end_time
-%p
-  %b Trunk:
-  = @trip.trunk
-%p
-  %b Comment:
-  = @trip.comment
+  %p
+    %b User:
+    = @trip.user
+  %p
+    %b Car:
+    = @trip.car
+  %p
+    %b Starts at:
+    = @trip.starts_at
+  %p
+    %b Ends at:
+    = @trip.ends_at
+  %p
+    %b Start time:
+    = @trip.start_time
+  %p
+    %b End time:
+    = @trip.end_time
+  %p
+    %b Trunk:
+    = @trip.trunk
+  %p
+    %b Comment:
+    = @trip.commenta
 
-= link_to 'Edit', edit_trip_path(@trip)
-\|
-= link_to 'Back', trips_path
+  = link_to 'Edit', edit_trip_path(@trip)
+  \|
+  = link_to 'Back', trips_path
+
+-#
+  übergebene Variablen:
+    - @trip
+      die Fahrt, um die es gerade geht
+
+    - @triprole
+      gibt das Verhältnis des aktuellen Benutzers und der Fahrt an:
+        - 0 = Fahrer
+        - 1 = Mitfahrer
+        - 2 = potentieller Mitfahrer (hat Anfrage gestellt, ist aber noch nicht angenommen)
+        - 3 = *Gast (z.B. über die Suche zur Fahrt gekommen)
+
+  brauche:
+    - Array mit allen Mitfahrern
+    - Array mit allen Usern, die eine Mitfahr-Anfrage gestellt haben
+
+  to do:
+    - Array mit den Mitfahrern einbinden (Darstellen der Mitfahrer)
+    - Array mit den potentiellen Mitfahrern einbinden (Übersicht für den Fahrer)
+    - Formular in HAML übersetzen
+
+-# Die Tabelle hat zwei Spalten: Eine für den die Tabelle der Mitfahrer etc, eine für die Map
+
+%table
+  %tr
+    %td
+      -# Tabelle für Mitfahrer und Co.
+      %table
+        %tr
+          %td Abfahrt:
+          %td
+            = form_tag do
+              = text_field_tag(:date_start, nil, :disabled => true)
+
+
+
+
+
+
+
+

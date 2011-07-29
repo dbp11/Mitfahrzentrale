@@ -1,31 +1,31 @@
-%h1 Listing cars
-
-%table
-  %tr
-    %th User
-    %th Seats
-    %th Trunk
-    %th Type
-    %th Licence
-    %th Fuel consumption
-    %th Smoker
-    %th
-    %th
-    %th
-
-  - @cars.each do |car|
+= stylesheet_link_tag :cars
+.cars
+  %h1 Dein Fuhrpark
+  
+  %table
     %tr
-      %td= car.user
-      %td= car.seats
-      %td= car.trunk
-      %td= car.description
-      %td= car.licence
-      %td= car.fuel_consumption
-      %td= car.smoker
-      %td= link_to 'Show', car
-      %td= link_to 'Edit', edit_car_path(car)
-      %td= link_to 'Destroy', car, :confirm => 'Are you sure?', :method => :delete
+      %th Bild
+      %th Bezeichnung
+      %th Anzahl der Sitzpl&auml;tze
+      %th Kofferraum
+      %th Raucher
+      %th Kennzeichen
+      %th Anzeigen
+      %th Editieren
+      %th Löschen
 
-%br
+    - @cars.each do |car|
+      %tr
+        %td= car.picture
+        %td= car.description
+        %td= car.seats
+        %td= car.trunk
+        %td= car.smoker
+        %td= car.licence
+        %td= link_to 'show', car
+        %td= link_to 'edit', edit_car_path(car)
+        %td= link_to 'destroy', car, :confirm => 'Bist du sicher?', :method => :delete
 
-= link_to 'New Car', new_car_path
+%a{:href => "/cars/new"}
+  Auto hinzuf&uuml;gen
+
