@@ -7,6 +7,8 @@ class Car < ActiveRecord::Base
 
   #Kontrolle ob das Kennzeichen eine Gülitige Länge hat
   validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}
+  
+  validates_presence_of :seats, :licence, :description 
 
   has_attached_file :carpic, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
 
