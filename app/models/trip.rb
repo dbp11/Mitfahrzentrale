@@ -53,14 +53,20 @@ class Trip < ActiveRecord::Base
 
   #liefert die Anzahl freier Sitzplätze, die noch nicht vergeben sind
   def get_free_seats
+    return free_seats - get_occupied_seats
+  end
+  
+  # liefert die Anzahl belegter Sitzpläte
+  def get_occupied_seats
     count = 0
     self.passengers.all.each do |p|
       if p.confirmed then
         count += 1
       end
     end
-    return free_seats - count
+    return count
   end
+
 
   #liefert alle user dieses Trips, die schon committed wurden
   def get_committed_passengers

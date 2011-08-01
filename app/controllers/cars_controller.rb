@@ -50,7 +50,7 @@ class CarsController < ApplicationController
   def create
     @car = Car.new(params[:car])
     authorize! :create, :car
-    temp = current_user
+    temp = current_user.id
     @car.user_id = temp
 
     respond_to do |format|
