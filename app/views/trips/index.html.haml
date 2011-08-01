@@ -15,7 +15,7 @@
   - number = 1
   - @future_trips.each do |trip|
     %tr
-      %td= number
+      %td= link_to number, trip
       %td
         %table{:border => "1"}
           %tr
