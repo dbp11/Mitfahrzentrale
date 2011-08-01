@@ -142,8 +142,11 @@ nav {
 			visibility: hidden;
 		}
 		li {
+			min-width: 120px;
+			position: relative;
 			float: left;
 			list-style-type: none;
+			text-align: center;
 			a {
 				display: block;
 				padding: 10px 20px;
