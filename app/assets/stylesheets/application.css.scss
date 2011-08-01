@@ -198,7 +198,7 @@ nav {
 .cssgradients nav li:hover {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to($nav_border_color_2));
-  -webkit-animation-name: abutton;
+ /* -webkit-animation-name: abutton;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: 10;
   -webkit-animation-direction: alternate;
