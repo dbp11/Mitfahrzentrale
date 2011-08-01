@@ -40,6 +40,8 @@ class RequestsController < ApplicationController
   # POST /requests
   # POST /requests.json
   def create
+    #start = Geocoder.coordinates(params:von)
+    #ende = Geocoder.coordinates(params:nach)
     @request = Request.new(params[:request])
 
     respond_to do |format|

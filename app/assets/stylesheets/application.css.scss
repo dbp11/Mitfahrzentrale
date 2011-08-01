@@ -131,16 +131,18 @@ header nav {
 			visibility: hidden;
 		}
 		li {
+			min-width: 120px;
 			position: relative;
 			float: left;
 			list-style-type: none;
+			text-align: center;
 			a {
 				display: block;
 				padding: 10px 20px;
 				border-left: 1px solid $nav_border_color_2;
 				border-right: 1px solid $nav_border_color_1;
 				text-decoration: none;
-        text-shadow: black 2px 2px 2px;
+				text-shadow: black 2px 2px 2px;
 				&:focus {
 					outline: none;
 					text-decoration: underline;
