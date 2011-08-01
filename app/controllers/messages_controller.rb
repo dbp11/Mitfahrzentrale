@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class MessagesController < AuthorizedController
   # GET /messages
   # GET /messages.json
   def index

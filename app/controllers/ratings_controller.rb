@@ -1,4 +1,4 @@
-class RatingsController < ApplicationController
+class RatingsController < AuthorizedController
   # GET /ratings
   # GET /ratings.json
   def index

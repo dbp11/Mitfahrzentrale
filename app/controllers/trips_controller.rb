@@ -1,5 +1,4 @@
-class TripsController < ApplicationController
-  before_filter :authenticate_user!
+class TripsController < AuthorizedController
   # GET /trips
   # GET /trips.json
   def index
