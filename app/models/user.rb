@@ -27,10 +27,10 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
   
   #Beziehung User schreibt User Nachricht/Rating
-  has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
-  has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
-  has_many :written_ratings, :class_name => "Rating", :as => "writer", :dependent => :destroy
-  has_many :received_ratings, :class_name => "Rating", :as => "receiver", :dependent => :destroy
+  has_many :received_messages, :class_name => "Message", :foreign_key =>"receiver_id", :dependent => :destroy
+  has_many :written_messages,  :class_name => "Message", :foreign_key =>"writer_id", :dependent => :destroy
+  has_many :written_ratings, :class_name => "Rating", :foreign_key => "author_id", :dependent => :destroy
+  has_many :received_ratings, :class_name => "Rating", :foreign_key => "receiver_id", :dependent => :destroy
  
   #Methoden:
   #toString Methode für User
