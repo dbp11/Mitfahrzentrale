@@ -73,7 +73,7 @@
             - if can? :read, @trip
               %td= link_to 'show', passenger
             %td Bewertung
-            %td= passenger.received_ratings
+            %td= passenger.get_avg_rating
             -#nur Fahrer und Mitfahrer können Nachrichten an die Mitfahrer versenden.
             -#jedoch kein Versenden an sich selbst (Variable benötigt)
             - if can? :manage, @trip and passenger != @user
@@ -84,7 +84,7 @@
               -#der Link ist so nicht korrekt. Mit Controllern abklären, wie das laufen soll
               %td= link_to 'austragen', passenger
   %tr
-    %td &bnsp;
+    %td &nbsp;
   %tr
     -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
     - if can? :manage, @trip
