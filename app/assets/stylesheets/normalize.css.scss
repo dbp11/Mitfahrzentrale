@@ -57,55 +57,15 @@ html {
     -ms-text-size-adjust: 100%; /* 4 */
 }
 
-/*
- * Addresses margins handled incorrectly in IE6/7
- */
-
-body {
-    margin: 0;
-}
-
 /* 
  * Addresses font-family inconsistency between 'textarea' and other form elements.
  */
 
-body,
 button,
 input,
 select,
 textarea {
     font-family: sans-serif;
-}
-
-
-/* =============================================================================
-   Links
-   ========================================================================== */
-
-a {
-    color: #00e;
-}
-
-a:visited {
-    color: #551a8b;
-}
-
-/*
- * Addresses outline displayed oddly in Chrome
- */
-
-a:focus {
-    outline: thin dotted;
-}
-
-/*
- * Improves readability when focused and also mouse hovered in all browsers
- * people.opera.com/patrickl/experiments/keyboard/test
- */
-
-a:hover,
-a:active {
-    outline: 0;
 }
 
 

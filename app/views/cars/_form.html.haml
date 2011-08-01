@@ -6,27 +6,30 @@
       %ul
         - @car.errors.full_messages.each do |msg|
           %li= msg
-
   .field
-    Fahrzeughalter
-    = f.text_field :user
+    = f.label :seats, "Sitzplätze*" 
+    %br
+    = f.number_field :seats, :size => 30, :value => 5, :min => 0, :max =>40
   .field
-    = f.label ("Sitzplaetze") :seats
-    = f.number_field :seats
+    = f.label :description, "Beschreibung des Fahrzeuges*"
+    %br
+    = f.text_field :description, :required => true
   .field
-    = f.label :trunk
-    = f.text_field :trunk
+    = f.label :licence, "Kennzeichen*"
+    %br
+    = f.text_field :licence, :required => true 
   .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :licence
-    = f.text_field :licence
-  .field
-    = f.label :fuel_consumption
+    = f.label :fuel_consumption, "Kraftstoffverbrauch"
+    %br
     = f.number_field :fuel_consumption
   .field
-    = f.label :smoker
-    = f.text_field :smoker
+    = f.label :smoker, "Raucher"
+    %br
+    = f.check_box :smoker
+  .field
+    = f.label :carpic, "Bild hochladen"
+    %br
+    = f.file_field :carpic
+
   .actions
     = f.submit 'Save'

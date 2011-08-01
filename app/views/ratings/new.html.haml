@@ -9,11 +9,11 @@
 					%li= msg
 	%p
 		= 'Bewertung für '
-		- if @rating.rated == @rating.trip.user
+		- if @rating.receiver == @rating.trip.user
 			= 'Fahrer '
 		- else
 			= 'Mitfahrer '
-		= @rating.rated.name
+		= @rating.receiver.name
 		= ' auf der Fahrt '
 		= @rating.trip
 	%table.form_table
