@@ -5,7 +5,9 @@
 body.ratings {
 	// Add the ratings class to your body tag
 	// Then, place scoped styles here.
-	.rating_table {
+	margin: auto;
+  width: 70%;
+.rating_table {
 		margin-bottom: 1em;
 		border: solid 2px;
 		width: 60%;
