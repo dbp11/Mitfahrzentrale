@@ -16,4 +16,5 @@ gem "cancan"
 gem "shoulda-matchers", :group => :test
 gem "geocoder"
 gem "paperclip"
+gem "gmaps4rails"
 #gem "metric_fu"
