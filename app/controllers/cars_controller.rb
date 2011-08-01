@@ -1,4 +1,4 @@
-class CarsController < AuthorizedController
+class CarsController < ApplicationController
   
   # GET /cars
   # GET /cars.json

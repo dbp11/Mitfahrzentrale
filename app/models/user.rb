@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def is?(role)
-    roles.nclude?(role.to_s)
+    roles.include?(role.to_s)
   end
 
   #Vergangene angebotene Trips des Users
