@@ -1,4 +1,4 @@
-class CarsController < ApplicationController
+class CarsController < AuthorizedController
   # GET /cars
   # GET /cars.json
   def index

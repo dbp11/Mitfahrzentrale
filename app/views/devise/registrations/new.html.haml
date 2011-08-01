@@ -50,6 +50,12 @@
     %br
     = f.text_field:city, :required=>"required"
 
+  %p
+    %br
+    = f.label :roles
+  %p
+    %br
+    = f.collection_select :role, User::ROLES, :to_s, :humanize 
 
   %p= f.submit "Sign up"
 = render :partial => "devise/shared/links"
