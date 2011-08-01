@@ -1,27 +1,14 @@
 %h1 Listing ratings
 
-%table
-  %tr
-    %th Text
-    %th Mark
-    %th Written by
-    %th Sent to
-    %th Trip
-    %th
-    %th
-    %th
-
-  - @ratings.each do |rating|
-    %tr
-      %td= rating.comment
-      %td= rating.mark
-      %td= rating.author
-      %td= rating.receiver
-      %td= rating.trip
-      %td= link_to 'Show', rating
-      %td= link_to 'Edit', edit_rating_path(rating)
-      %td= link_to 'Destroy', rating, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Rating', new_rating_path
+- @ratings.each do |rating|
+	%table.rating_table
+		%tr.rating_table_row
+			%td.rating_table_left
+				= "Bewertung von"
+				= link_to(rating.author.name, url_for(rating.author))
+				= " auf der Fahrt am"
+				= link_to(rating.trip.start_time.to_date, url_for(rating.trip)) + ":"
+			%td.rating_table_right= rating.trip
+		%tr.rating_table_row
+			%td.rating_table_comment{:colspan => "2"}
+				= rating.comment
