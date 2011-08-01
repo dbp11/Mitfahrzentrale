@@ -10,7 +10,7 @@ class Car < ActiveRecord::Base
   
   validates_presence_of :seats, :licence, :description 
 
-  has_attached_file :carpic, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
+  has_attached_file :carpic, :styles => { :medium =>  "400x400>", :thumb => "100x100>"}
 
   #to String Methode für Cars
   def to_s
