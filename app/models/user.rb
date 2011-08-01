@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
   # Stat. Integrität: Email muss vorhanden, unique und min 8 char lang sein
   validates :email, :uniqueness => true, :presence => true, :length => {:minimum => 8}
   #Vermeidung von Nullwerten 
-  validates_presence_of :name, :address, :zipcode, :city, :birthday 
+  validates_presence_of :name, :address, :zipcode, :city 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars
   
   
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
@@ -29,10 +29,10 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
   
   #Beziehung User schreibt User Nachricht/Rating
-  has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
-  has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
-  has_many :written_ratings, :class_name => "Rating", :as => "writer", :dependent => :destroy
-  has_many :received_ratings, :class_name => "Rating", :as => "receiver", :dependent => :destroy
+  has_many :received_messages, :class_name => "Message", :foreign_key =>"receiver_id", :dependent => :destroy
+  has_many :written_messages,  :class_name => "Message", :foreign_key =>"writer_id", :dependent => :destroy
+  has_many :written_ratings, :class_name => "Rating", :foreign_key => "author_id", :dependent => :destroy
+  has_many :received_ratings, :class_name => "Rating", :foreign_key => "receiver_id", :dependent => :destroy
  
   #Methoden:
   #toString Methode für User
@@ -82,5 +82,23 @@ class User < ActiveRecord::Base
       end
     end
     return erg
+  end
+
+  def get_avg_rating
+    count = 0
+    erg = 0
+    self.received_ratings.each do |x|
+      erg = erg + x.mark
+      count +=1
+    end
+    return erg / count
+  end
+
+  def count_ratings
+    count = 0
+    self.received_ratings.each do |x|
+      count += 1
+    end
+    return count
   end
 end

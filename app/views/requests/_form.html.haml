@@ -1,34 +1,62 @@
-= form_for @request do |f|
-  -if @request.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@request.errors.count, "error")} prohibited this request from being saved:"
-      %ul
-        - @request.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :starts_at_N
-    = f.text_field :starts_at_N
-  .field
-    = f.label :starts_at_E
-    = f.text_field :starts_at_E
-  .field
-    = f.label :ends_at_E
-    = f.text_field :ends_at_E
-  .field
-    = f.label :ends_at_N
-    = f.text_field :ends_at_N
-  .field
-    = f.label :start_time
-    = f.datetime_select :start_time
-  .field
-    = f.label :end_time
-    = f.datetime_select :end_time
-  .field
-    = f.label :baggage
-    = f.check_box :baggage
-  .field
-    = f.label :comment
-    = f.text_field :comment
-  .actions
-    = f.submit 'Save'
+-#= form_for @request do |f|
+-#	-if @request.errors.any?
+-#		#error_explanation
+-#			%h2= "#{pluralize(@request.errors.count, "error")} prohibited this request from being saved:"
+-#			%ul
+-#				- @request.errors.full_messages.each do |msg|
+-#					%li= msg
+-#
+-#	.field
+-#		= f.label :starts_at_N
+-#		= f.text_field :starts_at_N
+-#	.field
+-#		= f.label :starts_at_E
+-#		= f.text_field :starts_at_E
+-#	.field
+-#		= f.label :ends_at_E
+-#		= f.text_field :ends_at_E
+-#	.field
+-#		= f.label :ends_at_N
+-#		= f.text_field :ends_at_N
+-#	.field
+-#		= f.label :start_time
+-#		= f.datetime_select :start_time
+-#	.field
+-#		= f.label :end_time
+-#		= f.datetime_select :end_time
+-#	.field
+-#		= f.label :baggage
+-#		= f.check_box :baggage
+-#	.field
+-#		= f.label :comment
+-#		= f.text_field :comment
+-#	.actions
+-#		= f.submit 'Save'
+= form_tag("new", :method => "post") do
+	%table.form_table
+		%tr.form_table_row
+			%td.form_left
+				Von
+			-# entweder das textfield unten oder eine select-box
+			%td.form_right
+				= text_field_tag(:address_start, nil, :required => "required")
+		%tr
+			%td.form_left
+				Nach
+			-# entweder das textfield unten oder eine select-box
+			%td.form_right
+				= text_field_tag(:address_end, nil, :required => "required")
+		%tr
+			%td.form_left
+				Datum
+			%td.form_right
+				%input{:name => "date_start", :required => "required", :type => "date"}/
+		%tr
+			%td.form_left
+				Uhrzeit
+			%td.form_right
+				%input{:name => "time_start", :required => "required", :type => "time"}/
+		%tr
+			%td.form_left
+			%td.form_right
+				= submit_tag("Erstellen")

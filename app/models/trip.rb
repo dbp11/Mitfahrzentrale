@@ -10,7 +10,7 @@ class Trip < ActiveRecord::Base
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
-  validates_presence_of :address_start, :address_end, :start_time, :free_seats
+  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E
   
   #Freie Sitzplätze dürfen nicht negativ sein
   validates_length_of :free_seats, :in => 1..200
@@ -53,14 +53,20 @@ class Trip < ActiveRecord::Base
 
   #liefert die Anzahl freier Sitzplätze, die noch nicht vergeben sind
   def get_free_seats
+    return free_seats - get_occupied_seats
+  end
+  
+  # liefert die Anzahl belegter Sitzpläte
+  def get_occupied_seats
     count = 0
     self.passengers.all.each do |p|
       if p.confirmed then
         count += 1
       end
     end
-    return free_seats - count
+    return count
   end
+
 
   #liefert alle user dieses Trips, die schon committed wurden
   def get_committed_passengers
@@ -73,7 +79,7 @@ class Trip < ActiveRecord::Base
     return erg
   end
 
-  #liefert alle user dieses Trips, die (noch) nicht committed wurden
+  #liefert alle user dieses Trips, die (noch) nicht committed wurdeni
   def get_uncommitted_passengers
     erg = []
     self.passengers.all.each do |p|

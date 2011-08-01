@@ -6,13 +6,23 @@
  *= require_self
  *= require_tree .
 */
+/*  =============================================================================
+    Farbcodes
+    ========================================================================== */   
+$bg_color1: #87CEEB;
+$font_color: black;
+$bg_color2: lighten($bg_color1, 90%);
+$nav_border_color_1: lighten($bg_color1, 10%);
+$nav_border_color_2: darken($bg_color1, 20%);
+$nav_font_color: black;
+$nav_bg_color: darken($bg_color1, 20%);
 
 /* =============================================================================
 	 General settings in application.css.scss
 	 ========================================================================== */
 body {
-	background-color: #fff;
-	color: #333;
+	background-color: $bg_color1;
+	color: $font_color;
 	font-family: verdana, arial, helvetica, sans-serif;
 	font-size: 13px;
 	line-height: 18px;
@@ -25,7 +35,7 @@ p, ol, ul, td {
 }
 
 pre {
-	background-color: #eee;
+	background-color: $bg_color1;
 	padding: 10px;
 	font-size: 11px;
 }
@@ -34,7 +44,6 @@ pre {
 	 Links
 	 ========================================================================== */
 a {
-/*		color: #00e;*/
 }
 
 a:visited {
@@ -63,8 +72,6 @@ a:active {
 
 
 
-$bg_color1: #BBBBBB;
-$bg_color2: #FFFFFF;
 textarea {
 	width: 300px;
 	height: 6em;
@@ -84,11 +91,15 @@ label {
 }
 body {
 	margin: 0;
+  width: 100%;
 }
 .container {
 /*	margin-left: 10em;*/
 /*	margin-right: 10em;*/
 	width: 1000px;
+}
+div#main a{
+  text-align:center;  
 }
 #main {
 	min-height: 600px;
@@ -103,25 +114,34 @@ body {
 	padding-top: 1em;
 	padding-bottom: 2em;
 }
-
-
+ 
 /* =============================================================================
 	 Navigation bar
 	 ========================================================================== */
-$nav_border_color_1: #222222;
-$nav_border_color_2: #999999;
-$nav_font_color: #EEEEEE;
-$nav_bg_color: #6A6A6A;
-header nav {
+header {
+  font-family:  Arial, Gadget, sans-serif;
+  font-weight: bolder;
+  color: black;
+  font-size: 80;
+  text-align: center;
+  padding: 0.9em;
+	background: darken($bg_color1,10%);
+  text-shadow: #222222 1px 1px 3px;
+  banner {
+  -webkit-box-reflect: below 1px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.7, transparent), to(white));
+}
+}
+nav {
+  background: $nav_bg_color;
 	display: block;
 	margin: 0;
 	border:1px solid $nav_border_color_1;
+  border-color: black $nav_bg_color black $nav_bg_color;
 	position: relative;
-	background-color: black;
 	font-size: 16px;
 	font-weight: bold;
 	ul {
-		margin: 0;
+    margin: 0px;
 		padding: 0;
 		&:after {
 			content: ".";
@@ -131,66 +151,78 @@ header nav {
 			visibility: hidden;
 		}
 		li {
+      width: 14.3%;
+      min-width: 120px;
 			position: relative;
 			float: left;
 			list-style-type: none;
+			text-align: center;
 			a {
 				display: block;
 				padding: 10px 20px;
 				border-left: 1px solid $nav_border_color_2;
 				border-right: 1px solid $nav_border_color_1;
 				text-decoration: none;
-        text-shadow: black 2px 2px 2px;
+        text-shadow: white 1px 1px 1px;
 				&:focus {
 					outline: none;
 					text-decoration: underline;
 				}
 				&:link, &:visited {
 					color: $nav_font_color;
-				}
+				}/*
+        &:hover {
+
+          -webkit-animation-name: abutton;
+          -webkit-animation-duration: 1s;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-direction: alternate;
+          -webkit-animation-timing-function: ease-in;
+        }*/
 			}
 		}
 		li:first-child a {
+      padding-left: 35;
+      padding-right: 35;
 			border-left: none;
 		}
 		li:last-child a {
+      padding-left: 35;
+      padding-right: 35;
 			border-right: none;
 		}
 	}
 }
-.borderradius header nav {
-/*	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;*/
-}
-.cssgradients header nav {
+.cssgradients nav {
 	background: -moz-linear-gradient(0% 22px 90deg, $nav_border_color_1, $nav_border_color_2);
 	background: -webkit-gradient(linear, 0% 0%, 0% 70%, from($nav_border_color_2), to($nav_border_color_1));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_1, $nav_border_color_2);*/
 }
-.cssgradients header nav li:hover {
+.cssgradients nav li:hover {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to($nav_border_color_2));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
 }
-/*header nav ul li a:hover {
-  -webkit-animation-name: abutton;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
-  -webkit-animation-timing-function: ease-in;
-}*/
+
 @-webkit-keyframes abutton {
-  from{background: black; color: white;}
-  to{background:#00688B; color: #C0C0C0;}
+  from{background: $nav_bg_color;}
+  to{background: darken($nav_bg_color, 10%);}
 }
-.boxshadow.rgba header nav {
+/*.boxshadow.rgba nav {
 	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 	-webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 	box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
+}*/
+
+body.registrations {
+
+  margin: auto;
+  width: 70%;
 }
-
-
+body.sessions {
+  margin: auto;
+  width: 70%;
+}
 /* =============================================================================
 	 notices
 	 ========================================================================== */

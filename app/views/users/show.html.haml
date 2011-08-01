@@ -21,39 +21,39 @@
     %td.data_table_left#form_table_left
       Adresse: 
     %td.data_table_right#form_table_right
-      #{@user.visible_address? ? "versteckt" : @user.address}
+      #{@user.visible_address? ? @user.address: "versteckt"}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       PLZ: 
     %td.data_table_right#form_table_right
-      #{@user.zipcode}
+      #{@user.visible_zip? ? @user.zipcode : "versteckt"}
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       Ort: 
     %td.data_table_right#form_table_right
-      #{@user.city}
+      #{@user.visible_city? ? @user.city : "versteckt"}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       Geburtsdatum: 
     %td.data_table_right#form_table_right
-      #{@user.visible_age? ? "versteckt" : @user.birthday}
+      #{@user.visible_age? ?  @user.birthday : "versteckt"}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       InstantMassenger: 
     %td.data_table_right#form_table_right
-      #{@user.visible_im? ? "versteckt" : @user.instantmessenger}
+      #{@user.visible_im? ?  @user.instantmessenger: "versteckt"}
 
   %tr.data_table_row#form_table_row
     %td.data_table_left#form_table_left
       Telefon: 
     %td.data_table_right#form_table_right 
-      #{@user.visible_phone? ? "versteckt" : @user.phone}
+      #{@user.visible_phone? ? @user.phone : "versteckt"}
 
 
-  -#%p
-    %b Bild des Fahrzeuges:
+  %p
+    %b Bild:
     %br
-    = image_tag @user.carpic.url(:medium)
+    = image_tag @user.picture.url(:medium)
