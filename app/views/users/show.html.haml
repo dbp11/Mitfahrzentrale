@@ -51,3 +51,9 @@
       Telefon: 
     %td.data_table_right#form_table_right 
       #{@user.visible_phone? ? "versteckt" : @user.phone}
+
+
+  -#%p
+    %b Bild des Fahrzeuges:
+    %br
+    = image_tag @user.carpic.url(:medium)
