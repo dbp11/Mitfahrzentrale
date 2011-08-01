@@ -7,6 +7,15 @@ class Trip < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :passengers, :dependent => :destroy
   
+
+  #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
+  
+  validates_presence_of :address_start, :address_end, :start_time, :free_seats
+  
+  #Freie Sitzplätze dürfen nicht negativ sein
+  validates_length_of :free_seats, :in => 1..200
+
+
   #Methoden:
   #toString Methode für Trips
   def to_s
@@ -14,7 +23,7 @@ class Trip < ActiveRecord::Base
   end
 
 
-  #Brechnet Requests, die sich nur geringfügig von diesem Trip unterscheiden, und gibt ein Array aus
+  #Berechnet Requests, die sich nur geringfügig von diesem Trip unterscheiden, und gibt ein Array aus
   #Wertepaaren zurück. Der erste Wert ist die request_id, der zweite gibt die Länge des Umweges an, den der 
   #Fahrer dieses Trips in Kauf nehmen müsste. Das Array ist absteigend nach Umwegen sortiert.
   def get_similar_requests
@@ -40,5 +49,38 @@ class Trip < ActiveRecord::Base
 
     erg.sort{|a,b| a[1] <=> b[1]}
   end
-  
+
+
+  #liefert die Anzahl freier Sitzplätze, die noch nicht vergeben sind
+  def get_free_seats
+    count = 0
+    self.passengers.all.each do |p|
+      if p.confirmed then
+        count += 1
+      end
+    end
+    return free_seats - count
+  end
+
+  #liefert alle
+  def get_committed_passengers
+    erg = []
+    self.passengers.all.each do |p|
+      if p.confirmed then
+        erg << p.user
+      end
+    end
+    return erg
+  end
+
+
+  def get_uncommitted_passengers
+    erg = []
+    self.passengers.all.each do |p|
+      if !p.confirmed then
+        erg << p.user_id
+      end
+    end
+    return erg
+  end
 end

@@ -10,10 +10,8 @@
     = f.label :message
     = f.text_area :message
   .field
-    = f.label :writer
-    = f.text_field :writer
+    = f.hidden_field :writer
   .field
-    = f.label :receiver
-    = f.text_field :receiver
+    = f.hidden_field :receiver
   .actions
     = f.submit 'Save'

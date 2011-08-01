@@ -117,7 +117,7 @@ header nav {
 	margin: 0;
 	border:1px solid $nav_border_color_1;
 	position: relative;
-	background-color: #6a6a6a;
+	background-color: black;
 	font-size: 16px;
 	font-weight: bold;
 	ul {
@@ -140,6 +140,7 @@ header nav {
 				border-left: 1px solid $nav_border_color_2;
 				border-right: 1px solid $nav_border_color_1;
 				text-decoration: none;
+        text-shadow: black 2px 2px 2px;
 				&:focus {
 					outline: none;
 					text-decoration: underline;
@@ -171,6 +172,17 @@ header nav {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
+}
+/*header nav ul li a:hover {
+  -webkit-animation-name: abutton;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: ease-in;
+}*/
+@-webkit-keyframes abutton {
+  from{background: black; color: white;}
+  to{background:#00688B; color: #C0C0C0;}
 }
 .boxshadow.rgba header nav {
 	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
