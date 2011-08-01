@@ -1,7 +1,7 @@
 = stylesheet_link_tag :cars
 %h1 Neues Auto hinzuf&uuml;gen
 
-= form_for :car, :html => { :multipart => true } do |f|
+= form_for :car, :url => "/cars/create", :html => { :multipart => true } do |f|
   -if @car.errors.any?
     #error_explanation
       %h2= "#{pluralize(@car.errors.count, "error")} prohibited this car from being saved:"

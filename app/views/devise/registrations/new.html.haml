@@ -50,6 +50,27 @@
     %br
     = f.text_field:city, :required=>"required"
 
+  %p
+    %br
+    = f.label :Geschlecht
+  %p
+    %br
+    = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+
+  %p
+    %br
+    = f.label :Telefon
+  %p
+    %br
+    = f.phone_field :phone
+
+  %p
+    %br
+    = f.label :Instantmessenger
+  %p
+    %br
+    = f.text_field :instantmessenger
+
 
   %p= f.submit "Sign up"
 = render :partial => "devise/shared/links"

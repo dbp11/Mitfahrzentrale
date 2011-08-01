@@ -11,7 +11,9 @@ class Trip < ActiveRecord::Base
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
   validates_presence_of :address_start, :address_end, :start_time, :free_seats
-
+  
+  #Freie Sitzplätze dürfen nicht negativ sein
+  validates_length_of :free_seats, :in => 1..200
 
 
   #Methoden:
@@ -46,6 +48,18 @@ class Trip < ActiveRecord::Base
     end
 
     erg.sort{|a,b| a[1] <=> b[1]}
+  end
+
+
+  #liefert die Anzahl freier Sitzplätze, die noch nicht vergeben sind
+  def get_free_seats
+    count = 0
+    self.passengers.all.each do |p|
+      if p.confirmed then
+        count += 1
+      end
+    end
+    return free_seats - count
   end
   
 end
