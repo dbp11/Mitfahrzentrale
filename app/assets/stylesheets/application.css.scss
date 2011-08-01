@@ -9,11 +9,12 @@
 /*  =============================================================================
     Farbcodes
     ========================================================================== */   
-$bg_color1: #87CEEB;
+/*$bg_color1: #87CEEB;*/
+$bg_color1: #BBBBBB;
 $font_color: black;
 $bg_color2: lighten($bg_color1, 90%);
-$nav_border_color_1: darken($bg_color1, 20%);
 $nav_border_color_2: lighten($bg_color1, 10%);
+$nav_border_color_1: darken($bg_color1, 20%);
 $nav_font_color: black;
 $nav_bg_color: darken($bg_color1, 20%);
 
@@ -97,6 +98,7 @@ body {
 /*	margin-left: 10em;*/
 /*	margin-right: 10em;*/
 	width: 1000px;
+	margin: auto;
 }
 #main {
 	min-height: 600px;
@@ -214,15 +216,6 @@ nav {
 	box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 }*/
 
-body.registrations {
-
-  margin: auto;
-  width: 70%;
-}
-body.sessions {
-  margin: auto;
-  width: 70%;
-}
 /* =============================================================================
 	 notices
 	 ========================================================================== */
