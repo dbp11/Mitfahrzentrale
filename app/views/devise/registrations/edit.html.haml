@@ -2,30 +2,113 @@
   Edit #{resource_name.to_s.humanize}
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
-  %p
-    = f.label :name
+  %table.data_table#form_table
+    %tr
+      %td
+        = f.label :name
+      %td
+        = f.text_field :name
+    %tr
+      %td
+        = f.label :email
+      %td
+        = f.email_field :email
+    %tr
+      %td
+        = f.label :password
+        %i (frei lassen, wenn das Passwort nicht geändert werden soll)
+      %td
+        = f.password_field :password
+    %tr
+      %td
+        = f.label :password_confirmation
+      %td
+        = f.password_field :password_confirmation
+    %tr
+      %td
+        = f.label :current_password
+        %i (erforderlich für die Änderung)
+      %td
+        = f.password_field :current_password
+
+    %tr#form_table_row
+      %td
+        = f.label :Geburtsdatum
+      %td 
+        = f.date_select :birthday,
+                        :start_year => 1900,
+                        :end_year => 2011,
+                        :order => [:day, :month, :year],
+                        :use_month_numbers => true
+      %td{:class=>"label", :id=>"form_table_", :checked_value=>"1"}sichtbar
+      %td
+        = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
+    %tr#form_table_row
+      %td
+        = f.label :Geschlecht
+      %td 
+        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+
+    %tr#form_table_row
+      %td
+        = f.label :'Strasse und Hausnummer'
+      %td
+        = f.text_field:address, :required=>"required" 
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_address 
+          
+    %tr#form_table_row
+      %td
+        = f.label :PLZ
+      %td
+        = f.number_field:zipcode, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_zip
+
+
+    %tr#form_table_row
+      %td
+        = f.label :Ort
+      %td
+        = f.text_field:city, :required=>"required"
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_city
+
+
+
+    %tr#form_table_row
+      %td
+        = f.label :Telefon
+      %td
+        = f.phone_field:phone 
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_phone
+
+
+
+    %tr#form_table_row
+      %td
+        = f.label :InstantMassengerDaten
+      %td
+        = f.text_field:instantmessenger
+      %td{:class=>"label"}sichtbar
+      %td
+        = f.check_box:visible_im
+
+
+  .field
+    = f.label :carpic, "Bild hochladen"
+    %br
+    = f.file_field :carpic
     %br/
-    = f.text_field :name
-  %p
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %p
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password
-  %p
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %p
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password
-  %p= f.submit "Update"
-%h3 Cancel my account
+    = f.submit "Speichern"
+
+
+%h3 Account löschen
 %p
-  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
-= link_to "Back", :back
+  Unglücklich? #{link_to "Account löschen", registration_path(resource_name), :confirm => "Sind sie sicher?", :method => :delete}.
+= link_to "zurück", :back
