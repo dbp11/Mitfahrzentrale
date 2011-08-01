@@ -52,14 +52,13 @@
             %td
             %td= text_field_tag(:ends_at, @trip.address_end, :disabled => true)
       -#Tabelle mit Informationen über Fahrer, Mitfahrer, potentielle Mitfahrer
-        in Abhängigkeit vom Status des aktuellen Benutzers
+      -#in Abhängigkeit vom Status des aktuellen Benutzers
   %tr
     %td &nbsp;
   %tr
     %table
       %tr
-        -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu
-          Anzahl Gesamtplätze
+        -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
         %th= "Mitfahrer (#{f_seats}/#{@trip.car.seats})"
       -#wenn keine Mitfahrer vorhanden, dann Hinweis in Tabelle ausgeben
       - if c_passengers == nil or c_passengers.count <= 0
@@ -70,13 +69,13 @@
           - c_passengers.each do |passenger|
           %tr
             -#nur Fahrer und Mitfahrer dürfen die Links zu den anderen Mitfahrern
-              inkl. Namen der Mitfahrer sehen
-            - if can? :manage, @trip
+            -#inkl. Namen der Mitfahrer sehen
+            - if can? :read, @trip
               %td= link_to 'show', passenger
             %td Bewertung
             %td= passenger.received_ratings
             -#nur Fahrer und Mitfahrer können Nachrichten an die Mitfahrer versenden.
-              jedoch kein Versenden an sich selbst (Variable benötigt)
+            -#jedoch kein Versenden an sich selbst (Variable benötigt)
             - if can? :manage, @trip and passenger != @user
               -#der Link wird so wohl nicht funktionieren. Mit Controller klären
               %td= link_to 'new', Message
@@ -98,14 +97,14 @@
           %tr
             %td keine Bewerbungen vorhanden
           -#sonst alle Bewerbungen ausgeben
-          - else
-            - u_passengers.each do |passenger|
-              %tr
-                %td= link_to 'show', passenger
-                %td Bewertung
-                %td= passenger.received_ratings
-                -#wird so nicht funkionieren. Mit Controllern abreden.
-                %td= link_to 'annehmen', passenger
-                -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
-                  Link für den Fahrer, um die Anfrage abzulehnen
-                %td= passenger == @user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
+        - else
+          - u_passengers.each do |passenger|
+            %tr
+              %td= link_to 'show', passenger
+              %td Bewertung
+              %td= passenger.received_ratings
+              -#wird so nicht funkionieren. Mit Controllern abreden.
+              %td= link_to 'annehmen', passenger
+              -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
+              -#Link für den Fahrer, um die Anfrage abzulehnen
+              %td= passenger == @user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
