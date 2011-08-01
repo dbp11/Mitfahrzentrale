@@ -112,16 +112,27 @@ $nav_border_color_1: #222222;
 $nav_border_color_2: #999999;
 $nav_font_color: #EEEEEE;
 $nav_bg_color: #6A6A6A;
-header nav {
+header {
+  font-family:  Arial, Gadget, sans-serif;
+  font-weight: bolder;
+  color: #00688B;
+  font-size: 80;
+  text-align: center;
+  padding: 0.9em;
+	background: darken($bg_color1, 10%);
+  text-shadow: #222222 1px 1px 3px;
+}
+nav {
+  background: $nav_bg_color;
 	display: block;
 	margin: 0;
 	border:1px solid $nav_border_color_1;
+  border-top-color: black;
 	position: relative;
-	background-color: black;
 	font-size: 16px;
 	font-weight: bold;
 	ul {
-		margin: 0;
+    margin: 0px;
 		padding: 0;
 		&:after {
 			content: ".";
@@ -131,7 +142,6 @@ header nav {
 			visibility: hidden;
 		}
 		li {
-			position: relative;
 			float: left;
 			list-style-type: none;
 			a {
@@ -140,7 +150,7 @@ header nav {
 				border-left: 1px solid $nav_border_color_2;
 				border-right: 1px solid $nav_border_color_1;
 				text-decoration: none;
-        text-shadow: black 2px 2px 2px;
+        text-shadow: black 1px 1px 1px;
 				&:focus {
 					outline: none;
 					text-decoration: underline;
@@ -148,9 +158,18 @@ header nav {
 				&:link, &:visited {
 					color: $nav_font_color;
 				}
+        &:hover {
+
+          -webkit-animation-name: abutton;
+          -webkit-animation-duration: 1s;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-direction: alternate;
+          -webkit-animation-timing-function: ease-in;
+        }
 			}
 		}
 		li:first-child a {
+      margin-left: 40px;
 			border-left: none;
 		}
 		li:last-child a {
@@ -158,37 +177,26 @@ header nav {
 		}
 	}
 }
-.borderradius header nav {
-/*	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;*/
-}
-.cssgradients header nav {
+/*.cssgradients nav {
 	background: -moz-linear-gradient(0% 22px 90deg, $nav_border_color_1, $nav_border_color_2);
 	background: -webkit-gradient(linear, 0% 0%, 0% 70%, from($nav_border_color_2), to($nav_border_color_1));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_1, $nav_border_color_2);*/
-}
-.cssgradients header nav li:hover {
+//}
+/*.cssgradients nav li:hover {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
-}
-/*header nav ul li a:hover {
-  -webkit-animation-name: abutton;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
-  -webkit-animation-timing-function: ease-in;
-}*/
+//}
+
 @-webkit-keyframes abutton {
-  from{background: black; color: white;}
-  to{background:#00688B; color: #C0C0C0;}
+  from{background: $nav_bg_color;}
+  to{background:#00688B;}
 }
-.boxshadow.rgba header nav {
+/*.boxshadow.rgba nav {
 	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 	-webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
 	box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
-}
+}*/
 
 
 /* =============================================================================
