@@ -158,18 +158,18 @@ nav {
 				&:link, &:visited {
 					color: $nav_font_color;
 				}
-        &:hover {
+        //&:hover {
 
-          -webkit-animation-name: abutton;
-          -webkit-animation-duration: 1s;
-          -webkit-animation-iteration-count: infinite;
-          -webkit-animation-direction: alternate;
-          -webkit-animation-timing-function: ease-in;
-        }
+        //  -webkit-animation-name: abutton;
+        //  -webkit-animation-duration: 1s;
+        //  -webkit-animation-iteration-count: infinite;
+        //  -webkit-animation-direction: alternate;
+        //  -webkit-animation-timing-function: ease-in;
+       // }
 			}
 		}
 		li:first-child a {
-      margin-left: 40px;
+      //margin-left: 40px;
 			border-left: none;
 		}
 		li:last-child a {
@@ -177,16 +177,16 @@ nav {
 		}
 	}
 }
-/*.cssgradients nav {
+.cssgradients nav {
 	background: -moz-linear-gradient(0% 22px 90deg, $nav_border_color_1, $nav_border_color_2);
 	background: -webkit-gradient(linear, 0% 0%, 0% 70%, from($nav_border_color_2), to($nav_border_color_1));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_1, $nav_border_color_2);*/
-//}
-/*.cssgradients nav li:hover {
+}
+.cssgradients nav li:hover {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to(#555));
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
-//}
+}
 
 @-webkit-keyframes abutton {
   from{background: $nav_bg_color;}
