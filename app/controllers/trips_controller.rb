@@ -26,18 +26,9 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
     
-    if current_user == @trip.user_id
-      @triprole = 0
-    elsif (current_user == @trip.passenger && @trip.passenger.confirmed)
-      @triprole = 1
-    elsif (current_user == @trip.passenger && !@trip.passenger.confirmed)
-      @triprole = 2
-    else 
-      @triprole = 3
-    end
     @commited_passenger = @trip.get_commited_passengers.all
     @uncommited_passenger = @trip.get_uncommited_passengers.all
-
+    @free_seats = @trip.get_free_seats
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @trip }
