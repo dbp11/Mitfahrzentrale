@@ -27,6 +27,8 @@
                     :end_year => 2011,
                     :order => [:day, :month, :year],
                     :use_month_numbers => true
+    %br
+
   %p
     %br
     = f.label :address
@@ -71,8 +73,8 @@
     %br
     = f.text_field :instantmessenger
 
-  = f.hidden_field :visible_age
+  -#= f.hidden_field :visible_age
 
 
   %p= f.submit "Sign up"
-= render :partial => "devise/shared/links"
+-#= render :partial => "devise/shared/links"
