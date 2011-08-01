@@ -83,4 +83,14 @@ class User < ActiveRecord::Base
     end
     return erg
   end
+
+  def get_avg_rating
+    count = 0
+    erg = 0
+    self.received_ratings.each do |x|
+      erg = erg + x.mark
+      count +=1
+    end
+    return erg / count
+  end
 end
