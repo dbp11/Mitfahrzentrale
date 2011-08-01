@@ -11,6 +11,16 @@ class MessagesController < ApplicationController
     end
   end
 
+  def outbox
+    @messages = Message.all
+    #Hier Methode, nur empfangene
+  
+    respond_to do |format|
+      format.html # index.html.haml
+      format.json  { render :json => @messages }
+    end
+  end
+
   # GET /messages/1
   # GET /messages/1.json
   def show
@@ -28,7 +38,7 @@ class MessagesController < ApplicationController
     @message = Message.new
     temp = User.find(params[:id])
     @message.receiver = temp
-	@message.writer = current_user
+	  @message.writer = current_user
 
     respond_to do |format|
       format.html # new.html.erb
