@@ -93,7 +93,6 @@ class User < ActiveRecord::Base
     end
     return erg / count
   end
-<<<<<<< HEAD
 
   def count_ratings
     count = 0
@@ -102,7 +101,4 @@ class User < ActiveRecord::Base
     end
     return count
   end
-=======
-  
->>>>>>> 6bf96175cb958fff0fe24b2ad2a0f79cee06646a
 end
