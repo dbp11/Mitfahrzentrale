@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :address, :zipcode, :city, :birthday 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :roles
   
   
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
@@ -33,13 +33,29 @@ class User < ActiveRecord::Base
   has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
   has_many :written_ratings, :class_name => "Rating", :as => "writer", :dependent => :destroy
   has_many :received_ratings, :class_name => "Rating", :as => "receiver", :dependent => :destroy
- 
+
+  ROLES = %w[admin member]
+
   #Methoden:
   #toString Methode für User
   def to_s
     name
   end
-  
+ 
+  def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  end
+
+  def roles
+    ROLES.reject do |r|
+      ((roles_mask || 0 ) & 2**ROLES.index(r)).zero?
+    end
+  end
+
+  def is?(role)
+    roles.nclude?(role.to_s)
+  end
+
   #Vergangene angebotene Trips des Users
   def driven
    erg=[] 
