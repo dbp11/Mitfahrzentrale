@@ -27,6 +27,10 @@
                     :end_year => 2011,
                     :order => [:day, :month, :year],
                     :use_month_numbers => true
+    %br
+    = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
+    %tr#form_table_row
+
   %p
     %br
     = f.label :address
@@ -75,4 +79,4 @@
 
 
   %p= f.submit "Sign up"
-= render :partial => "devise/shared/links"
+-#= render :partial => "devise/shared/links"
