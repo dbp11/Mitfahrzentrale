@@ -49,5 +49,17 @@ class Trip < ActiveRecord::Base
 
     erg.sort{|a,b| a[1] <=> b[1]}
   end
+
+
+  #liefert die Anzahl freier Sitzplätze, die noch nicht vergeben sind
+  def get_free_seats
+    count = 0
+    self.passengers.all.each do |p|
+      if p.confirmed then
+        count += 1
+      end
+    end
+    return free_seats - count
+  end
   
 end
