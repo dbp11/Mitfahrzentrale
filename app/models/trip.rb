@@ -7,6 +7,13 @@ class Trip < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :passengers, :dependent => :destroy
   
+
+  #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
+  
+  validates_presence_of :address_start, :address_end, :start_time, :free_seats
+
+
+
   #Methoden:
   #toString Methode für Trips
   def to_s
