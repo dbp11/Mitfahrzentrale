@@ -1,5 +1,8 @@
 Mitfahrzentrale::Application.routes.draw do
+  
+  match "/messages/outbox" => "messages#outbox" 
   resources :messages
+  
 
   resources :cars
 

@@ -3,10 +3,21 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     @messages = Message.all
+    #Hier Methode einfügen, nur eigene Nachrichten
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @messages }
+    end
+  end
+
+  def outbox
+    @messages = Message.all
+    #Hier Methode, nur empfangene
+  
+    respond_to do |format|
+      format.html # index.html.haml
+      format.json  { render :json => @messages }
     end
   end
 
@@ -27,7 +38,7 @@ class MessagesController < ApplicationController
     @message = Message.new
     temp = User.find(params[:id])
     @message.receiver = temp
-	@message.writer = current_user
+	  @message.writer = current_user
 
     respond_to do |format|
       format.html # new.html.erb
