@@ -47,7 +47,7 @@
       %td
         = f.label :Geschlecht
       %td 
-        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], :prompt=> !@user.sex? ? "Maennlich" : "Weiblich")
 
     %tr#form_table_row
       %td
