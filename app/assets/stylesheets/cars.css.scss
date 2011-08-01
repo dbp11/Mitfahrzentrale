@@ -2,14 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.cars table 
-  tbody tr th {
-  border: 2px solid;
-  border-width: 1px;
-  padding: 0 5px 5 5;
-  font-size: 12px;
-  text-shadow: 1px 1px 1px white;
+.cars {
+  margin: auto;
+  width: 70%;
+  a {
+    text-align: center;
+  }
+  table tbody {
+    border: 1px solid;
+    border-width: 1px;
+    padding: 0 5px 5 5;
+    tr {
+      td {
+        text-align: center;
+      }
   
+      th {
+        text-align: center;
+        font-size: 12px;
+        border-width: 1px;
+        padding: 0 5px 5 5;
+}
+      }
+    }
 }
 
 

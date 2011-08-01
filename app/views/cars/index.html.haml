@@ -18,7 +18,10 @@
 
     - @cars.each do |car|
       %tr
-        %td= image_tag car.carpic.url(:thumb)
+        - if car.carpic?
+          %td= image_tag car.carpic.url(:thumb)
+        - else
+          %td= "Kein Bild"
         %td= car.description
         %td= car.seats
         %td= car.fuel_consumption
