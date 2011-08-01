@@ -34,7 +34,7 @@
       %td
         %select{:name => "car", :required => "required"}
           - @fahrzeuge.each do |f|
-            %option{:value => f} f.description
+            %option{:value => f.id}= f.description
     %tr
     %tr
       %td
