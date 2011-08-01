@@ -93,4 +93,12 @@ class User < ActiveRecord::Base
     end
     return erg / count
   end
+
+  def count_ratings
+    count = 0
+    self.received_ratings.each do |x|
+      count += 1
+    end
+    return count
+  end
 end
