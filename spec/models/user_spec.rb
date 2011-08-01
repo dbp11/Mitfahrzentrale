@@ -14,7 +14,9 @@ describe User do
       :address => "bla Strasse 20 blahausen 4444",
       :addressN => 45646,
       :addressE => 12313,
-      :zipcode => 4444
+      :zipcode => 4444,
+      :birthday => Time.now,
+      :city => "fsfsf"
     }
     @attr_alternativ = { 
       :name => "Example User",
@@ -26,16 +28,28 @@ describe User do
       :address => "bla Strasse 20 blahausen 4444",
       :addressN => 45646,
       :addressE => 12313,
-      :zipcode => 4444
+      :zipcode => 4444,
+      :birthday => Time.now,
+      :city => "fesffe"
     }
    @user = User.create!(@attr_alternativ) 
+  end
+
+  it "Kontrolle ob Validation city richtig funktoniert" do
+     no_city_user = User.new(@attr.merge(:city => ""))
+     no_city_user.should_not be_valid
+  end
+
+  it "Kontrolle ob Validation birthday funktioniert" do
+     no_birthday_user = User.new(@attr.merge(:birthday => nil))
+     no_birthday_user.should_not be_valid
   end
 
   it "Kontrolle ob die Methode driven richtig funktioniert" do
     past = Time.now - 1.day
     old = Trip.new
     old.user = @user
-    old.end_time = past
+    old.start_time = past
     old.save
     @user.driven.include? old
   end
@@ -44,7 +58,7 @@ describe User do
     future = Time.now + 1.day
     newtrip = Trip.new
     newtrip.user = @user
-    newtrip.end_time = future    
+    newtrip.start_time = future    
     newtrip.save
     @user.to_drive.include? future
   end

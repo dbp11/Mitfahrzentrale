@@ -1,5 +1,4 @@
 class TripsController < ApplicationController
-  before_filter :authenticate_user!
   # GET /trips
   # GET /trips.json
   def index
@@ -25,18 +24,7 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
-    
-    if current_user == @trip.user_id
-      @triprole = 0
-    elsif (current_user == @trip.passenger && @trip.passenger.confirmed)
-      @triprole = 1
-    elsif (current_user == @trip.passenger && !@trip.passenger.confirmed)
-      @triprole = 2
-    else 
-      @triprole = 3
-    end
-    @commited_passenger = @trip.get_commited_passengers.all
-    @uncommited_passenger = @trip.get_uncommited_passengers.all
+    @triprole = 0
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,7 +36,7 @@ class TripsController < ApplicationController
   # GET /trips/new.json
   def new
     @trip = Trip.new
-    @fahrzeuge = current_user.cars.all
+    @fahrzeuge = current_user.cars
     flash[:notice] = params[:temp]
 
     respond_to do |format|
