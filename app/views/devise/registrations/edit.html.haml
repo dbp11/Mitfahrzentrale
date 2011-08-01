@@ -47,7 +47,10 @@
       %td
         = f.label :Geschlecht
       %td 
-        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], :prompt=> !@user.sex? ? "Maennlich" : "Weiblich")
+        - if @user.sex? 
+          = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], "1")
+        - else
+          = f.select:sex, options_for_select([["Maennlich", "1"], ["Weiblich", "0"]], "0")
 
     %tr#form_table_row
       %td
@@ -101,9 +104,9 @@
 
 
   .field
-    = f.label :carpic, "Bild hochladen"
+    = f.label :picture, "Bild hochladen"
     %br
-    = f.file_field :carpic
+    = f.file_field :picture
     %br/
     = f.submit "Speichern"
 
