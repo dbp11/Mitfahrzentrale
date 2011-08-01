@@ -25,8 +25,8 @@ class MessagesController < ApplicationController
   # GET /messages/new.json
   def new
     @message = Message.new
-    @message.reciver_id = params[:id]
-    
+    temp = User.find(params[:id])
+    @message.receiver = temp
 
     respond_to do |format|
       format.html # new.html.erb
