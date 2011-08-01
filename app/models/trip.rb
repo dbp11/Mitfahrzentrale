@@ -62,23 +62,23 @@ class Trip < ActiveRecord::Base
     return free_seats - count
   end
 
-  #liefert alle
+  #liefert alle user dieses Trips, die schon committed wurden
   def get_committed_passengers
     erg = []
     self.passengers.all.each do |p|
       if p.confirmed then
-        erg << p.user_id
+        erg << p.user
       end
     end
     return erg
   end
 
-
+  #liefert alle user dieses Trips, die (noch) nicht committed wurden
   def get_uncommitted_passengers
     erg = []
     self.passengers.all.each do |p|
       if !p.confirmed then
-        erg << p.user_id
+        erg << p.user
       end
     end
     return erg
