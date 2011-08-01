@@ -12,8 +12,8 @@
 $bg_color1: #87CEEB;
 $font_color: black;
 $bg_color2: lighten($bg_color1, 90%);
-$nav_border_color_1: lighten($bg_color1, 10%);
-$nav_border_color_2: darken($bg_color1, 20%);
+$nav_border_color_1: darken($bg_color1, 20%);
+$nav_border_color_2: lighten($bg_color1, 10%);
 $nav_font_color: black;
 $nav_bg_color: darken($bg_color1, 20%);
 
@@ -98,9 +98,6 @@ body {
 /*	margin-right: 10em;*/
 	width: 1000px;
 }
-div#main a{
-  text-align:center;  
-}
 #main {
 	min-height: 600px;
 	background:-moz-linear-gradient(top, $bg_color1, $bg_color2); /* Firefox */
@@ -122,14 +119,12 @@ header {
   font-family:  Arial, Gadget, sans-serif;
   font-weight: bolder;
   color: black;
-  font-size: 80;
+  font-size: 70;
   text-align: center;
-  padding: 0.9em;
+  padding: 1em;
 	background: darken($bg_color1,10%);
   text-shadow: #222222 1px 1px 3px;
-  banner {
-  -webkit-box-reflect: below 1px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(.7, transparent), to(white));
-}
+  background: -webkit-raidal-gradient( darken($bg_color1, 10%), $bg_color2);
 }
 nav {
   background: $nav_bg_color;
@@ -175,7 +170,7 @@ nav {
 
           -webkit-animation-name: abutton;
           -webkit-animation-duration: 1s;
-          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-iteration-count: 1;
           -webkit-animation-direction: alternate;
           -webkit-animation-timing-function: ease-in;
         }*/
@@ -201,12 +196,17 @@ nav {
 .cssgradients nav li:hover {
 	background: -moz-linear-gradient(0% 100px 90deg, $nav_border_color_2, $nav_border_color_1);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($nav_border_color_1), to($nav_border_color_2));
+  -webkit-animation-name: abutton;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 10;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: ease-in;
 /*	background: -webkit-linear-gradient(90deg, $nav_border_color_2, $nav_border_color_1);*/
 }
 
 @-webkit-keyframes abutton {
-  from{background: $nav_bg_color;}
-  to{background: darken($nav_bg_color, 10%);}
+  from{opacity: 0;}
+  to{opacity: 1;}
 }
 /*.boxshadow.rgba nav {
 	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.75);
