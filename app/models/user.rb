@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # Stat. Integrität: Email muss vorhanden, unique und min 8 char lang sein
   validates :email, :uniqueness => true, :presence => true, :length => {:minimum => 8}
   #Vermeidung von Nullwerten 
-  validates_presence_of :name, :address, :zipcode, :city, :birthday 
+  validates_presence_of :name, :address, :zipcode, :city 
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars
@@ -93,4 +93,5 @@ class User < ActiveRecord::Base
     end
     return erg / count
   end
+  
 end

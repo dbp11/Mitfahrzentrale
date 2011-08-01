@@ -22,7 +22,8 @@
         %td= car.description
         %td= car.seats
         %td= car.fuel_consumption
-        %td= car.smoker
+        %td
+          = car.smoker? ? "Ja" : "Nein"
         %td= car.licence
         %td= link_to 'Details', car
         %td= link_to 'Bearbeiten', edit_car_path(car)
