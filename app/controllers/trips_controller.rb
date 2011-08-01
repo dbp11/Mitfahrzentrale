@@ -42,7 +42,6 @@ class TripsController < ApplicationController
   def new
     @trip = Trip.new
     @fahrzeuge = current_user.cars
-    flash[:notice] = params[:temp]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -60,6 +59,7 @@ class TripsController < ApplicationController
   def create
     #Die eingehenden Daten empfangen und an eine Methode übergeben, die ein Array an möglichen Orten zurückgeben
     #Redirecten mit Parametern? An die new Action?
+
     @trip = Trip.new(params[:trip])
      
     respond_to do |format|
