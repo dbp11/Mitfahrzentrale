@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     @messages = Message.all
+    #Hier Methode einfügen, nur eigene Nachrichten
 
     respond_to do |format|
       format.html # index.html.erb
