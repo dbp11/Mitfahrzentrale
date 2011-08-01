@@ -5,7 +5,6 @@ class Ability
 
     can :manage, :all if user.is? :admin
     can :read, :all if user.is? :user
-    can :show, :all if user.is? :guest
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
