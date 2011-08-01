@@ -23,7 +23,7 @@ class Trip < ActiveRecord::Base
   end
 
 
-  #Brechnet Requests, die sich nur geringfügig von diesem Trip unterscheiden, und gibt ein Array aus
+  #Berechnet Requests, die sich nur geringfügig von diesem Trip unterscheiden, und gibt ein Array aus
   #Wertepaaren zurück. Der erste Wert ist die request_id, der zweite gibt die Länge des Umweges an, den der 
   #Fahrer dieses Trips in Kauf nehmen müsste. Das Array ist absteigend nach Umwegen sortiert.
   def get_similar_requests
@@ -61,5 +61,26 @@ class Trip < ActiveRecord::Base
     end
     return free_seats - count
   end
-  
+
+  #liefert alle
+  def get_committed_passengers
+    erg = []
+    self.passengers.all.each do |p|
+      if p.confirmed then
+        erg << p.user_id
+      end
+    end
+    return erg
+  end
+
+
+  def get_uncommitted_passengers
+    erg = []
+    self.passengers.all.each do |p|
+      if !p.confirmed then
+        erg << p.user_id
+      end
+    end
+    return erg
+  end
 end

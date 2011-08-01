@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /trips
   # GET /trips.json
   def index
@@ -25,8 +26,8 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
     
-    @commited_passenger = @trip.get_commited_passengers.all
-    @uncommited_passenger = @trip.get_uncommited_passengers.all
+    @commited_passenger = @trip.get_committed_passengers
+    @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
     
     respond_to do |format|
