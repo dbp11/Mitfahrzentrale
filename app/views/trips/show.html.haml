@@ -36,6 +36,7 @@
       die Fahrt, um die es gerade geht
 
     - @triprole
+      NICHT MEHR BENÖTIGT. CANCAN BENUTZEN!!!!
       gibt das Verhältnis des aktuellen Benutzers und der Fahrt an:
         - 0 = Fahrer
         - 1 = Mitfahrer
@@ -79,6 +80,11 @@
       %table
         %tr
           %th= "Mitfahrer (" + @passengers.count + "/" + @trip.car.seats + ")"
+        - @passengers.each do |passenger|
+          %tr
+            - if can? :manage @trip
+
+            %td= link_to 'show', passenger
 
 
 
