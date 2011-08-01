@@ -26,5 +26,10 @@
 				%input{:name => "time_start", :required => "required", :type => "time"}/
 		%tr
 			%td.form_left
+				= "Gepäck"
+			%td.form_right
+				= check_box_tag(:name => "baggage", :value => "baggage")
+		%tr
+			%td.form_left
 			%td.form_right
 				= submit_tag("Erstellen")

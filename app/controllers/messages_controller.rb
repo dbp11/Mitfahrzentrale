@@ -27,6 +27,7 @@ class MessagesController < ApplicationController
     @message = Message.new
     temp = User.find(params[:id])
     @message.receiver = temp
+	@message.writer = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +47,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "new" }
