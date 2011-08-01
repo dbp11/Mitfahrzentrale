@@ -28,8 +28,6 @@
                     :order => [:day, :month, :year],
                     :use_month_numbers => true
     %br
-    = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
-    %tr#form_table_row
 
   %p
     %br
@@ -75,7 +73,7 @@
     %br
     = f.text_field :instantmessenger
 
-  = f.hidden_field :visible_age
+  -#= f.hidden_field :visible_age
 
 
   %p= f.submit "Sign up"
