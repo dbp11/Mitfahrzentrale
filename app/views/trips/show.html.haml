@@ -86,27 +86,3 @@
               %td= link_to 'austragen', passenger
   %tr
     %td &bnsp;
-  %tr
-    -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
-    - if can? :manage, @trip
-      %table
-        %tr
-          -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
-          %th= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
-        -#wenn nil oder keine Bewerbungen vorhanden, dann Hinweis ausgeben
-        - if u_passengers == nil or u_passengers.count <= 0
-          %tr
-            %td keine Bewerbungen vorhanden
-          -#sonst alle Bewerbungen ausgeben
-          - else
-            - u_passengers.each do |passenger|
-              %tr
-                %td= link_to 'show', passenger
-                %td Bewertung
-                %td= passenger.received_ratings
-                -#wird so nicht funkionieren. Mit Controllern abreden.
-                %td= link_to 'annehmen', passenger
-                -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
-                  Link für den Fahrer, um die Anfrage abzulehnen
-                %td= passenger == @user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
-

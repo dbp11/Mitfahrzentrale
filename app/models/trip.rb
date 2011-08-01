@@ -67,7 +67,7 @@ class Trip < ActiveRecord::Base
     erg = []
     self.passengers.all.each do |p|
       if p.confirmed then
-        erg << p.user_id
+        erg << p.user
       end
     end
     return erg
