@@ -126,7 +126,7 @@
             %td Abfahrt:
             %td
               %input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
-            %td
+            %td 
               %input{:type => "date", :readonly => "readonly", :value => trip.start_time.to_date}/
             %td
               %input{:type => "time", :readonly => "readonly", :value => trip.start_time.to_time}/
@@ -135,9 +135,9 @@
             %td
               %input{:type => "text", :readonly => "readonly", :value => trip.address_end}/
             %td
-              %input{:type => "date", :readonly => "readonly", :value => trip.end_time.to_date}/
+              -#%input{:type => "date", :readonly => "readonly", :value => trip.end_time.to_date}/
             %td
-              %input{:type => "time", :readonly => "readonly", :value => trip.end_time.to_time}/
+              -#%input{:type => "time", :readonly => "readonly", :value => trip.end_time.to_time}/
 
 %br/
 %br/
