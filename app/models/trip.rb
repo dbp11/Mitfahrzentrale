@@ -11,7 +11,9 @@ class Trip < ActiveRecord::Base
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
   validates_presence_of :address_start, :address_end, :start_time, :free_seats
-
+  
+  #Freie Sitzplätze dürfen nicht negativ sein
+  validates_length_of :free_seats, :in => 1..200
 
 
   #Methoden:
