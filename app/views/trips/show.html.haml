@@ -35,11 +35,11 @@
 - f_seats = @free_seats
 - o_seats = @occupied_seats
 
-%table
+%table{:border => "1"}
   %tr
     %td
       -#Tabelle mit Informationen über die Fahrt
-      %table
+      %table{:border => "1"}
         %tr
           %td Abfahrt:
           = form_tag do
@@ -57,7 +57,7 @@
   %tr
     %td &nbsp;
   %tr
-    %table
+    %table{:border => "1"}
       %tr
         -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
         %th{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{@trip.car.seats})"
@@ -91,7 +91,7 @@
   %tr
     -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
     - if can? :read, @trip
-      %table
+      %table{:border => "1"}
         %tr
           -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
           %th= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
