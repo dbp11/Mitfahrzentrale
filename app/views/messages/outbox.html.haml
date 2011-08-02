@@ -1,17 +1,24 @@
-%h1 Listing messages
+%h1 Gesendete Nachrichten
+%div.other_site
+	= link_to("Empfangene Nachrichten", url_for(:action => "index", :controller => "messages"))
 
 - @messages.each do |message|
 	%table.message_table
-		%tr.message_table_row
+		%tr
 			%td.message_table_left
 				= "Nachricht an"
 				= link_to(message.receiver.name, url_for(message.receiver))
 			%td.message_table_right
 				= message.created_at.strftime("%d.%m.%y %H:%M")
-		%tr.message_table_row
+		%tr
+			%td.message_table_both{:colspan => "2"}
+				%div
+					%span Betreff:
+					= message.subject
+		%tr
 			%td.message_table_both{:colspan => "2"}
 				= message.message
-		%tr.message_table_row
+		%tr
 			%td.message_table_both{:colspan => "2"}
 				=link_to("Neu Nachricht", url_for(:action => "new", :controller => "messages", :id => message.receiver.id))
 				= "|"
