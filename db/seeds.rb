@@ -15,11 +15,11 @@ car4 = Car.create! :user_id => 4, :seats => 4, :licence => "54321", :fuel_consum
 car5 = Car.create! :user_id => 5, :seats => 2, :licence => "45646", :fuel_consumption => 20.3, :smoker => true, :description => "aha aha! Hier soll etwas sinnvolles stehen?"
 
 #Creates 5 messages
-msg1 = Message.create! :message => "Man man man, dass war ein Trip ;)!", :writer_id => 1, :receiver_id => 2
-msg2 = Message.create! :message => "Oje Oje!", :writer_id => 2, :receiver_id => 3
-msg3 = Message.create! :message => "nbajgggsr", :writer_id => 3, :receiver_id => 4
-msg4 = Message.create! :message => "Bam", :writer_id => 4, :receiver_id => 5
-msg5 = Message.create! :message => "Nil", :writer_id => 5, :receiver_id => 1
+msg1 = Message.create! :message => "Man man man, dass war ein Trip ;)!", :writer_id => 1, :receiver_id => 2, :delete_writer => false, :delete_receiver => false
+msg2 = Message.create! :message => "Oje Oje!", :writer_id => 2, :receiver_id => 3, :delete_writer => true,:delete_receiver =>false
+msg3 = Message.create! :message => "nbajgggsr", :writer_id => 3, :receiver_id => 4, :delete_writer => false, :delete_receiver => true
+msg4 = Message.create! :message => "Bam", :writer_id => 4, :receiver_id => 5, :delete_writer => false, :delete_receiver => false
+msg5 = Message.create! :message => "Nil", :writer_id => 5, :receiver_id => 1, :delete_writer => true, :delete_receiver => false
 
 #Creates passenger
 ps1 = Passenger.create! :user_id => 2, :trip_id => 1, :confirmed => true
