@@ -96,10 +96,10 @@ class Trip < ActiveRecord::Base
   end
 
   def get_distance
-    get_route
-
+   get_route[0]["distance"]["value"]
   end
 
-  def get_time
+  def get_time_in_seconds
+    get_route[0]["duration"]["value"]
   end
 end
