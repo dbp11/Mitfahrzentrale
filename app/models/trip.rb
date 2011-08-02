@@ -89,4 +89,22 @@ class Trip < ActiveRecord::Base
     end
     return erg
   end
+
+  # Berechnet die komplette Route mit allen Zwischenziele
+  def set_route
+    @route ||= Gmaps4rails.destination({"from" =>address_start, "to" =>address_end},{},"pretty")
+
+    self.distance = route[0]["distance"]["value"]
+    self.duration = route[0]["duration"]["value"]
+  end
+  
+  # Berechnet die Entfernung in Metern
+  def get_route_duration
+    return duration.div(3600)+"Stunden"+(duration % 60)+ "Minuten" 
+  end
+ 
+  # Berechnet die benötigte Zeit in Sekunden
+  def get_route_distance
+    return (distance / 1000).round(3) + "Km"
+  end
 end

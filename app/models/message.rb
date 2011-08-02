@@ -6,6 +6,9 @@ class Message < ActiveRecord::Base
   belongs_to  :writer, :class_name => "User"
   #Beziehung:users_receive_messages
   belongs_to  :receiver, :class_name => "User"
+   
+  #Validation
+  validates_with Messagevalidator, :fields => [:delete_writer, :delete_receiver]
 
   #Methoden:
   #to String Methode für Message
