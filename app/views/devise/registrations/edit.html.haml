@@ -1,8 +1,10 @@
+
+
 %h1.head
   Profil bearbeiten
 %p
   Mit * gekennzeichnete Felder müssen ausgefüllt sein
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :name=>"Formular", :onsubmit=>"return zipcheck();", :action=>"/edit" }) do |f|
   = devise_error_messages!
 
   %table.form_table
@@ -67,7 +69,19 @@
       %td.form_table_right
         = f.label :"PLZ*"
       %td.form_table_left
-        = f.number_field:zipcode, :required=>"required"
+        :javascript
+          function zipcheck(){
+            var element=null; 
+            element=document.Formular.zipcode;  
+            if(element.value.length<5){
+              alert('PLZ zu kurz'); 
+              element.focus(); 
+              return false;
+            } 
+            return true;
+          }
+
+        = f.text_field:zipcode, :required=>"required", :class=>"integer", :maxlength=>"5", :size=>"30", :name=>"zipcode", :onblur => "zipcheck();"
       %td{:class=>"label", :id=>"form_table_middle"}sichtbar
       %td.form_table_end
         = f.check_box:visible_zip
@@ -120,3 +134,6 @@
     #{link_to "Account löschen", registration_path(resource_name), :confirm => "Sind sie sicher?", :method => :delete}.
   %p.links
     = link_to "zurück", :back
+
+
+
