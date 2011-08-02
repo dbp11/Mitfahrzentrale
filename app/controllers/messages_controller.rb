@@ -1,8 +1,10 @@
 class MessagesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    temp = User.find(current_user.id)
+    @messages = temp.get_received_messages
     #Hier Methode einfügen, nur eigene Nachrichten
 
     respond_to do |format|
@@ -12,7 +14,8 @@ class MessagesController < ApplicationController
   end
 
   def outbox
-    @messages = Message.all
+    temp = User.find(current_user.id)
+    @messages = temp.get_written_messages
     #Hier Methode, nur empfangene
   
     respond_to do |format|
@@ -24,12 +27,12 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @message = Message.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @message }
-    end
+    #@message = Message.find(params[:id])
+    redirect_to messages_url
+    #respond_to do |format|
+      #format.html # show.html.erb
+      #format.json { render json: @message }
+    #end
   end
 
   # GET /messages/new
@@ -55,6 +58,9 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
+    @message.delete_receiver = false
+    @message.delete_writer = false
+
 
     respond_to do |format|
       if @message.save
@@ -71,15 +77,26 @@ class MessagesController < ApplicationController
   # PUT /messages/1.json
   def update
     @message = Message.find(params[:id])
-
+  	if params[:who] == "receiver"
+	  	@message.delete_receiver = true
+  	elsif params[:who] == "writer"
+	  	@message.delete_writer = true
+  	end
+    @message.save
+	  if @message.delete_receiver and @message.delete_writer
+  	   @message.destroy
+  	end
     respond_to do |format|
-      if @message.update_attributes(params[:message])
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
+      if params[:who] == "writer"
+        format.html { redirect_to "/messages/outbox", notice: 'Message was successfully deleted.' }
+        format.json { head :ok }
+      elsif params[:who] == "receiver"
+        format.html { redirect_to messages_url, notice: 'Message was successfully deleted.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+        format.html { redirect_to messages_url, failure: 'Message could not be deleted.' }
+        format.json { head :ok }
+	    end
     end
   end
 
