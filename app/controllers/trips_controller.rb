@@ -23,8 +23,12 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
+    @FAHRER = 0
+    @MITFAHRER = 1
+    @POTENTIELLER_MITFAHRER = 2
+    @GAST = 3
+    @status = @FAHRER
     @trip = Trip.find(params[:id])
-    
     @commited_passenger = @trip.get_committed_passengers
     @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
@@ -78,7 +82,7 @@ class TripsController < ApplicationController
     else
       @trip.free_seats = params[:free_seats]
     end
-    #@trip.set_route
+    @trip.set_route
 
     respond_to do |format|
       if @trip.save

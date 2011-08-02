@@ -3,6 +3,7 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
+    temp = current_user.id
     @requests = Request.all
 
     respond_to do |format|
@@ -15,6 +16,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @request = Request.find(params[:id])
+    @sorted_trips = @request.get_sorted_trips
 
     respond_to do |format|
       format.html # show.html.erb

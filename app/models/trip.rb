@@ -10,7 +10,7 @@ class Trip < ActiveRecord::Base
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
-  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E
+  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
   
   #Freie Sitzplätze dürfen nicht negativ sein
   validates_length_of :free_seats, :in => 1..200
@@ -23,31 +23,51 @@ class Trip < ActiveRecord::Base
   end
 
 
-  #Berechnet Requests, die sich nur geringfügig von diesem Trip unterscheiden, und gibt ein Array aus
-  #Wertepaaren zurück. Der erste Wert ist die request_id, der zweite gibt die Länge des Umweges an, den der 
-  #Fahrer dieses Trips in Kauf nehmen müsste. Das Array ist absteigend nach Umwegen sortiert.
-  def get_similar_requests
-    distance = Geocoder::Calculations.distance_between [starts_at_N, starts_at_E], 
-                                                       [ends_at_N, ends_at_E], :units => :km
-    start_f = start_time.to_f
+  #Methode die alle passenden Requests sucht
+  #@return Array von Requests
+  def get_available_requests
+    start_f =start_time.to_f
     erg = []
 
-    Request.all.each do |r|
-      r_start_f = r.start_time.to_f
-      r_end_f = r.end_time.to_f
-      if start_f.between?(r_start_f, r_end_f) then  
-        distance_start = Geocoder::Calculations.distance_between [r.starts_at_N, r.starts_at_E], 
-                                                                 [starts_at_N, starts_at_E], :units => :km
-        distance_end = Geocoder::Calculations.distance_between [r.ends_at_N, r.ends_at_E], 
-                                                               [ends_at_N, ends_at_E], :units => :km
-        distance_r = Geocoder::Calculations.distance_between [r.starts_at_N, r.starts_at_E], 
-                                                             [r.ends_at_N, r.ends_at_E], :units => :km
-        difference = distance_r + distance_start + distance_end - distance
-        erg << [r, difference]
+    Request.all.each do |t|
+      if (start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
+          ((Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
+           [starts_at_N, starts_at_E], :units => :km) <= t.start_radius) and
+          ((Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
+           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius)) then 
+        erg << t
       end
+    end
+    return erg
+  end
+
+  #Berechnet Trips, die sich nur geringfügig von dieser Request unterscheiden, und gibt ein Array aus
+  #Wertepaaren zurück. Der erste Wert ist der Trip, der zweite gibt die Länge des Umweges an, den der
+  #Fahrer dieses Trips in Kauf nehmen müsste. Das Array ist absteigend nach Umwegen sortiert.
+  def get_sorted_requests
+    requests = get_available_requests
+    erg = []
+
+    requests.each do |t|
+      start_con = Gmaps4rails.destination({"from" => self.address_start, "to" => t.address_start},{},"pretty")
+      end_con =  Gmaps4rails.destination({"from" => self.address_end, "to" => t.address_end},{},"pretty")
+      
+      start_distance = start_con[0]["distance"]["value"]
+      start_duration = start_con[0]["duration"]["value"]
+
+      end_distance = end_con[0]["distance"]["value"]
+      end_duration = end_con[0]["duration"]["value"]
+
+      t_rating = t.user.get_avg_rating.to_f / 6
+      t_ignors = t.user.get_relative_ignorations
+      detour = (t.distance + end_distance + self.distance - start_distance) / start_distance
+      detime = (t.duration + end_duration + self.duration - start_duration) / start_duration
+
+      erg << [t, Math.sqrt(t_rating*t_rating + t_ignors*t_ignors + detour*detour + detime*detime)]
     end
 
     erg.sort{|a,b| a[1] <=> b[1]}
+    
   end
 
 
