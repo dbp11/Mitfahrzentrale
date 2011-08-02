@@ -12,16 +12,27 @@
         border: 1px solid;
         text-align: center;
       }
+    a img:hover {
+      -webkit-animation: resize 700ms;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: alternate;
+      //height: 30px;
+      //width: 30px;
+    }
   
       th {
         text-align: center;
-        font-size: 12px;
+        font-size: 14px;
         border: 1px solid;
         border-width: 1px;
-        padding: 0 5px 5 5;
-}
+        padding: 5px;
       }
     }
+  }
+}
+@-webkit-keyframes resize {
+  from { height: 20px; width: 20px;}
+  to{ height: 40px; width: 40px;}
 }
 
 
