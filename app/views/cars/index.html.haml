@@ -12,23 +12,28 @@
       %th Verbrauch
       %th Raucher
       %th Kennzeichen
+      %th Beschreibung
       %th Anzeigen  
       %th Editieren
       %th Löschen
 
     - @cars.each do |car|
       %tr
-        %td= image_tag car.carpic.url(:thumb)
+        - if car.carpic?
+          %td= image_tag car.carpic.url(:thumb)
+        - else
+          %td= "Kein Bild"
         %td= car.description
         %td= car.seats
         %td= car.fuel_consumption
         %td
           = car.smoker? ? "Ja" : "Nein"
         %td= car.licence
+        %td
         %td= link_to 'Details', car
         %td= link_to 'Bearbeiten', edit_car_path(car)
         %td= link_to 'Löschen', car, :confirm => 'Bist du sicher?', :method => :delete
 
-%a{:href => "/cars/new"}
-  Auto hinzuf&uuml;gen
+  %a{:href => "/cars/new"}
+    Auto hinzuf&uuml;gen
 

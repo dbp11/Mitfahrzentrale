@@ -41,7 +41,6 @@ class TripsController < ApplicationController
   def new
     @trip = Trip.new
     @fahrzeuge = current_user.cars
-    flash[:notice] = params[:temp]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -59,14 +58,28 @@ class TripsController < ApplicationController
   def create
     #Die eingehenden Daten empfangen und an eine Methode übergeben, die ein Array an möglichen Orten zurückgeben
     #Redirecten mit Parametern? An die new Action?
-    @trip = Trip.new(params[:trip])
-     
+
+    #@trip = Trip.new(params[:trip])
+    @trip = Trip.new()
+    @trip.user_id = current_user.id
+    @trip.car_id = params[:car]
+    temp = Geocoder.coordinates(params[:address_start])
+    @trip.starts_at_N = temp[0]
+    @trip.starts_at_E = temp[1]
+    temp = Geocoder.coordinates(params[:address_end])
+    @trip.ends_at_N = temp[0]
+    @trip.ends_at_E = temp[1]
+    @trip.address_start = params[:address_start]
+    @trip.address_end = params[:address_end]
+    @trip.start_time = params[:date_start]
+    temp = Car.find(params[:car])
+    @trip.free_seats = temp.seats - 1
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to root_path }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end

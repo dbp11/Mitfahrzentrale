@@ -7,7 +7,7 @@
 				= "Bewertung von"
 				= link_to(rating.author.name, url_for(rating.author))
 				= " auf der Fahrt am"
-				= link_to(rating.trip.start_time.to_date, url_for(rating.trip)) + ":"
+				= link_to(rating.trip.start_time.to_date, url_for(rating.trip))
 			%td.rating_table_right= rating.trip
 		%tr.rating_table_row
 			%td.rating_table_comment{:colspan => "2"}
