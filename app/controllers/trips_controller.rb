@@ -7,12 +7,11 @@ class TripsController < ApplicationController
     temp = current_user
     @trips = temp.driven
     #Alle Fahrten, die ich als Fahrer noch absolvieren muss
-    @future_trips = temp.driven
+    @future_trips = temp.to_drive
     #Alle Fahrten, die ich als Fahrer absolviert habe
-    @completed_trips = temp.to_drive
+    @completed_trips = temp.driven
     #Alle Fahrten, in denen ich Mitfahrer war
     @ridden_trips = temp.driven_with
-    #driven_with und to_drive_with funktioniert noch nicht -> undefined local variable or method `passenger_trip'
     #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
     @future_ridden_trips = temp.to_drive_with
     respond_to do |format|
