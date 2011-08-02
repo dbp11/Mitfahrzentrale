@@ -92,7 +92,7 @@ class Trip < ActiveRecord::Base
 
   # Berechnet die komplette Route mit allen Zwischenziele
   def set_route
-    @route ||= Gmaps4rails.destination({"from" =>address_start, "to" =>address_end},{},"pretty")
+    route = Gmaps4rails.destination({"from" =>address_start, "to" =>address_end},{},"pretty")
 
     self.distance = route[0]["distance"]["value"]
     self.duration = route[0]["duration"]["value"]
