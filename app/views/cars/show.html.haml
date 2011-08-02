@@ -6,7 +6,10 @@
 %p
   %b Bild des Fahrzeuges:
   %br
-  = image_tag @car.carpic.url(:medium)
+  - if @car.carpic? 
+    = image_tag @car.carpic.url(:medium)
+  - else 
+    = "Kein Bild hochgeladen"
 %p
   %b Sitzplaetze:
   = @car.seats
@@ -21,7 +24,7 @@
   = @car.fuel_consumption
 %p
   %b Raucherwagen:
-  = @car.smoker
+  = @car.smoker? ? "ja" : "nein"
 
 = link_to 'Daten ändern', edit_car_path(@car)
 \|

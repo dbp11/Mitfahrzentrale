@@ -40,6 +40,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.1)
+    crack (0.1.8)
     devise (1.4.2)
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
@@ -53,6 +54,8 @@ GEM
       factory_girl (~> 2.0.0.rc)
       railties (>= 3.0.0)
     geocoder (1.0.2)
+    gmaps4rails (0.10.2)
+      crack
     haml (3.1.2)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -153,6 +156,7 @@ DEPENDENCIES
   devise (>= 1.4.2)
   factory_girl_rails (>= 1.1.rc1)
   geocoder
+  gmaps4rails
   haml (>= 3.1.2)
   haml-rails (>= 0.3.4)
   jquery-rails
