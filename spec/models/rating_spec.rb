@@ -10,4 +10,6 @@ describe Rating do
       :author_id => 46
     }
   end
+
+  #Test ob Validations funktionieren
 end

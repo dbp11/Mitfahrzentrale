@@ -10,4 +10,6 @@ describe Message do
       :delte_receiver => false
     }
   end
+
+  #Test ob Validation funktionieren
 end
