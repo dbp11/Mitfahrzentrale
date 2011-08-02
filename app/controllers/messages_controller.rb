@@ -58,7 +58,6 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-    @message.message = @message.message.gsub(/[\n]/, '<br />')
     @message.delete_receiver = false
     @message.delete_writer = false
 
