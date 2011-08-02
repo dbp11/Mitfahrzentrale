@@ -27,11 +27,10 @@ class Trip < ActiveRecord::Base
   #@return Array von Requests
   def get_available_requests
     start_f =start_time.to_f
-    end_f = end_time.to_f
     erg = []
 
     Request.all.each do |t|
-      if (t.start_time.to_f.between?(start_f, end_f) and 
+      if (start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
           ((Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
            [starts_at_N, starts_at_E], :units => :km) <= t.start_radius) and
           ((Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
@@ -45,7 +44,7 @@ class Trip < ActiveRecord::Base
   #Berechnet Trips, die sich nur geringfügig von dieser Request unterscheiden, und gibt ein Array aus
   #Wertepaaren zurück. Der erste Wert ist der Trip, der zweite gibt die Länge des Umweges an, den der
   #Fahrer dieses Trips in Kauf nehmen müsste. Das Array ist absteigend nach Umwegen sortiert.
-  def get_sorted_trips
+  def get_sorted_requests
     requests = get_available_requests
     erg = []
 
