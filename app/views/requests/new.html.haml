@@ -1,18 +1,18 @@
 %h1 New request
 
 = form_tag("new", :method => "post") do
-	%table.form_table
-		%tr.form_table_row
-			%td.form_left
+	%table
+		%tr
+			%td
 				Von
 			-# entweder das textfield unten oder eine select-box
-			%td.form_right
+			%td
 				= text_field_tag(:address_start, nil, :required => "required")
 		%tr
-			%td.form_left
+			%td
 				Nach
 			-# entweder das textfield unten oder eine select-box
-			%td.form_right
+			%td
 				= text_field_tag(:address_end, nil, :required => "required")
 		%tr
 			%td.form_left
@@ -28,7 +28,7 @@
 			%td.form_left
 				= "Gepäck"
 			%td.form_right
-				= check_box_tag(:name => "baggage", :value => "baggage")
+				= check_box_tag(:baggage)
 		%tr
 			%td.form_left
 			%td.form_right
