@@ -32,31 +32,36 @@
 -#		= f.text_field :comment
 -#	.actions
 -#		= f.submit 'Save'
+-#
+
 = form_tag("new", :method => "post") do
-	%table.form_table
-		%tr.form_table_row
-			%td.form_left
-				Von
-			-# entweder das textfield unten oder eine select-box
-			%td.form_right
-				= text_field_tag(:address_start, nil, :required => "required")
+	%table
 		%tr
-			%td.form_left
-				Nach
+			%td Von
 			-# entweder das textfield unten oder eine select-box
-			%td.form_right
-				= text_field_tag(:address_end, nil, :required => "required")
+			%td= text_field_tag(:address_start, nil, :required => "required")
 		%tr
-			%td.form_left
-				Datum
-			%td.form_right
+			%td Nach
+			-# entweder das textfield unten oder eine select-box
+			%td= text_field_tag(:address_end, nil, :required => "required")
+		%tr
+			%td Start-Datum
+			%td
 				%input{:name => "date_start", :required => "required", :type => "date"}/
-		%tr
-			%td.form_left
-				Uhrzeit
-			%td.form_right
+			%td Start-Uhrzeit
+			%td
 				%input{:name => "time_start", :required => "required", :type => "time"}/
 		%tr
-			%td.form_left
-			%td.form_right
-				= submit_tag("Erstellen")
+			%td Ende-Datum
+			%td
+				%input{:name => "date_end", :required => "required", :type => "date"}/
+			%td Ende-Uhrzeit
+			%td
+				%input{:name => "time_end", :required => "required", :type => "time"}/
+		%tr
+			%td Gep&auml;ck
+			%td= check_box_tag(:baggage)
+		%tr
+			%td
+			%td= submit_tag("Erstellen")
+
