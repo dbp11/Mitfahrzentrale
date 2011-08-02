@@ -24,7 +24,7 @@ describe Message do
   end
 
   it "Kontrolle der Validation delete_writer" do
-    no_delete_writer = Message.new(@attr.merge(:delelte_writer => nil))
+    no_delete_writer = Message.new(@attr.merge(:delete_writer => nil))
     no_delete_writer.should_not be_valid
   end
 end
