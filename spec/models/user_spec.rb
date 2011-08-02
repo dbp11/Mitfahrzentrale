@@ -40,11 +40,6 @@ describe User do
      no_city_user.should_not be_valid
   end
 
-  it "Kontrolle ob Validation birthday funktioniert" do
-     no_birthday_user = User.new(@attr.merge(:birthday => nil))
-     no_birthday_user.should_not be_valid
-  end
-
   it "Kontrolle driven richtig funktionier" do
     past = Time.now - 1.day
     old = Trip.new
