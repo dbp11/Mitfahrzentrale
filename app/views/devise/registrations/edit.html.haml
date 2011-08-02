@@ -1,22 +1,22 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
+%h1
+  Profil bearbeiten
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
+
   %table.data_table#form_table
     %tr
       %td
-        = f.label :name
+        = f.label :"Name*"
       %td
         = f.text_field :name
     %tr
       %td
-        = f.label :email
+        = f.label :"E-Mail*"
       %td
         = f.email_field :email
     %tr
       %td
         = f.label :password
-        %i (frei lassen, wenn das Passwort nicht geändert werden soll)
       %td
         = f.password_field :password
     %tr
@@ -26,14 +26,13 @@
         = f.password_field :password_confirmation
     %tr
       %td
-        = f.label :current_password
-        %i (erforderlich für die Änderung)
+        = f.label :"Passwort*"
       %td
         = f.password_field :current_password, :required=>"required"
 
     %tr#form_table_row
       %td
-        = f.label :Geburtsdatum
+        = f.label :"Geburtsdatum*"
       %td 
         = f.date_select :birthday,
                         :start_year => 1900,
@@ -55,7 +54,7 @@
 
     %tr#form_table_row
       %td
-        = f.label :'Strasse und Hausnummer'
+        = f.label :"Strasse und Hausnummer*"
       %td
         = f.text_field:address, :required=>"required" 
       %td{:class=>"label"}sichtbar
@@ -64,7 +63,7 @@
           
     %tr#form_table_row
       %td
-        = f.label :PLZ
+        = f.label :"PLZ*"
       %td
         = f.number_field:zipcode, :required=>"required"
       %td{:class=>"label"}sichtbar
@@ -74,7 +73,7 @@
 
     %tr#form_table_row
       %td
-        = f.label :Ort
+        = f.label :"Ort*"
       %td
         = f.text_field:city, :required=>"required"
       %td{:class=>"label"}sichtbar
@@ -111,7 +110,7 @@
     %br/
     = f.submit "Speichern"
 
-
+%p Mit * gekennzeichnete Felder müssen ausgefüllt sein!
 %h3 Account löschen
 %p
   Unglücklich? #{link_to "Account löschen", registration_path(resource_name), :confirm => "Sind sie sicher?", :method => :delete}.
