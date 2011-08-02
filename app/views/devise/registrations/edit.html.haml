@@ -29,7 +29,7 @@
         = f.label :current_password
         %i (erforderlich für die Änderung)
       %td
-        = f.password_field :current_password
+        = f.password_field :current_password, :required=>"required"
 
     %tr#form_table_row
       %td
@@ -39,7 +39,8 @@
                         :start_year => 1900,
                         :end_year => 2011,
                         :order => [:day, :month, :year],
-                        :use_month_numbers => true
+                        :use_month_numbers => true,
+                        :required=>"required"
       %td{:class=>"label", :id=>"form_table_", :checked_value=>"1"}sichtbar
       %td
         = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
@@ -47,7 +48,10 @@
       %td
         = f.label :Geschlecht
       %td 
-        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
+        - if @user.sex? 
+          = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], "1")
+        - else
+          = f.select:sex, options_for_select([["Maennlich", "1"], ["Weiblich", "0"]], "0")
 
     %tr#form_table_row
       %td
@@ -101,9 +105,9 @@
 
 
   .field
-    = f.label :carpic, "Bild hochladen"
+    = f.label :picture, "Bild hochladen"
     %br
-    = f.file_field :carpic
+    = f.file_field :picture
     %br/
     = f.submit "Speichern"
 
@@ -111,4 +115,6 @@
 %h3 Account löschen
 %p
   Unglücklich? #{link_to "Account löschen", registration_path(resource_name), :confirm => "Sind sie sicher?", :method => :delete}.
-= link_to "zurück", :back
+
+%p
+  = link_to "zurück", :back

@@ -3,6 +3,36 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.ratings {
-  // Add the ratings class to your body tag
-  // Then, place scoped styles here.
+	// Add the ratings class to your body tag
+	// Then, place scoped styles here.
+	.rating_table {
+		margin-bottom: 1.5em;
+/*		border: solid 2px;*/
+		width: 60%;
+		tr:first-child {
+			background-color: #777777;
+			font-weight: bold;
+		}
+		td {
+			/*border: solid 1px;*/
+			padding-top: 0.1em;
+			padding-bottom: 0.1em;
+			padding-left: 0.5em;
+			padding-right: 0.5em;
+		}
+		.rating_table_left {
+			/*width: 400px;*/
+		}
+		.rating_table_right {
+			/*width: 2em;*/
+			text-align: right;
+			/*font-weight: bold;*/
+		}
+		.rating_table_comment {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+			background-color: #AAAAAA;
+			border-top: solid 1px;
+		}
+	}
 }

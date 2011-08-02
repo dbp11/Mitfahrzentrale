@@ -1,9 +1,11 @@
 class CarsController < ApplicationController
+  before_filter :authenticate_user!
   
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all
+    temp = current_user
+    @cars = temp.cars
     authorize! :show, :car
 
     respond_to do |format|
@@ -16,7 +18,7 @@ class CarsController < ApplicationController
   # GET /cars/1.json
   def show
     @car = Car.find(params[:id])
-    authorize! :read, @car
+    authorize! :show, :car
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,7 +30,7 @@ class CarsController < ApplicationController
   # GET /cars/new.json
   def new
     @car = Car.new
-    authorize! :create, @car
+    authorize! :create, :car
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,8 +49,8 @@ class CarsController < ApplicationController
   # POST /cars.json
   def create
     @car = Car.new(params[:car])
-    authorize! :create, @car
-    temp = current_user
+    authorize! :create, :car
+    temp = current_user.id
     @car.user_id = temp
 
     respond_to do |format|

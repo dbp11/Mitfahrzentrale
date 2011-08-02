@@ -12,10 +12,9 @@
 
 %h3 Noch offene Fahrten
 %table{:border => "1"}
-  - number = 1
   - @future_trips.each do |trip|
     %tr
-      %td= number
+      %td= link_to trip.id, trip
       %td
         %table{:border => "1"}
           %tr
@@ -45,10 +44,9 @@
 
 %h3 Beendete Fahrten
 %table{:border => "1"}
-  - number = 1
   - @completed_trips.each do |trip|
     %tr
-      %td= number
+      %td= link_to trip.id, trip
       %td
         %table{:border => "1"}
           %tr
@@ -78,10 +76,9 @@
 
 %h3 Noch offene Mitfahrten
 %table{:border => "1"}
-  - number = 1
   - @future_ridden_trips.each do |trip|
     %tr
-      %td= number
+      %td= link_to trip.id, trip
       %td
         %table{:border => "1"}
           %tr
@@ -111,10 +108,9 @@
 
 %h3 Beendete Mitfahrten
 %table{:border => "1"}
-  - number = 1
   - @ridden_trips.each do |trip|
     %tr
-      %td= number
+      %td= link_to trip.id, trip
       %td
         %table{:border => "1"}
           %tr
