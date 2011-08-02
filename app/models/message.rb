@@ -13,6 +13,9 @@ class Message < ActiveRecord::Base
     writer+ " an " +receiver+ ": " +message
   end
 
+  
+
+
 
 
 end

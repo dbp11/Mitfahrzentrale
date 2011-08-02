@@ -121,4 +121,23 @@ class User < ActiveRecord::Base
     end
     return count
   end
+
+  def get_written_messages
+    erg = []
+    self.written_messages.each do |m|
+      if m.delete_writer? then
+        erg << m
+      end
+    end
+    return erg
+  end
+
+  def get_received_messages
+    eg = []
+    self.received_messages.each do |m|
+      if m.delete_receiver? then
+        erg << m
+      end
+    end
+  end
 end
