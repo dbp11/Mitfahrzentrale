@@ -10,7 +10,7 @@ class TripsController < ApplicationController
     @future_trips = temp.to_drive
     #Alle Fahrten, die ich als Fahrer absolviert habe
     @completed_trips = temp.driven
-    #Alle Fahrten, in denen ich Mitfahrer war
+    #Alle Fahrten, die ich als Mitfahrer absolviert habe
     @ridden_trips = temp.driven_with
     #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
     @future_ridden_trips = temp.to_drive_with
@@ -71,9 +71,15 @@ class TripsController < ApplicationController
     @trip.ends_at_E = temp[1]
     @trip.address_start = params[:address_start]
     @trip.address_end = params[:address_end]
-    @trip.start_time = params[:date_start]
+    @trip.start_time = params[:date_start]+"T"+params[:time_start]+"Z"
     temp = Car.find(params[:car])
-    @trip.free_seats = temp.seats - 1
+    if params[:free_seats] == ""
+      @trip.free_seats = temp.seats
+    else
+      @trip.free_seats = params[:free_seats]
+    end
+    #@trip.set_route
+
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
