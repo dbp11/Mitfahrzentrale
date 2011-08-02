@@ -29,6 +29,7 @@ class TripsController < ApplicationController
     @commited_passenger = @trip.get_committed_passengers
     @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
+    @occupied_seats = @trip.get_occupied_seats
     
     respond_to do |format|
       format.html # show.html.erb

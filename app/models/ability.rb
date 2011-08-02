@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     can :show, :car
     can :create, :car
+    can :manage, :all
     #can ...
     # Define abilities for the passed in user here. For example:
     #
