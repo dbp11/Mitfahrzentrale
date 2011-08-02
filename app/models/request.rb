@@ -6,7 +6,6 @@ class Request < ActiveRecord::Base
   #Validation
   validates_presence_of :duration, :distance, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :start_time, :end_time, :start_radius, :end_radius
 
-
   #Methode die alle zum Radius des suchenden Users die passenden Trips sucht
   #@return Array von Trips
   def get_available_trips
