@@ -28,5 +28,12 @@ class Request < ActiveRecord::Base
 
     erg.sort{|a,b| a[1] <=> b[1]}
   end
+
+  def set_route
+    route = Gmaps4rails.destination({"from" =>address_start, "to" =>address_end},{},"pretty")
+
+    self.distance = route[0]["distance"]["value"]
+    self.duration = route[0]["duration"]["value"]
+  end
 end
 
