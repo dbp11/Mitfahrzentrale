@@ -7,7 +7,10 @@
       die Fahrt, um die es gerade geht
 
     - @free_seats
-      noch freie Plätze beim Trip
+      noch freie Sitzplätze
+
+    - @occupied_seats
+      Anzahl besetzter Plätze
 
     - @commited_passenger
       Array mit allen Mitfahrern
@@ -60,7 +63,7 @@
     %table{:border => "1"}
       %tr
         -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
-        %th{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{@trip.car.seats})"
+        %th{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
       -#wenn keine Mitfahrer vorhanden, dann Hinweis in Tabelle ausgeben
       - if c_passengers == nil or c_passengers.count <= 0
         %tr
