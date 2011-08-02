@@ -10,11 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :address, :zipcode, :city 
 
   # Setup accessible (or protected) attributes for your model
-<<<<<<< HEAD
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :roles
-=======
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars, :roles
->>>>>>> 66718ec7faba14cba929c785ed2c6c353311ddab
   
   
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
@@ -33,40 +29,21 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
   
   #Beziehung User schreibt User Nachricht/Rating
-<<<<<<< HEAD
-  has_many :received_messages, :class_name => "Message", :as =>"receiver", :dependent => :destroy
-  has_many :written_messages,  :class_name => "Message", :as =>"writer", :dependent => :destroy
-  has_many :written_ratings, :class_name => "Rating", :as => "writer", :dependent => :destroy
-  has_many :received_ratings, :class_name => "Rating", :as => "receiver", :dependent => :destroy
 
-  ROLES = %w[admin member]
 
-=======
   has_many :received_messages, :class_name => "Message", :foreign_key =>"receiver_id", :dependent => :destroy
   has_many :written_messages,  :class_name => "Message", :foreign_key =>"writer_id", :dependent => :destroy
   has_many :written_ratings, :class_name => "Rating", :foreign_key => "author_id", :dependent => :destroy
   has_many :received_ratings, :class_name => "Rating", :foreign_key => "receiver_id", :dependent => :destroy
- 
->>>>>>> 66718ec7faba14cba929c785ed2c6c353311ddab
+
+  ROLES = %w[admin member]
+
   #Methoden:
   #toString Methode für User
   def to_s
     name
   end
- 
-  def roles=(roles)
-    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
-  end
 
-  def roles
-    ROLES.reject do |r|
-      ((roles_mask || 0 ) & 2**ROLES.index(r)).zero?
-    end
-  end
-
-  def is?(role)
-    roles.include?(role.to_s)
-  end
 
   #Vergangene angebotene Trips des Users
   def driven
