@@ -1,13 +1,13 @@
 = stylesheet_link_tag :cars
 .cars
-  %h1 Dein Fuhrpark
+  %h1 Deine Fahrzeuge
 
   
   
   %table
     %tr
       %th Bild
-      %th Bezeichnung
+      %th Modell
       %th Anzahl der Sitzpl&auml;tze
       %th Verbrauch
       %th Raucher
@@ -23,13 +23,13 @@
           %td= image_tag car.carpic.url(:thumb)
         - else
           %td= "Kein Bild"
-        %td= car.description
+        %td= car.car_type
         %td= car.seats
         %td= car.fuel_consumption
         %td
           = car.smoker? ? "Ja" : "Nein"
         %td= car.licence
-        %td
+        %td= car.description
         %td= link_to 'Details', car
         %td= link_to 'Bearbeiten', edit_car_path(car)
         %td= link_to 'Löschen', car, :confirm => 'Bist du sicher?', :method => :delete
