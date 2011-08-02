@@ -9,8 +9,10 @@ body.trips {
 		margin-bottom: 1.5em;
 		border: solid 2px;
 		width: 100%;
-		tr:first-child {
+    tr {
       border: solid 1px;
+    }
+		tr:first-child {
 			background-color: #777777;
 			font-weight: bold;
 		}
