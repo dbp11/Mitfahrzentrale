@@ -71,13 +71,14 @@ class TripsController < ApplicationController
     @trip.ends_at_E = temp[1]
     @trip.address_start = params[:address_start]
     @trip.address_end = params[:address_end]
-    @trip.start_time = params[:date_start]
+    @trip.start_time = params[:date_start]+"T"+params[:time_start]+"Z"
     temp = Car.find(params[:car])
-    if params[:free_seats] == nil
-      @trip.free_seats = temp.seats - 1
+    if params[:free_seats] == ""
+      @trip.free_seats = temp.seats
     else
       @trip.free_seats = params[:free_seats]
     end
+    #@trip.set_route
 
     respond_to do |format|
       if @trip.save
