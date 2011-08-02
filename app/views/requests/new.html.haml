@@ -15,21 +15,25 @@
 			%td
 				= text_field_tag(:address_end, nil, :required => "required")
 		%tr
-			%td.form_left
-				Datum
-			%td.form_right
+			%td Start-Datum
+			%td
 				%input{:name => "date_start", :required => "required", :type => "date"}/
-		%tr
-			%td.form_left
-				Uhrzeit
-			%td.form_right
+			%td Start-Uhrzeit
+			%td
 				%input{:name => "time_start", :required => "required", :type => "time"}/
 		%tr
-			%td.form_left
+			%td Ende-Datum
+			%td
+				%input{:name => "date_end", :required => "required", :type => "date"}/
+			%td Ende-Uhrzeit
+			%td
+				%input{:name => "time_end", :required => "required", :type => "time"}/
+		%tr
+			%td
 				= "Gepäck"
-			%td.form_right
+			%td
 				= check_box_tag(:baggage)
 		%tr
-			%td.form_left
-			%td.form_right
+			%td
+			%td
 				= submit_tag("Erstellen")
