@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe Message do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @attr ={
+      :message => "fjfskfsfsefefsffse",
+      :writer_id => 123,
+      :receiver_id => 321,
+      :delete_writer => false,
+      :delte_receiver => false
+    }
+  end
 end
