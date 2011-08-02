@@ -1,4 +1,4 @@
-%h1 Gesendete Nachrichten
+%h2 Gesendete Nachrichten
 %div.other_site
 	= link_to("Empfangene Nachrichten", url_for(:action => "index", :controller => "messages"))
 
@@ -20,6 +20,6 @@
 				= raw(h(message.message).gsub(/[\n]/,"<br />"))
 		%tr
 			%td.message_table_both{:colspan => "2"}
-				=link_to("Neu Nachricht", url_for(:action => "new", :controller => "messages", :id => message.receiver.id))
+				=link_to("Neue Nachricht", url_for(:action => "new", :controller => "messages", :id => message.id, :type => "new"))
 				= "|"
 				= link_to("Löschen", url_for(:action => "update", :controller => "messages", :id => message.id, :who => "writer"), :method => :put)

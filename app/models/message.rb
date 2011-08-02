@@ -25,13 +25,14 @@ class Message < ActiveRecord::Base
       errors.add(:field, 'delete_writer bzw. delete_receiver nil')
     end
   end
-  
   #delete_receiver darf nicht Null werden
   def delete_receiver_nil 
     if(self.delete_receiver == nil)
       errors.add(:field, 'delete_writer bzw. delete_receiver nil')
     end
   end
+
+
   #to String Methode für Message
   def to_s  
     writer+ " an " +receiver+ ": " +message
