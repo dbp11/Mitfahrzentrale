@@ -214,7 +214,8 @@ Prognose
 
 Bruno Labbadia hat auf seinen bisherigen Stationen in der Ersten Bundesliga im zweiten Jahr enttäuscht. Wir glauben, dass er diese Negativserie hinter sich lassen kann. Manager Fredi Bobic und der Coach haben den Kader punktuell verstärkt und mussten nur den Abgang von Träsch verschmerzen. Mit Cacau, Harnik, Schieber und Tamás Hajnal hat der VfB durchaus Offensivpotenzial zu bieten. Die Achillesferse ist und bleibt allerdings die Abwehr. So wird dem VfB ein Jahr der Konsolidierung im gesicherten Bundesliga-Mittelfeld nicht erspart bleiben. Die Schwaben landen am Ende auf Platz 8.
 
-Michel Massing", :writer_id => 1, :receiver_id => 4, :delete_writer => true, :delete_receiver => false, :subject => "aaaaaaaaaaaaaa"
+Michel Massing", :writer_id => 1, :receiver_id => 4, :delete_writer => true, :delete_receiver => false, :subject => "Das tapfere Schneiderlein gab die Vorlage zum Duell zwischen Eintracht Braunschweig und dem FC Bayern München, nachdem die Niedersachsen in ihrer Vereinsgeschichte bereits sechs Mal den Pokal-Favoriten zur Strecke gebracht hatten. Darunter befanden sich auch die Münchner, die im Jahr 1982 bei der 0:2-Niederlage den Kürzeren gezogen hatten.
+"
 msg9 = Message.create! :message => "FB-Pokal: Der FC Bayern München besiegt Eintracht Braunschweig
 DFB-Pokal: Der FC Bayern München besiegt Eintracht Braunschweig
 Braunschweig-Trainer Torsten Lieberknecht bekam kein Geschenk von den Bayern
@@ -255,13 +256,13 @@ Spielerisch ging nichts mehr für Braunschweig und da auch die Standards nicht u
 Als Müller nach zwei herausgeholten Strafstößen dann unnachahmlich zum 3:0 einlupfte, war die Messe gelesen und der Deckel auf der Geschichte. Somit gab es keine neue Pokalsensation und die Gewissheit, dass eine gute Geschichte noch lange nicht das Zeug zu einem Märchen hat.
 
 Gunnar Beuth
-", :writer_id => 1, :receiver_id => 5, :delete_writer => true, :delete_receiver => false, :subject => "dfdfdfdfdggfggfgfgfgfgfgfggfgfgfgfgfgfgfgfggfgfgffgfgfgfgfgfgfggfg"
+", :writer_id => 1, :receiver_id => 5, :delete_writer => true, :delete_receiver => false, :subject => "Somit gab es keine neue Pokalsensation und die Gewissheit, dass eine gute Geschichte noch lange nicht das Zeug zu einem Märchen hat."
 msg10 = Message.create! :message => "NiFakt: Der FC Chelsea ist weiter auf der Suche nach Verstärkungen für die Offensive, vor allem die Kreativität im Mittelfeld soll erhöht werden. Deshalb galt lange Zeit Luka Modric von Tottenham als Favorit, doch die Spurs weigern sich. Das scheint sich auch nach der erneuten Erhöhung des Angebots auf 34 Millionen Euro nicht zu ändern. Nun könnte es zu einer Planänderung kommen, die Roman Abramovich einen seiner Lieblingsspieler bescheren würde.
 
 Gerücht: Kaka verlässt Real Madrid und wechselt zum FC Chelsea.
 
 Wahrheitsgehalt: Maximal: 15% Gerüchte über einen Wechsel von Kaka zum FC Chelsea gibt es, seit Abramovich bei den Blues das Sagen hat. Nun könnte wieder Bewegung in die Sache kommen, denn nach Informationen der spanischen Zeitung Sport denkt Real über einen Verkauf von Kaka nach, auch wenn die damals investierten 65 Millionen Euro keinesfalls zu erzielen sind. Kaka selbst will sich bei den Königlichen eigentlich durchsetzen. Die Vorbereitung hat bis jetzt aber gezeigt, dass ein Stammplatz sehr unwahrscheinlich ist. So soll Chelsea bereit sein, 30 Millionen Euro zu zahlen. Real hätte so die Möglichkeit, einen weiteren Stürmer zu verpflichten, wie es Trainer José Mourinho schon länger fordert.
-l", :writer_id => 2, :receiver_id => 1, :delete_writer => true, :delete_receiver => false, :subject => "fdfdafeeffesfefeaffefffeaeaffeahfekfehefshfeahfehfeaehflhfeahehhjhj"
+l", :writer_id => 2, :receiver_id => 1, :delete_writer => true, :delete_receiver => false, :subject => "Somit gab es keine neue Pokalsensation und die Gewissheit, dass eine gute Geschichte noch lange nicht das Zeug zu einem Märchen hat."
 #Creates passenger
 ps1 = Passenger.create! :user_id => 2, :trip_id => 1, :confirmed => true
 ps2 = Passenger.create! :user_id => 3, :trip_id => 2, :confirmed => false
@@ -277,12 +278,21 @@ ra4 = Rating.create! :comment => "Befriedigend", :mark => 3, :trip_id => 4, :rec
 ra5 = Rating.create! :comment => "Ist ganz gut abgelaufen!", :mark => 2, :trip_id => 5, :receiver_id => 5, :author_id => 1
 
 #Creates request
-req1 = Request.create! :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_N => 52.2766061, :ends_at_E => 7.43844030000001, :address_start => "München", :address_end => "Rheine", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 1
-req2 = Request.create! :starts_at_N => 48.1391265, :starts_at_E => 11.581863, :ends_at_N => 53.074981, :ends_at_E => 8.807081, :address_start => "München", :address_end => "Bremen", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 2
-req3 = Request.create! :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_N => 52.267281, :ends_at_E => 8.0531882, :address_start => "Meppen", :address_end => "Osnbrück", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 3
-req4 = Request.create! :starts_at_N => 53.553813, :starts_at_E => 9.91586, :ends_at_N => 52.5234051, :ends_at_E => 13.4113999, :address_start => "Hamburg", :address_end => "Berlin", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 4
-req5 = Request.create! :starts_at_N => 52.4025974, :starts_at_E => 7.6408948, :ends_at_N => 52.2766061, :ends_at_E => 7.438440300000001, :address_start => "Rheine", :address_end => "Hopsten-Halverde", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 5
-
+req1 = Request.create! :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_N => 52.2766061, :ends_at_E => 7.43844030000001, :address_start => "München", :address_end => "Rheine", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 1, :start_radius => 31, :end_radius => 37
+req2 = Request.create! :starts_at_N => 48.1391265, :starts_at_E => 11.581863, :ends_at_N => 53.074981, :ends_at_E => 8.807081, :address_start => "München", :address_end => "Bremen", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 2, :start_radius => 12, :end_radius => 15
+req3 = Request.create! :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_N => 52.267281, :ends_at_E => 8.0531882, :address_start => "Meppen", :address_end => "Osnabrück", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 3, :start_radius => 43, :end_radius => 22
+req4 = Request.create! :starts_at_N => 53.553813, :starts_at_E => 9.91586, :ends_at_N => 52.5234051, :ends_at_E => 13.4113999, :address_start => "Hamburg", :address_end => "Berlin", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 4, :start_radius => 12, :end_radius => 32
+req5 = Request.create! :starts_at_N => 52.4025974, :starts_at_E => 7.6408948, :ends_at_N => 52.2766061, :ends_at_E => 7.438440300000001, :address_start => "Rheine", :address_end => "Hopsten-Halverde", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 5, :start_radius => 12, :end_radius=> 46
+req1.set_route
+req2.set_route
+req3.set_route
+req4.set_route
+req5.set_route
+req1.save
+req2.save
+req3.save
+req4.save
+req5.save
 #Creates trips
 tri1 = Trip.create! :user_id => 1, :car_id => 1, :starts_at_N => 52.27133, :starts_at_E => 7.4452, :ends_at_E => 8.13409, :ends_at_N => 52.57975, :address_start => "Hafenbahn 10 48431 Rheine", :address_end => "Großer Esch 20 48496 Hopsten", :start_time => Time.now-1.day, :comment => "Biete eine Fahrt an!", :baggage => true, :free_seats => 5
 tri2 = Trip.create! :user_id => 2, :car_id => 2, :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_E => 8.807081, :ends_at_N => 53.074981,:address_start => "München"   , :address_end => "Bremen"   , :start_time => Time.now-1.day, :comment => "Platz für alle :D!", :baggage => true, :free_seats => 4
