@@ -7,32 +7,34 @@ body.messages {
   // Then, place scoped styles here.
 	.message_table {
 		margin-bottom: 1.5em;
-		/*border: solid 2px;*/
 		width: 60%;
-		tr:first-child {
-			background-color: #777777;
-			font-weight: bold;
-		}
 		td {
-			/*border: solid 1px;*/
 			padding-top: 0.1em;
 			padding-bottom: 0.1em;
 			padding-left: 0.5em;
 			padding-right: 0.5em;
 		}
 		.message_table_left {
-			/*width: 400px;*/
 		}
 		.message_table_right {
-		/*	width: 2em;*/
 			text-align: right;
-		/*	font-weight: bold;*/
 		}
-		.message_table_comment {
-			padding-top: 0.3em;
-			padding-bottom: 0.3em;
+		.message_table_both {
+		}
+		tr:first-child {
+			background-color: #777777;
+			font-weight: bold;
+		}
+		tr:nth-child(2) {
 			background-color: #AAAAAA;
 			border-top: solid 1px;
+			td {
+				padding-top: 0.3em;
+				padding-bottom: 0.3em;			
+			}
+		}
+		tr:last-child {
+			text-align: right;
 		}
 	}
 }
