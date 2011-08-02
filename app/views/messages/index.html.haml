@@ -1,17 +1,24 @@
-%h1 Listing messages
+%h1 Empfangene Nachrichten
+%div.other_site
+	= link_to("Gesendete Nachrichten", url_for(:action => "outbox", :controller => "messages"))
 
 - @messages.each do |message|
 	%table.message_table
-		%tr.message_table_row
+		%tr
 			%td.message_table_left
 				= "Nachricht von"
 				= link_to(message.writer.name, url_for(message.writer))
 			%td.message_table_right
 				= message.created_at.strftime("%d.%m.%y %H:%M")
-		%tr.message_table_row
+		%tr
 			%td.message_table_both{:colspan => "2"}
-				= message.message
-		%tr.message_table_row
+				%div
+					%span Betreff:
+					= message.subject
+		%tr
+			%td.message_table_both{:colspan => "2"}
+				= raw(h(message.message).gsub(/[\n]/,"<br />"))
+		%tr
 			%td.message_table_both{:colspan => "2"}
 				=link_to("Antworten", url_for(:action => "new", :controller => "messages", :id => message.writer.id))
 				= "|"
