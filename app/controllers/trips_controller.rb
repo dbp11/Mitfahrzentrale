@@ -7,12 +7,11 @@ class TripsController < ApplicationController
     temp = current_user
     @trips = temp.driven
     #Alle Fahrten, die ich als Fahrer noch absolvieren muss
-    @future_trips = temp.driven
+    @future_trips = temp.to_drive
     #Alle Fahrten, die ich als Fahrer absolviert habe
-    @completed_trips = temp.to_drive
-    #Alle Fahrten, in denen ich Mitfahrer war
+    @completed_trips = temp.driven
+    #Alle Fahrten, die ich als Mitfahrer absolviert habe
     @ridden_trips = temp.driven_with
-    #driven_with und to_drive_with funktioniert noch nicht -> undefined local variable or method `passenger_trip'
     #Alle Fahrten, in denen ich Mitfahrer noch teilnehmen
     @future_ridden_trips = temp.to_drive_with
     respond_to do |format|
@@ -24,11 +23,16 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
+    @FAHRER = 0
+    @MITFAHRER = 1
+    @POTENTIELLER_MITFAHRER = 2
+    @GAST = 3
+    @status = @FAHRER
     @trip = Trip.find(params[:id])
-    
     @commited_passenger = @trip.get_committed_passengers
     @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
+    @occupied_seats = @trip.get_occupied_seats
     
     respond_to do |format|
       format.html # show.html.erb
@@ -71,9 +75,15 @@ class TripsController < ApplicationController
     @trip.ends_at_E = temp[1]
     @trip.address_start = params[:address_start]
     @trip.address_end = params[:address_end]
-    @trip.start_time = params[:date_start]
+    @trip.start_time = params[:date_start]+"T"+params[:time_start]+"Z"
     temp = Car.find(params[:car])
-    @trip.free_seats = temp.seats - 1
+    if params[:free_seats] == ""
+      @trip.free_seats = temp.seats
+    else
+      @trip.free_seats = params[:free_seats]
+    end
+    @trip.set_route
+
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }

@@ -42,8 +42,22 @@
     = f.text_field:city, :required=>"required"
 
   %p
+<<<<<<< HEAD
     = f.label :"Geschlecht*"
     %br/
+=======
+    %br
+    = f.label :roles
+  %p
+    %br
+    = f.collection_select :role, User::ROLES, :to_s, :humanize 
+
+  %p
+    %br
+    = f.label :Geschlecht
+  %p
+    %br
+>>>>>>> 16d4bd98a4c056283a04bc2f6996e8ddcb10feca
     = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
 
   %p

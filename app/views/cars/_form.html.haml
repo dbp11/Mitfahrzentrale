@@ -2,7 +2,7 @@
 = form_for @car do |f|
   -if @car.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@car.errors.count, "error")} prohibited this car from being saved:"
+      %h2= "#{pluralize(@car.errors.count, "error")} Beim speichern des Fahrzeuges ist ein Fehler aufgetreten:"
       %ul
         - @car.errors.full_messages.each do |msg|
           %li= msg
@@ -11,9 +11,9 @@
     %br
     = f.number_field :seats, :size => 30, :value => 5, :min => 0, :max =>40
   .field
-    = f.label :description, "Beschreibung des Fahrzeuges*"
+    = f.label :car_type, "Fahrzeugmodell*"
     %br
-    = f.text_field :description, :required => true
+    = f.text_field :car_type, :required => true
   .field
     = f.label :licence, "Kennzeichen*"
     %br
@@ -27,9 +27,13 @@
     %br
     = f.check_box :smoker
   .field
+    = f.label :description, "Beschreibung"
+    %br
+    = f.text_field :description
+  .field
     = f.label :carpic, "Bild hochladen"
     %br    
     = f.file_field :carpic
 
   .actions
-    = f.submit 'Save'
+    = f.submit 'Speichern'

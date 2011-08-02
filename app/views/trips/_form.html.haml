@@ -10,11 +10,11 @@
       Nutzer wählt den gewünschten Startpunkt und das gewünschte Ziel.
 
 = form_tag("create", :method => "post") do
-  %table.form_table
-    %tr.form_table_row
-      %td.form_left Start-Ort
+  %table
+    %tr
+      %td Start-Ort
       -# entweder das textfield unten oder eine select-box
-      %td.form_right
+      %td
         = text_field_tag(:address_start, nil, :required => "required")
     %tr
       %td Ziel-Ort
@@ -24,7 +24,7 @@
     %tr
       %td Abfahrt-Datum
       %td
-        %input{:name => "date_start", :required => "required", :type => "datetime"}/
+        %input{:name => "date_start", :required => "required", :type => "date"}/
     %tr
       %td Abfahrt-Uhrzeit
       %td
@@ -34,8 +34,14 @@
       %td
         %select{:name => "car", :required => "required"}
           - @fahrzeuge.each do |f|
-            %option{:value => f.id}= f.description
+            %option{:value => f.id}= "#{f.car_type} (#{f.seats} Sitzplätze)"
     %tr
+      %td Sitzplätze 
+      %td
+        %select{:name => "free_seats"}
+          %option{:value => ""} keine Änderung
+          - 10.times do |i|
+            %option{:value => (i+1)}= (i+1)
     %tr
       %td
         = submit_tag("Erstellen")

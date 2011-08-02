@@ -1,16 +1,33 @@
+-#
+  übergebene Variablen:
+    - @sorted_trips
+      Array mit auf den Request passende Fahrten
+
 %p#notice= notice
 
 %p
-  %b Starts at:
-  = @request.starts_at
+  %b Starts at N:
+  = @request.starts_at_N
 %p
-  %b Ends at:
-  = @request.ends_at
+  %b Starts at E:
+  = @request.starts_at_E
 %p
-  %b Start time:
+  %b Ends at N:
+  = @request.ends_at_N
+%p
+  %b Ends at E:
+  = @request.ends_at_E
+%p
+  %b Address Start:
+  = @request.address_start
+%p
+  %b Address End:
+  = @request.address_end
+%p
+  %b Start Time:
   = @request.start_time
 %p
-  %b End time:
+  %b End Time:
   = @request.end_time
 %p
   %b Baggage:

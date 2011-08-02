@@ -5,34 +5,72 @@
 body.messages {
   // Add the messages class to your body tag
   // Then, place scoped styles here.
-	.message_table {
-		margin-bottom: 1.5em;
-		/*border: solid 2px;*/
-		width: 60%;
-		tr:first-child {
-			background-color: #777777;
-			font-weight: bold;
-		}
-		td {
-			/*border: solid 1px;*/
-			padding-top: 0.1em;
-			padding-bottom: 0.1em;
-			padding-left: 0.5em;
-			padding-right: 0.5em;
-		}
-		.message_table_left {
-			/*width: 400px;*/
-		}
-		.message_table_right {
-		/*	width: 2em;*/
+	#main {
+		.other_site {
+			width: 70%;
 			text-align: right;
-		/*	font-weight: bold;*/
+			margin-top: -2em;
+			margin-bottom: 1em;
+			a {
+				margin-right: 0.5em;
+			}
 		}
-		.message_table_comment {
-			padding-top: 0.3em;
-			padding-bottom: 0.3em;
-			background-color: #AAAAAA;
-			border-top: solid 1px;
+		.message_table {
+			table-layout: fixed;
+			margin: 0;
+			margin-bottom: 1.5em;
+			width: 70%;
+			td {
+				padding-top: 0.1em;
+				padding-bottom: 0.1em;
+				padding-left: 0.5em;
+				padding-right: 0.5em;
+			}
+			.message_table_left {
+			}
+			.message_table_right {
+				text-align: right;
+			}
+			.message_table_both {
+			}
+			tr:first-child {
+				background-color: #777777;
+				border-bottom: solid 1px;
+				font-weight: bold;
+				.message_table_right {
+					width: 12em;
+				}
+			}
+			tr:nth-child(2) {
+				background-color: #DDDDDD;
+				td {
+					padding-left: 0.5em;
+					padding-right: 0.5em;
+					padding-top: 0.5em;
+					padding-bottom: 0;
+					div {
+						padding-left: 0.5em;
+						padding-right: 0.5em;
+						background-color: #AAAAAA;
+						span {
+							font-weight: bold;
+						}
+					}
+				}
+			}
+			tr:nth-child(3) {
+				background-color: #DDDDDD;
+				td {
+					text-align: justify;
+					padding-top: 0.3em;
+					padding-bottom: 0.3em;
+					padding-left: 0.8em;
+					padding-right: 0.8em;
+				}
+			}
+			tr:last-child {
+				text-align: right;
+			}
 		}
 	}
 }

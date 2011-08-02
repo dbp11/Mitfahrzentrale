@@ -27,27 +27,28 @@ tmp/*
 .sass-cache
 /config/config.yml
 #/config/database.yml
-/coverage.data
-/coverage/
-/db/*.javadb/
-/db/*.sqlite3-journal
-/doc/api/
-/doc/app/
-/doc/features.html
-/doc/specs.html
-/public/cache
-/public/stylesheets/compiled
-/public/system
-/spec/tmp/*
-/cache
-/capybara*
-/capybara-*.html
-/gems
-/rerun.txt
-/spec/requests
-/spec/routing
-/spec/views
-/specifications
+coverage.data
+coverage/
+db/*.javadb/
+db/*.sqlite3-journal
+# doc/api/
+# doc/app/
+doc/*
+doc/features.html
+doc/specs.html
+public/cache
+public/stylesheets/compiled
+public/system
+spec/tmp/*
+cache
+capybara*
+capybara-*.html
+gems
+rerun.txt
+spec/requests
+spec/routing
+spec/views
+specifications
 
 # scm revert files
 **.orig
