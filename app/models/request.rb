@@ -41,7 +41,7 @@ class Request < ActiveRecord::Base
       end_distance = end_con[0]["distance"]["value"]
       end_duration = end_con[0]["duration"]["value"]
 
-      t_rating = t.user.get_avg_rating / 6
+      t_rating = t.user.get_avg_rating.to_f / 6
       t_ignors = t.user.get_relative_ignorations
       detour = (start_distance + end_distance + self.distance - t.distance) / t.distance
       detime = (start_duration + end_duration + self.duration - t.duration) / t.duration
