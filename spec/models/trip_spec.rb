@@ -17,7 +17,8 @@ describe Trip do
       :free_seats => 4
     }
   end
-
+  
+  #Test ob Validations funktionieren
   it "Kontrolle ob Validation address_start funktioniert" do
     no_address_start = Trip.new(@attr.merge(:address_start => nil))
     no_address_start.should_not be_valid
@@ -32,4 +33,6 @@ describe Trip do
     no_start_time = Trip.new(@attr.merge(:start_time => nil))
     no_start_time.should_not be_valid
   end
+
+  #Test ob Methoden funktionieren
 end
