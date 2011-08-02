@@ -1,119 +1,122 @@
-%h1
+%h1.head
   Profil bearbeiten
+%p
+  Mit * gekennzeichnete Felder müssen ausgefüllt sein
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
 
-  %table.data_table#form_table
-    %tr
-      %td
+  %table.form_table
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :"Name*"
-      %td
+      %td.form_table_right
         = f.text_field :name
-    %tr
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :"E-Mail*"
-      %td
+      %td.form_table_right
         = f.email_field :email
-    %tr
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :password
-      %td
+      %td.form_table_right
         = f.password_field :password
-    %tr
-      %td
-        = f.label :password_confirmation
-      %td
+    %tr.form_table_row
+      %td.form_table_left
+        = f.label :"Passwort wiederholen"
+      %td.form_table_right
         = f.password_field :password_confirmation
-    %tr
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :"Passwort*"
-      %td
+      %td.form_table_right
         = f.password_field :current_password, :required=>"required"
 
-    %tr#form_table_row
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :"Geburtsdatum*"
-      %td 
+      %td.form_table_right
         = f.date_select :birthday,
                         :start_year => 1900,
                         :end_year => 2011,
                         :order => [:day, :month, :year],
                         :use_month_numbers => true,
                         :required=>"required"
-      %td{:class=>"label", :id=>"form_table_", :checked_value=>"1"}sichtbar
-      %td
-        = f.check_box:visible_age, :value=>"sichtbar", :id=>"form_table_fourth"
-    %tr#form_table_row
-      %td
+      %td{:class=>"label", :id=>"form_table_middle", :checked_value=>"1"}sichtbar
+      %td.form_table_end
+        = f.check_box:visible_age, :value=>"sichtbar"
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :Geschlecht
-      %td 
+      %td.form_table_right 
         - if @user.sex? 
           = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], "1")
         - else
           = f.select:sex, options_for_select([["Maennlich", "1"], ["Weiblich", "0"]], "0")
 
-    %tr#form_table_row
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :"Strasse und Hausnummer*"
-      %td
+      %td.form_table_right
         = f.text_field:address, :required=>"required" 
-      %td{:class=>"label"}sichtbar
-      %td
+      %td{:class=>"label", :id=>"form_table_middle"}sichtbar
+      %td.form_table_end
         = f.check_box:visible_address 
           
-    %tr#form_table_row
-      %td
+    %tr.form_table_row
+      %td.form_table_right
         = f.label :"PLZ*"
-      %td
+      %td.form_table_left
         = f.number_field:zipcode, :required=>"required"
-      %td{:class=>"label"}sichtbar
-      %td
+      %td{:class=>"label", :id=>"form_table_middle"}sichtbar
+      %td.form_table_end
         = f.check_box:visible_zip
 
 
-    %tr#form_table_row
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :"Ort*"
-      %td
+      %td.form_table_right
         = f.text_field:city, :required=>"required"
-      %td{:class=>"label"}sichtbar
-      %td
+      %td{:class=>"label", :id=>"form_table_middle"}sichtbar
+      %td.form_table_end
         = f.check_box:visible_city
 
 
 
-    %tr#form_table_row
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :Telefon
-      %td
+      %td.form_table_right
         = f.phone_field:phone 
-      %td{:class=>"label"}sichtbar
-      %td
+      %td{:class=>"label", :id=>"form_table_middle"}sichtbar
+      %td.form_table_end
         = f.check_box:visible_phone
 
 
 
-    %tr#form_table_row
-      %td
+    %tr.form_table_row
+      %td.form_table_left
         = f.label :InstantMassengerDaten
-      %td
+      %td.form_table_right
         = f.text_field:instantmessenger
-      %td{:class=>"label"}sichtbar
-      %td
+      %td{:class=>"label", :id=>"form_table_middle"}sichtbar
+      %td.form_table_end
         = f.check_box:visible_im
+    %tr.form_table_row
+      %td.form_table_left
+        = f.label :picture, "Bild hochladen"
+      %td.form_table_right
+        = f.file_field :picture
+      %td.form_table_middle
+      %td.form_table_end
 
-
-  .field
-    = f.label :picture, "Bild hochladen"
-    %br
-    = f.file_field :picture
-    %br/
-    = f.submit "Speichern"
-
-%p Mit * gekennzeichnete Felder müssen ausgefüllt sein!
-%h3 Account löschen
-%p
-  Unglücklich? #{link_to "Account löschen", registration_path(resource_name), :confirm => "Sind sie sicher?", :method => :delete}.
-
-%p
-  = link_to "zurück", :back
+    %tr.form_table_row
+      %td
+      %td
+      %td
+        = f.submit "Speichern"
+  %h3.links
+    #{link_to "Account löschen", registration_path(resource_name), :confirm => "Sind sie sicher?", :method => :delete}.
+  %p.links
+    = link_to "zurück", :back

@@ -1,59 +1,59 @@
-%table.data_table#form_table
+%table.form_table#form_table
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       User: 
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.name}
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       Email:
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.email if @user.email}
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       Geschlecht:
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.sex? ? "Maennlich" : "Weiblich"}
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       Adresse: 
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.visible_address? ? @user.address: "versteckt"}
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       PLZ: 
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.visible_zip? ? @user.zipcode : "versteckt"}
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       Ort: 
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.visible_city? ? @user.city : "versteckt"}
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       Geburtsdatum: 
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.visible_age? ?  @user.birthday : "versteckt"}
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       InstantMassenger: 
-    %td.data_table_right#form_table_right
+    %td.form_table_right#form_table_right
       #{@user.visible_im? ?  @user.instantmessenger: "versteckt"}
 
-  %tr.data_table_row#form_table_row
-    %td.data_table_left#form_table_left
+  %tr.form_table_row#form_table_row
+    %td.form_table_left#form_table_left
       Telefon: 
-    %td.data_table_right#form_table_right 
+    %td.form_table_right#form_table_right 
       #{@user.visible_phone? ? @user.phone : "versteckt"}
 
 
   %p
-    %b Bild:
+    %br Bild:
     %br
     = image_tag @user.picture.url(:medium)
