@@ -9,12 +9,12 @@ class Message < ActiveRecord::Base
   belongs_to  :receiver, :class_name => "User"
    
   #Validation
-  validate :no_true_true
-  validates_presence_of :delete_writer, :delete_receiver
+  #validate :no_true_true
+  #validates_presence_of :delete_writer, :delete_receiver
   #Methoden:
   #no_true_true für Validate
   def no_true_true
-    errors.add(:base,"Nicht möglich da Nachricht glöscht wird!") unless if( delete_receiver==true and delete_writer==true) 
+    errors.add(:base,"Nicht möglich da Nachricht glöscht wird!") unless if((delete_receiver==true and delete_writer==false) or (delete_receiver==false and delete_writer==true) or (delete_receiver==false and delete_writer==false)) 
   end
   end
   #to String Methode für Message
