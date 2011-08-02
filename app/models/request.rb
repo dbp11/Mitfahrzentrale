@@ -3,6 +3,8 @@ class Request < ActiveRecord::Base
   #Beziehungen
   belongs_to :user
 
+  validates_presence_of :address_start, :address_end, :start_time, :end_time, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E
+
   #Berechnet Trips, die sich nur geringfügig von dieser Request unterscheiden, und gibt ein Array aus
   #Wertepaaren zurück. Der erste Wert ist der Trip, der zweite gibt die Länge des Umweges an, den der
   #Fahrer dieses Trips in Kauf nehmen müsste. Das Array ist absteigend nach Umwegen sortiert.
