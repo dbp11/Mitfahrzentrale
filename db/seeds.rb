@@ -299,6 +299,16 @@ tri2 = Trip.create! :user_id => 2, :car_id => 2, :starts_at_N => 48.1391265, :st
 tri3 = Trip.create! :user_id => 3, :car_id => 3, :starts_at_N => 53.553813, :starts_at_E => 9.991586, :ends_at_E => 13.4113999, :ends_at_N => 52.523401, :address_start => "Hamburg"   , :address_end => "Berlin", :start_time => Time.now-1.day, :comment => "Ahoi", :baggage => false, :free_seats => 3
 tri4 = Trip.create! :user_id => 4, :car_id => 4, :starts_at_N => 52.2766061, :starts_at_E => 7.43840300000001, :ends_at_E => 7.3237899999999, :ends_at_N => 52.52306, :address_start => "Rheine"   , :address_end => "Lingen", :start_time => Time.now-1.day, :comment => "Boom Boom", :baggage => true, :free_seats => 5
 tri5 = Trip.create! :user_id => 5, :car_id => 5, :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_E => 8.0531882, :ends_at_N => 52.267281, :address_start => "Meppen"   , :address_end => "Osnabrück", :start_time => Time.now-1.day, :comment => "Schnell schnell!", :baggage => false, :free_seats => 4
+tri1.set_route
+tri2.set_route
+tri3.set_route
+tri4.set_route
+tri5.set_route
+tri1.save
+tri2.save
+tri3.save
+tri4.save
+tri5.save
 
 #Creates Assoziations
 user1.ignorings << user2
