@@ -29,8 +29,8 @@
           = car.smoker? ? "Ja" : "Nein"
         %td= car.licence
         %td= car.description
-        %td= link_to 'Bearbeiten', edit_car_path(car)
-        %td= link_to image_tag( '/public/images/Delete-icon.png'), car, :confirm => 'Bist du sicher?', :method => :delete
+        %td= link_to image_tag( '/images/Edit-icon.png', :size => "20x20"), edit_car_path(car)
+        %td= link_to image_tag( '/images/Delete-icon.png', :size => "20x20"), car, :confirm => 'Bist du sicher?', :method => :delete
 
   %a{:href => "/cars/new"}
     Auto hinzuf&uuml;gen
