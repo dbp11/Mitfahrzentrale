@@ -39,9 +39,15 @@ class MessagesController < ApplicationController
   # GET /messages/new.json
   def new
     @message = Message.new
-    temp = User.find(params[:id])
-    @message.receiver = temp
-	  @message.writer = current_user
+    temp = Message.find(params[:id])
+	if params[:type] == "reply"
+		@message .receiver = temp.writer
+		@message.writer = current_user
+		@message.subject = "RE: " + temp.subject.to_s
+	elsif params[:type] == "new"
+		@message.receiver = temp.receiver
+		@message.writer = current_user
+	end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,7 +64,6 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-    @message.message = @message.message.gsub(/[\n]/, '<br />')
     @message.delete_receiver = false
     @message.delete_writer = false
 
