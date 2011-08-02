@@ -122,7 +122,7 @@ München - Die Rechtschreibreform wird auch 15 Jahre nach ihrer Einführung noch
 Demnach wird die Reform von 1996 nur von einem Drittel der Bevölkerung begrüßt, 62 Prozent halten sie noch immer für falsch.
 
 
-Das Interesse an korrekter Rechtschreibung sei ungebrochen hoch: Nur 15 Prozent halten sie für überflüssig, dagegen ist sie für 85 Prozent der Befragten wichtig. ", :writer_id => 5, :receiver_id => 1, :delete_writer => true, :delete_receiver => false, :subject => "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+Das Interesse an korrekter Rechtschreibung sei ungebrochen hoch: Nur 15 Prozent halten sie für überflüssig, dagegen ist sie für 85 Prozent der Befragten wichtig. ", :writer_id => 5, :receiver_id => 1, :delete_writer => true, :delete_receiver => false, :subject => "Prominente Bankdrücker bei Bayer Leverkusen: die Nationalspieler Stephan Kießling und Michael Ballack (Zweiter und Dritter von links).Foto:"
 msg7 = Message.create! :message => "Asse in der Hinterhand
 
 Prominente Bankdrücker bei Bayer Leverkusen: die Nationalspieler Stephan Kießling und Michael Ballack (Zweiter und Dritter von links).Foto:
@@ -151,7 +151,7 @@ Mit Robin Dutt holte Sportdirektor Rudi Völler einen ambitionierten Trainer. Du
 
 » Das muss sich ändern: Ändern muss sich nichts. Dennoch könnte der überschaubare Kader im Hinblick auf die Champions League zu einem Problem werden. Das ist bei Bayer Leverkusen die Frage aller Fragen: Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga?
 
-» Einlauftipp: Leverkusen ist reif für den Titel. Eigentlich und ohne Zweifel. Wahrscheinlich sind die Ränge eins bis drei. Am Ende wird Bayer Dritter.", :writer_id => 1, :receiver_id => 3, :delete_writer => true, :delete_receiver => false, :subject => "ddddddddddddddddddddddddddddddddddddddddd"
+» Einlauftipp: Leverkusen ist reif für den Titel. Eigentlich und ohne Zweifel. Wahrscheinlich sind die Ränge eins bis drei. Am Ende wird Bayer Dritter.", :writer_id => 1, :receiver_id => 3, :delete_writer => true, :delete_receiver => false, :subject => "Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga?   "
 msg8 = Message.create! :message => "	
 FUSSBALL | 1. BUNDESLIGA
 Schriftgröße: 
