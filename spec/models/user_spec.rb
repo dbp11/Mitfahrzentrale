@@ -1,4 +1,4 @@
-# encoding: utf-8
+# ecoding: utf-8
 require 'spec_helper'
 
 describe User do
@@ -89,7 +89,7 @@ describe User do
     user_with_duplicate_email.should_not be_valid
   end
   
-  it "should reject email addresses identical up to case" do
+  it "Kontrolle ob e-mail eindeutig ist" do
     upcased_email = @attr[:email].upcase
     User.create!(@attr.merge(:email => upcased_email))
     user_with_duplicate_email = User.new(@attr)
@@ -146,5 +146,4 @@ describe User do
     end
 
   end
-
 end
