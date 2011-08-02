@@ -87,11 +87,15 @@ class User < ActiveRecord::Base
   def get_avg_rating
     count = 0
     erg = 0
-    self.received_ratings.each do |x|
-      erg = erg + x.mark
-      count +=1
-    end
-    return erg / count
+    #if self.received_ratings.empty? 
+    #  return 3
+   # else
+      self.received_ratings.each do |x|
+        erg = erg + x.mark
+        count +=1
+      end
+      return erg.to_f / count.to_f
+    #end
   end
 
   def count_ratings
@@ -121,4 +125,8 @@ class User < ActiveRecord::Base
     end
     return erg
   end
+
+  def get_relative_ignorations
+    self.ignoreds.count.to_f / User.all.count.to_f
+  end 
 end
