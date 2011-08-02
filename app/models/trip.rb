@@ -89,4 +89,17 @@ class Trip < ActiveRecord::Base
     end
     return erg
   end
+
+
+  def get_route
+    Gmaps4rails.direction({"from" =>address_start, "to" =>address_end},{},"pretty")
+  end
+
+  def get_distance
+    get_route
+
+  end
+
+  def get_time
+  end
 end
