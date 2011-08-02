@@ -11,7 +11,7 @@
 			#container.container
 				%header
 					%banner
-						MITFAHRZENTRALE 
+						= image_tag( '/images/Header.png', :size => "1000x150") 
 				%nav
 					%ul
 						- if user_signed_in?
@@ -34,3 +34,4 @@
 				#main{:role => "main"}
 					= yield
 				%footer
+
