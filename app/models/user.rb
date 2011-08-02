@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
         erg << m
       end
     end
-    return erg
+    erg.sort{|a,b| a.created_at <=> b.created_at}
   end
 
   def get_received_messages
@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
         erg << m
       end
     end
-    return erg
+    erg.sort{|a,b| a.created_at <=> b.created_at}
   end
 
   def get_relative_ignorations
