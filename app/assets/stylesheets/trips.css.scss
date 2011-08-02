@@ -5,4 +5,75 @@
 body.trips {
   // Add the trips class to your body tag
   // Then, place scoped styles here.
+	.trips_table {
+		margin-bottom: 1.5em;
+		border: solid 2px;
+		width: 100%;
+    tr {
+      border: solid 1px;
+    }
+		tr:first-child {
+			background-color: #777777;
+			font-weight: bold;
+		}
+		td {
+			/*border: solid 1px;*/
+			padding-top: 0.1em;
+			padding-bottom: 0.1em;
+			padding-left: 0.5em;
+			padding-right: 0.5em;
+		}
+    a {
+      padding: 5px 30 5 30;
+
+      &:visited {
+        color: #333333;
+      }
+
+      &:link {
+        color: #333333;
+      }
+
+      &:hover {
+        color: #111111;
+      }
+    }
+
+    #minimal {
+      width: 1px;
+    }
+
+    .number_col {
+      &:hover {
+        background-color: #777777;
+      }
+    }
+
+		.left {
+			/*width: 400px;*/
+      text-align: left;
+    }
+
+    .left_bold {
+      text-align: left;
+      font-weight: bold;
+    }
+
+		.right {
+		/*	width: 2em;*/
+			text-align: right;
+		/*	font-weight: bold;*/
+		}
+
+    .center {
+      text-align: center;
+    }
+
+		.comment {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+			background-color: #AAAAAA;
+			border-top: solid 1px;
+		}
+	}
 }

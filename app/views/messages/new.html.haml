@@ -1,5 +1,26 @@
-%h1 New message
+%h2 Nachricht Schreiben
 
-= render 'form'
+= form_for @message do |f|
+	-if @message.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@message.errors.count, "error")} prohibited this message from being saved:"
+			%ul
+				- @message.errors.full_messages.each do |msg|
+					%li= msg
+	= f.hidden_field :writer_id
+	= f.hidden_field :receiver_id
+	.field
+		= f.label("An:")
+		= link_to(@message.receiver.name, url_for(:action => "show", :controller => "users", :id => @message.receiver.id))
+	.field
+		= f.label(:subject, "Betreff")
+		%br
+		= f.text_field(:subject)
+	.field
+		= f.label(:message, "Nachricht")
+		%br
+		= f.text_area :message
+	.actions
+		= link_to('Zurück', messages_path)
+		= f.submit 'Senden'
 
-= link_to 'Back', messages_path

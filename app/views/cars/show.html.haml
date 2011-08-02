@@ -1,28 +1,31 @@
 %p#notice= notice
 
 %p
-  %b Fahzeughalter:
-  = @car.user
-%p
   %b Bild des Fahrzeuges:
   %br
-  = image_tag @car.carpic.url(:medium)
+  - if @car.carpic? 
+    = image_tag @car.carpic.url(:medium)
+  - else 
+    = "Kein Bild hochgeladen"
 %p
-  %b Sitzplaetze:
+  %b Modell:
+  = @car.car_type
+%p
+  %b Sitzpl&auml;tze:
   = @car.seats
-%p
-  %b Beschreibung:
-  = @car.description
-%p
-  %b Nummernschild:
-  = @car.licence
 %p
   %b Verbrauch:
   = @car.fuel_consumption
 %p
   %b Raucherwagen:
-  = @car.smoker
+  = @car.smoker? ? "ja" : "nein"
+%p
+  %b Nummernschild:
+  = @car.licence
 
-= link_to 'Daten ändern', edit_car_path(@car)
+%p
+  %b Beschreibung:
+  = @car.description
+= link_to 'Bearbeiten', edit_car_path(@car)
 \|
 = link_to 'Zurück', cars_path

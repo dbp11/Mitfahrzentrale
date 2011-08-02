@@ -10,25 +10,28 @@
 		%body{:class => controller.controller_name}
 			#container.container
 				%header
-					%nav
-						%ul
-							- if user_signed_in?
-								-#%li
-								-#	= link_to('Startseite', root_path)
-								%li
-									= link_to('Suchen', new_request_path)
-								%li
-									= link_to('Fahrten', trips_path)
-								%li
-									= link_to('Nachrichten', messages_path)
-								%li
-									= link_to('Bewertungen', ratings_path)
-								%li
-									= link_to('Fuhrpark', cars_path)
-							= render 'devise/menu/registration_items'
-							= render 'devise/menu/login_items'
-					- flash.each do |name, msg|
-						= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+					%banner
+						= image_tag( '/images/Header.png', :size => "1000x150") 
+				%nav
+					%ul
+						- if user_signed_in?
+							-#%li
+							-#	= link_to('Startseite', root_path)
+							%li
+								= link_to('Suchen', new_request_path)
+							%li
+								= link_to('Fahrten', trips_path)
+							%li
+								= link_to('Nachrichten', messages_path)
+							%li
+								= link_to('Bewertungen', ratings_path)
+							%li
+								= link_to('Fahrzeuge', cars_path)
+						= render 'devise/menu/registration_items'
+						= render 'devise/menu/login_items'
+				- flash.each do |name, msg|
+					= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
 				#main{:role => "main"}
 					= yield
 				%footer
+

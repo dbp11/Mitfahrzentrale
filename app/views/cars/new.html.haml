@@ -1,10 +1,10 @@
 = stylesheet_link_tag :cars
-%h1 Neues Auto hinzuf&uuml;gen
+%h1 Neues Fahrzeug hinzuf&uuml;gen
 
 = form_for :car, :url => "/cars/create", :html => { :multipart => true } do |f|
   -if @car.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@car.errors.count, "error")} prohibited this car from being saved:"
+      %h2= "#{pluralize(@car.errors.count, "error")} Beim speichern des Fahrzueges ist ein Fehler aufgetreten:"
       %ul
         - @car.errors.full_messages.each do |msg|
           %li= msg
@@ -13,9 +13,9 @@
     %br
     = f.number_field :seats, :size => 30, :min => 0, :max =>40
   .field
-    = f.label :description, "Beschreibung des Fahrzeuges*"
+    = f.label :car_type, "Modell*"
     %br
-    = f.text_field :description, :required => true
+    = f.text_field :car_type, :required => true
   .field
     = f.label :licence, "Kennzeichen*"
     %br
@@ -29,11 +29,15 @@
     %br
     = f.check_box :smoker
   .field
+    = f.label :description, "Beschreibung (max. 160 Zeichen)"
+    %br
+    = f.text_area :description, :maxlength => 100, :placeholder => "Großer Kofferraum, Keine Türen", :resize => "none"
+  .field
     = f.label :carpic, "Bild hochladen"
     %br
     = f.file_field :carpic
     
   .actions
-    = f.submit 'Save'
+    = f.submit 'Hinzufügen'
   Mit * gekennzeichnete Felder sind Pflichtfelder
-= link_to 'Back', cars_path
+= link_to 'Zurück', cars_path

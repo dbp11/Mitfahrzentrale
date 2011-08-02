@@ -1,7 +1,12 @@
 %h1 Furhpark bearbeiten
 
 = render 'form'
-
-= link_to 'Show', @car
+Aktuelles Bild:
+%br
+= image_tag @car.carpic.url(:medium)
+%br
+= @car.carpic
+%br
+= link_to 'Anzeigen', @car
 \|
-= link_to 'Back', cars_path
+= link_to 'Zurück', cars_path

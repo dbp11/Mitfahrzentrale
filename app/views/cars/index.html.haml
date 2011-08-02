@@ -1,34 +1,37 @@
 = stylesheet_link_tag :cars
 .cars
-  %h1 Dein Fuhrpark
+  %h1 Deine Fahrzeuge
 
   
   
   %table
     %tr
       %th Bild
-      %th Bezeichnung
-      %th Anzahl der Sitzpl&auml;tze
+      %th Modell
+      %th Sitzpl&auml;tze
       %th Verbrauch
       %th Raucher
       %th Kennzeichen
-      %th Anzeigen  
+      %th Beschreibung
       %th Editieren
       %th Löschen
 
     - @cars.each do |car|
       %tr
-        %td= image_tag car.carpic.url(:thumb)
-        %td= car.description
+        - if car.carpic?
+          %td= image_tag car.carpic.url(:thumb)
+        - else
+          %td= image_tag( '/images/Default_car_icon.png', :size => "100x100") 
+        %td= link_to car.car_type, car
         %td= car.seats
         %td= car.fuel_consumption
         %td
           = car.smoker? ? "Ja" : "Nein"
         %td= car.licence
-        %td= link_to 'Details', car
-        %td= link_to 'Bearbeiten', edit_car_path(car)
-        %td= link_to 'Löschen', car, :confirm => 'Bist du sicher?', :method => :delete
+        %td= car.description
+        %td= link_to image_tag( '/images/Edit_Car_icon.png', :size => "40x40"), edit_car_path(car)
+        %td= link_to image_tag( '/images/Delete_Car_icon.png', :size => "40x40"), car, :confirm => 'Bist du sicher?', :method => :delete
 
-%a{:href => "/cars/new"}
-  Auto hinzuf&uuml;gen
+  
+  = link_to image_tag( '/images/Add_car_icon.png', :size => "30x30"), new_car_path
 

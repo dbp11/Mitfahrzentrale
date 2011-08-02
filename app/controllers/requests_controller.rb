@@ -1,7 +1,9 @@
 class RequestsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /requests
   # GET /requests.json
   def index
+    temp = current_user.id
     @requests = Request.all
 
     respond_to do |format|
@@ -14,6 +16,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @request = Request.find(params[:id])
+    @sorted_trips = @request.get_sorted_trips
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,10 +43,24 @@ class RequestsController < ApplicationController
   # POST /requests
   # POST /requests.json
   def create
-    #start = Geocoder.coordinates(params:von)
-    #ende = Geocoder.coordinates(params:nach)
-    @request = Request.new(params[:request])
-
+    #@request = Request.new(params[:request])
+    start = Geocoder.coordinates(params[:address_start])
+    ende = Geocoder.coordinates(params[:address_end])
+    @request = Request.new()
+    @request.user_id = current_user.id
+    @request.starts_at_N = start[0]
+    @request.starts_at_E = start[1]
+    @request.ends_at_N = ende[0]
+    @request.ends_at_E = ende[1]
+    @request.address_start = params[:address_start]
+    @request.address_end = params[:address_end]
+    @request.start_time = params[:date_start]+"T"+params[:time_start]+"Z"
+    @request.end_time = params[:date_end]+"T"+params[:time_end]+"Z"
+    if params[:baggage] == nil
+      @request.baggage = false
+    else
+      @request.baggage = true
+    end
     respond_to do |format|
       if @request.save
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
