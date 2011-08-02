@@ -38,8 +38,8 @@
     %tr
       %td Sitzplätze 
       %td
-        %select{:name => "free_seats", :required => "required"}
-          %option{:value => nil} keine Änderung
+        %select{:name => "free_seats"}
+          %option{:value => ""} keine Änderung
           - 10.times do |i|
             %option{:value => (i+1)}= (i+1)
     %tr
