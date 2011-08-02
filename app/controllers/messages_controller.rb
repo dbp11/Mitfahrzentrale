@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
+    temp = User.find(current_user.id)
     @messages = Message.all
     #Hier Methode einfügen, nur eigene Nachrichten
 
