@@ -122,7 +122,7 @@ München - Die Rechtschreibreform wird auch 15 Jahre nach ihrer Einführung noch
 Demnach wird die Reform von 1996 nur von einem Drittel der Bevölkerung begrüßt, 62 Prozent halten sie noch immer für falsch.
 
 
-Das Interesse an korrekter Rechtschreibung sei ungebrochen hoch: Nur 15 Prozent halten sie für überflüssig, dagegen ist sie für 85 Prozent der Befragten wichtig. ", :writer_id => 5, :receiver_id => 1, :delete_writer => true, :delete_receiver => false, :subject => "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+Das Interesse an korrekter Rechtschreibung sei ungebrochen hoch: Nur 15 Prozent halten sie für überflüssig, dagegen ist sie für 85 Prozent der Befragten wichtig. ", :writer_id => 5, :receiver_id => 1, :delete_writer => true, :delete_receiver => false, :subject => "Prominente Bankdrücker bei Bayer Leverkusen: die Nationalspieler Stephan Kießling und Michael Ballack (Zweiter und Dritter von links).Foto:"
 msg7 = Message.create! :message => "Asse in der Hinterhand
 
 Prominente Bankdrücker bei Bayer Leverkusen: die Nationalspieler Stephan Kießling und Michael Ballack (Zweiter und Dritter von links).Foto:
@@ -151,7 +151,7 @@ Mit Robin Dutt holte Sportdirektor Rudi Völler einen ambitionierten Trainer. Du
 
 » Das muss sich ändern: Ändern muss sich nichts. Dennoch könnte der überschaubare Kader im Hinblick auf die Champions League zu einem Problem werden. Das ist bei Bayer Leverkusen die Frage aller Fragen: Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga?
 
-» Einlauftipp: Leverkusen ist reif für den Titel. Eigentlich und ohne Zweifel. Wahrscheinlich sind die Ränge eins bis drei. Am Ende wird Bayer Dritter.", :writer_id => 1, :receiver_id => 3, :delete_writer => true, :delete_receiver => false, :subject => "ddddddddddddddddddddddddddddddddddddddddd"
+» Einlauftipp: Leverkusen ist reif für den Titel. Eigentlich und ohne Zweifel. Wahrscheinlich sind die Ränge eins bis drei. Am Ende wird Bayer Dritter.", :writer_id => 1, :receiver_id => 3, :delete_writer => true, :delete_receiver => false, :subject => "Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga?   "
 msg8 = Message.create! :message => "	
 FUSSBALL | 1. BUNDESLIGA
 Schriftgröße: 
@@ -278,11 +278,11 @@ ra4 = Rating.create! :comment => "Befriedigend", :mark => 3, :trip_id => 4, :rec
 ra5 = Rating.create! :comment => "Ist ganz gut abgelaufen!", :mark => 2, :trip_id => 5, :receiver_id => 5, :author_id => 1
 
 #Creates request
-req1 = Request.create! :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_N => 52.2766061, :ends_at_E => 7.43844030000001, :address_start => "München", :address_end => "Rheine", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 1, :start_radius => 31, :end_radius => 37
-req2 = Request.create! :starts_at_N => 48.1391265, :starts_at_E => 11.581863, :ends_at_N => 53.074981, :ends_at_E => 8.807081, :address_start => "München", :address_end => "Bremen", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 2, :start_radius => 12, :end_radius => 15
-req3 = Request.create! :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_N => 52.267281, :ends_at_E => 8.0531882, :address_start => "Meppen", :address_end => "Osnabrück", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 3, :start_radius => 43, :end_radius => 22
-req4 = Request.create! :starts_at_N => 53.553813, :starts_at_E => 9.91586, :ends_at_N => 52.5234051, :ends_at_E => 13.4113999, :address_start => "Hamburg", :address_end => "Berlin", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 4, :start_radius => 12, :end_radius => 32
-req5 = Request.create! :starts_at_N => 52.4025974, :starts_at_E => 7.6408948, :ends_at_N => 52.2766061, :ends_at_E => 7.438440300000001, :address_start => "Rheine", :address_end => "Hopsten-Halverde", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 5, :start_radius => 12, :end_radius=> 46
+req1 = Request.new :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_N => 52.2766061, :ends_at_E => 7.43844030000001, :address_start => "München", :address_end => "Rheine", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 1, :start_radius => 31, :end_radius => 37
+req2 = Request.new :starts_at_N => 48.1391265, :starts_at_E => 11.581863, :ends_at_N => 53.074981, :ends_at_E => 8.807081, :address_start => "München", :address_end => "Bremen", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 2, :start_radius => 12, :end_radius => 15
+req3 = Request.new :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_N => 52.267281, :ends_at_E => 8.0531882, :address_start => "Meppen", :address_end => "Osnabrück", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 3, :start_radius => 43, :end_radius => 22
+req4 = Request.new :starts_at_N => 53.553813, :starts_at_E => 9.91586, :ends_at_N => 52.5234051, :ends_at_E => 13.4113999, :address_start => "Hamburg", :address_end => "Berlin", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => false, :comment => "Hilfe", :user_id => 4, :start_radius => 12, :end_radius => 32
+req5 = Request.new :starts_at_N => 52.4025974, :starts_at_E => 7.6408948, :ends_at_N => 52.2766061, :ends_at_E => 7.438440300000001, :address_start => "Rheine", :address_end => "Hopsten-Halverde", :start_time => Time.now-1.day, :end_time => Time.now+365.day, :baggage => true, :comment => "Hilfe", :user_id => 5, :start_radius => 12, :end_radius=> 46
 req1.set_route
 req2.set_route
 req3.set_route
@@ -294,11 +294,11 @@ req3.save
 req4.save
 req5.save
 #Creates trips
-tri1 = Trip.create! :user_id => 1, :car_id => 1, :starts_at_N => 52.27133, :starts_at_E => 7.4452, :ends_at_E => 8.13409, :ends_at_N => 52.57975, :address_start => "Hafenbahn 10 48431 Rheine", :address_end => "Großer Esch 20 48496 Hopsten", :start_time => Time.now-1.day, :comment => "Biete eine Fahrt an!", :baggage => true, :free_seats => 5
-tri2 = Trip.create! :user_id => 2, :car_id => 2, :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_E => 8.807081, :ends_at_N => 53.074981,:address_start => "München"   , :address_end => "Bremen"   , :start_time => Time.now-1.day, :comment => "Platz für alle :D!", :baggage => true, :free_seats => 4
-tri3 = Trip.create! :user_id => 3, :car_id => 3, :starts_at_N => 53.553813, :starts_at_E => 9.991586, :ends_at_E => 13.4113999, :ends_at_N => 52.523401, :address_start => "Hamburg"   , :address_end => "Berlin", :start_time => Time.now-1.day, :comment => "Ahoi", :baggage => false, :free_seats => 3
-tri4 = Trip.create! :user_id => 4, :car_id => 4, :starts_at_N => 52.2766061, :starts_at_E => 7.43840300000001, :ends_at_E => 7.3237899999999, :ends_at_N => 52.52306, :address_start => "Rheine"   , :address_end => "Lingen", :start_time => Time.now-1.day, :comment => "Boom Boom", :baggage => true, :free_seats => 5
-tri5 = Trip.create! :user_id => 5, :car_id => 5, :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_E => 8.0531882, :ends_at_N => 52.267281, :address_start => "Meppen"   , :address_end => "Osnabrück", :start_time => Time.now-1.day, :comment => "Schnell schnell!", :baggage => false, :free_seats => 4
+tri1 = Trip.new :user_id => 1, :car_id => 1, :starts_at_N => 52.27133, :starts_at_E => 7.4452, :ends_at_E => 8.13409, :ends_at_N => 52.57975, :address_start => "Hafenbahn 10 48431 Rheine", :address_end => "Großer Esch 20 48496 Hopsten", :start_time => Time.now-1.day, :comment => "Biete eine Fahrt an!", :baggage => true, :free_seats => 5
+tri2 = Trip.new :user_id => 2, :car_id => 2, :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_E => 8.807081, :ends_at_N => 53.074981,:address_start => "München"   , :address_end => "Bremen"   , :start_time => Time.now-1.day, :comment => "Platz für alle :D!", :baggage => true, :free_seats => 4
+tri3 = Trip.new :user_id => 3, :car_id => 3, :starts_at_N => 53.553813, :starts_at_E => 9.991586, :ends_at_E => 13.4113999, :ends_at_N => 52.523401, :address_start => "Hamburg"   , :address_end => "Berlin", :start_time => Time.now-1.day, :comment => "Ahoi", :baggage => false, :free_seats => 3
+tri4 = Trip.new :user_id => 4, :car_id => 4, :starts_at_N => 52.2766061, :starts_at_E => 7.43840300000001, :ends_at_E => 7.3237899999999, :ends_at_N => 52.52306, :address_start => "Rheine"   , :address_end => "Lingen", :start_time => Time.now-1.day, :comment => "Boom Boom", :baggage => true, :free_seats => 5
+tri5 = Trip.new :user_id => 5, :car_id => 5, :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_E => 8.0531882, :ends_at_N => 52.267281, :address_start => "Meppen"   , :address_end => "Osnabrück", :start_time => Time.now-1.day, :comment => "Schnell schnell!", :baggage => false, :free_seats => 4
 tri1.set_route
 tri2.set_route
 tri3.set_route
