@@ -82,7 +82,7 @@ class TripsController < ApplicationController
     else
       @trip.free_seats = params[:free_seats]
     end
-    #@trip.set_route
+    @trip.set_route
 
     respond_to do |format|
       if @trip.save
