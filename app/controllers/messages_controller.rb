@@ -71,15 +71,18 @@ class MessagesController < ApplicationController
   # PUT /messages/1.json
   def update
     @message = Message.find(params[:id])
+	if params[:who] == "receiver"
+		@message.delete_receiver = true
+	elsif
+		@message.delete_writer = true
+	end
+	if @message.delete_receiver and @message.delete_writer
+	   @message.destroy
+	end
 
     respond_to do |format|
-      if @message.update_attributes(params[:message])
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to messages_url, notice: 'Message was successfully deleted.' }
+      format.json { head :ok }
     end
   end
 
