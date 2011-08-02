@@ -8,4 +8,6 @@ describe Passenger do
       :confirmed => true
     }
   end
+  
+  #Test ob Validations funktionieren
 end

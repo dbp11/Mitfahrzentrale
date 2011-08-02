@@ -16,4 +16,8 @@ describe Request do
       :user_id => 456
     }
   end
+
+  #Test ob Validations funktionieren
+  
+  #Test ob Methoden funktionieren
 end
