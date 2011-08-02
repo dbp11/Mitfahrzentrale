@@ -1,39 +1,5 @@
 %h1 New request
 
-= form_tag("create", :method => "post") do
-	%table
-		%tr
-			%td
-				Von
-			-# entweder das textfield unten oder eine select-box
-			%td
-				= text_field_tag(:address_start, nil, :required => "required")
-		%tr
-			%td
-				Nach
-			-# entweder das textfield unten oder eine select-box
-			%td
-				= text_field_tag(:address_end, nil, :required => "required")
-		%tr
-			%td Start-Datum
-			%td
-				%input{:name => "date_start", :required => "required", :type => "date"}/
-			%td Start-Uhrzeit
-			%td
-				%input{:name => "time_start", :required => "required", :type => "time"}/
-		%tr
-			%td Ende-Datum
-			%td
-				%input{:name => "date_end", :required => "required", :type => "date"}/
-			%td Ende-Uhrzeit
-			%td
-				%input{:name => "time_end", :required => "required", :type => "time"}/
-		%tr
-			%td
-				= "Gepäck"
-			%td
-				= check_box_tag(:baggage)
-		%tr
-			%td
-			%td
-				= submit_tag("Erstellen")
+= render 'form'
+
+= link_to 'Index (ZU TESTZWECKEN!!!)', requests_path
