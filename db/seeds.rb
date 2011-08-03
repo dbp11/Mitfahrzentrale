@@ -87,12 +87,7 @@ Bundesliga-Vorschau: Hannover 96
 Bundesliga-Vorschau: Gladbach
 
 Bruno Labbadia arbeitete mit seinem Team zunächst weiter am Erfolgssystem aus der Rückrunde. Neben dem 4-2-3-1 hat der Trainer aber auch eine Art 4-1-3-2 einstudiert. Wir wollen variabel sein, auf verschiedene Situationen reagieren können. Das hängt gar nicht so sehr vom Gegner ab, sondern vor allem von unseren Spielern, erklärte Labbadia auf bundesliga.de. Mit Johan Audel, Timo Gebhart, Traoré, Shinji Okazaki und Martin Harnik hat der Trainer einige Optionen für die offensiven Außenpositionen.
-
-Im Sturm kämpfen Cacau, Schieber und Pogrebnyak um die Planstelle. Im defensiven Mittelfeld soll der langjährige Kapitän des FC Kopenhagen den Spielaufbau ordnen. Kvist konnte mit seinem Club im letzten Jahr bis ins Achtelfinale der Champions League vordringen. Neben ihm wird Kuzmanovic oder Christian Gentner spielen. Die Problemzone ist und bleibt die Abwehr.
-
-Cristian Molinaro lieferte mit einer sportal.de-Durchschnittsnote 3 eine tolle Halbserie zum Bundesliga-Einstand ab (Rückrunde 09/10). Doch der Italiener konnte seine Leistung in der Hinrunde der letzten Saison nicht wiederholen, erst in der Rückrunde steigerte er sich (Notenschnitt: 3,9). Noch bedenklicher als auf der linken Abwehrposition sieht es auf der rechten Seite aus. Mit Khalid Boulahrouz und Stefano Celozzi ist der VfB im Bundesligavergleich eher in der unteren Hälfte zu finden. Das Thema Innenverteidiger spielte ja schon eine gewisse Rolle, deshalb...
-
-Bruno Labbadia hat auf seinen bisherigen Stationen in der Ersten Bundesliga im zweiten Jahr enttäuscht. Wir glauben, dass er diese Negativserie hinter sich lassen kann. Manager Fredi Bobic und der Coach haben den Kader punktuell verstärkt und mussten nur den Abgang von Träsch verschmerzen. Mit Cacau, Harnik, Schieber und Tamás Hajnal hat der VfB durchaus Offensivpotenzial zu bieten. Die Achillesferse ist und bleibt allerdings die Abwehr. So wird dem VfB ein Jahr der Konsolidierung im gesicherten Bundesliga-Mittelfeld nicht erspart bleiben. Die Schwaben landen am Ende auf Platz 8.
+icht erspart bleiben. Die Schwaben landen am Ende auf Platz 8.
 
 Michel Massing", :writer_id => 1, :receiver_id => 4, :delete_writer => true, :delete_receiver => false, :subject => "Das tapfere Schneiderlein gab die Vorlage zum Duell zwischen Eintracht Braunschweig und dem"
 msg9 = Message.create! :message => "FB-Pokal: Der FC Bayern München besiegt Eintracht Braunschweig
