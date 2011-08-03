@@ -175,6 +175,7 @@ class Trip < ActiveRecord::Base
     end
   end
 
+
   def finished
     if self.start_time < Time.now
       return true
