@@ -1,4 +1,7 @@
 class Trip < ActiveRecord::Base
+  include ActiveModel::Validations
+
+#############################   Beziehungen   ############################
 
   #Modellierung der Beziehungen
   belongs_to :user
@@ -7,15 +10,39 @@ class Trip < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :passengers, :dependent => :destroy
   
+#############################   Validations   ############################
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
-  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
+  validate :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
+
+  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance, :user_id, :car_id
   
   #Freie Sitzplätze dürfen nicht negativ sein
-  validates_length_of :free_seats, :in => 1..200
+  validates_length_of :free_seats, :minimum => 1
+ # Methode prüft ob ein erstellter Trip in der Vergangenheit liegt
+  def start_time_in_past
+    if start_time < Time.now
+      errors.add(:fields, 'Startzeit liegt in der Vergangenheit')
+    end
+  end
+  
+  #Start- und Endaddresse dürfen nicht übereinstimmen
+  def start_address_same_as_end_address
+    if (starts_at_N == ends_at_N and starts_at_E == ends_at_E)
+      errors.add(:field, 'Startadresse = Endadresse, Fahrt lohnt sich nicht')
+    end    
+  end
 
+  #Baggage darf nicht Null sein
+  def baggage_not_nil
+    if(self.baggage == nil)
+      errors.add(:field, 'Baggage ist Null')
+    end
+  end
 
+########################   Methoden für Controller   #######################
+  
   #Methoden:
   #toString Methode für Trips
   def to_s
@@ -30,11 +57,12 @@ class Trip < ActiveRecord::Base
     erg = []
 
     Request.all.each do |t|
-      if (start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
+      if self.get_free_seats >= 1 and start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
           ((Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
            [starts_at_N, starts_at_E], :units => :km) <= t.start_radius) and
           ((Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
-           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius)) then 
+           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius) and 
+           (!t.baggage and !self.baggage or self.baggage) then 
         erg << t
       end
     end
@@ -126,5 +154,25 @@ class Trip < ActiveRecord::Base
   # Berechnet die benötigte Zeit in Sekunden
   def get_route_distance
     return (distance / 1000).round(3) + "Km"
+  end
+
+ 
+  def user_committed (compared_user)
+    self.passengers.where(user_id = compared_user.id).first.confirmed?
+  end
+  
+  def user_uncommitted (compared_user)
+    if self.passengers.where(user_id = compared_user.id).first.confirmed?
+      false
+    else true
+    end
+  end
+
+  def finished
+    if self.start_time < Time.now
+      return true
+    else
+      return false
+    end
   end
 end

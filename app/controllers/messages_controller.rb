@@ -39,14 +39,25 @@ class MessagesController < ApplicationController
   # GET /messages/new.json
   def new
     @message = Message.new
-    temp = Message.find(params[:id])
-	if params[:type] == "reply"
-		@message .receiver = temp.writer
-		@message.writer = current_user
+	@message.writer = current_user
+	if params[:uid]
+		@message.receiver = User.find(params[:uid])
+		if params[:tid]
+			# message relatet to a trip
+			temp = Trip.find(params[:tid])
+			@message.subject = "[["+ url_for(temp) + "|" + "LINKTEXT HIER" +"]]"
+		else
+			# new message
+			# all set
+		end
+	elsif params[:mid]
+		# message reply
+		temp = Message.find(params[:mid])
+		@message.receiver = temp.writer
 		@message.subject = "RE: " + temp.subject.to_s
-	elsif params[:type] == "new"
-		@message.receiver = temp.receiver
-		@message.writer = current_user
+	else
+		# error
+
 	end
 
     respond_to do |format|

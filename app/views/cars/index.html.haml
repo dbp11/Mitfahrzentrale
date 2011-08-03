@@ -1,6 +1,8 @@
 = stylesheet_link_tag :cars
 .cars
   %h1 Deine Fahrzeuge
+  .other_side
+    = link_to image_tag( '/images/cars/car_button_add_high.png', :alt => "Neues Fahrzeug", :size => "50x50"), new_car_path
 
   
   
@@ -21,7 +23,7 @@
         - if car.carpic?
           %td= image_tag car.carpic.url(:thumb)
         - else
-          %td= image_tag( '/images/Default_car_icon.png', :size => "100x100") 
+          %td= image_tag( '/images/cars/Default_car_icon.png', :size => "100x100") 
         %td= link_to car.car_type, car
         %td= car.seats
         %td= car.fuel_consumption
@@ -29,11 +31,8 @@
           = car.smoker? ? "Ja" : "Nein"
         %td= car.licence
         %td= car.description
-        %td= link_to image_tag( '/images/Edit_Car_icon.png', :size => "40x40"), edit_car_path(car)
-        %td= link_to image_tag( '/images/Delete_Car_icon.png', :size => "40x40"), car, :confirm => 'Bist du sicher?', :method => :delete
+        %td= link_to image_tag( '/images/cars/car_button_edit_high.png', :size => "40x40"), edit_car_path(car)
+        %td= link_to image_tag( '/images/cars/car_button_delete_high.png', :size => "40x40"), car, :confirm => 'Bist du sicher?', :method => :delete
 
   
-  Neues Fahrzeug
-  %br
-  = link_to image_tag( '/images/Add_car_icon.png', :size => "50x50"), new_car_path
 

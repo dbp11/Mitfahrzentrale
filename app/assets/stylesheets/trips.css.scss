@@ -5,6 +5,10 @@
 body.trips {
   // Add the trips class to your body tag
   // Then, place scoped styles here.
+  .trips_base_table {
+    border: solid 1px;
+    width: 100%;
+  }
 	.trips_table {
 		margin-bottom: 1.5em;
 		border: solid 2px;
@@ -23,9 +27,8 @@ body.trips {
 			padding-left: 0.5em;
 			padding-right: 0.5em;
 		}
-    a {
-      padding: 5px 30 5 30;
 
+    a {
       &:visited {
         color: #333333;
       }
@@ -35,8 +38,12 @@ body.trips {
       }
 
       &:hover {
-        color: #111111;
+        color: #000000;
       }
+    }
+
+    a.number_link {
+      padding: 5px 30 5 30;
     }
 
     #minimal {
