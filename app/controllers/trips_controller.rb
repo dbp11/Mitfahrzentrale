@@ -27,6 +27,8 @@ class TripsController < ApplicationController
     @MITFAHRER = 1
     @POTENTIELLER_MITFAHRER = 2
     @GAST = 3
+
+    @user = current_user
     
     @trip = Trip.find(params[:id])
     if params[:request]
