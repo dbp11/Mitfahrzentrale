@@ -115,7 +115,7 @@ ps2 = Passenger.new :user_id => 3, :trip_id => 2, :confirmed => false
 ps3 = Passenger.new :user_id => 4, :trip_id => 3, :confirmed => true
 ps4 = Passenger.new :user_id => 5, :trip_id => 4, :confirmed => false
 ps5 = Passenger.new :user_id => 1, :trip_id => 5, :confirmed => true
-ps6 = Passenger.new :user_id => 1, :trip_id => 5, :confirmed => true
+ps6 = Passenger.new :user_id => 3, :trip_id => 4, :confirmed => true
 ps7 = Passenger.new :user_id => 1, :trip_id => 2, :confirmed => true
 ps8 = Passenger.new :user_id => 1, :trip_id => 3, :confirmed => true
 ps9 = Passenger.new :user_id => 1, :trip_id => 4, :confirmed => true

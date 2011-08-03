@@ -3,6 +3,11 @@
 # erstellt, Messages versandt, Ratings gegeben, an ihm die Profileinstellungen gespeichert. Folglich ist der User, 
 # in hinsicht der Beziehungen, die komplexeste Klasse.
 # Er besitzt folgende Datenfelder:
+# *email :string -- E-Mail Adresse des Benutzers
+# *encrypted_password :string -- verschlüsseltes Passwort des Benutzers (Devise Plugin)
+# *reset_password_token :string -- Zurücksetzen des Passwortkürzels
+# *reset_password_sent_at :datetime -- letztes Zurücksetzen des Passwort
+# *remember_created_at :datetime -- Remember_Me Anlage am
 # *sign_in_count :integer -- Anzahl der Logins
 # *current_sign_in_at :datetime -- Aktuell eingeloggt um
 # *last_sign_in_at :datetime -- Zuletzt eingeloggt am
@@ -15,16 +20,27 @@
 # *addressN :float -- <i>Von Geocoder benötigt:</i> nördliche Breite der Adresse 
 # *addressE :float -- <i>Von Geocoder benötigt:</i> östliche Länge der Adresse
 # *zipcode :integer -- Postleitzahl
-# *
-#
-
-
-
-
-
+# *instantmessenger :string -- Instantmessenger
+# *city :string Wohnort
+# *birthday :date -- Geburtsdatum des Users 
+# *phone :string Telephonnummer
+# *business :boolean -- Ist User Gewerbs- oder Privatanbieter
+# *email_notifications -- E-Mail-Benachrichtigungen an- oder ausschalten
+# *visible_phone :boolean -- Sichtbarkeit der Telephonnummer an- oder ausschalten
+# *visible_email :boolean -- Sichtbarkeit der E-Mail an- oder ausschalten
+# *visible_address :boolean -- Sichtbarkeit der Adresse an- oder ausschalten
+# *visible_age :boolean -- Sichtbarkeit des Alter an- oder ausschalten
+# *visible_im :boolean -- Sichtbarkeit des Instantmessenger an- oder ausschalten
+# *visible_cars :boolean -- Sichtbarkeit der Autos an- oder ausschalten
+# *visible_zip :boolean -- Sichtbarkeit der Postleitzahl an- oder ausschalten
+# *visible_city :boolean -- Sichtbarkeit der Stadt an- oder ausschalten
+# *picture_file_name :string -- <i>Von Paperclip gefordert</i> Name des gespeicherten Bildes
+# *picture_content_type :string -- <i>Von Paperclip gefordert</i> Dateityp des Bildes
+# *picture_file_size :integer -- <i>Von Paperclip gefordert </i> Größe des Bildes
+# *picture_updated_at :datetime -- <i>Von Paperclip gefordert </i> letzte Bildänderung
 class User < ActiveRecord::Base
 
-  ####################### Railsplugin Devise ################################
+  ####################### ==Railsplugin Devise ################################
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, 
   # :timeoutable and :omniauthable
@@ -40,7 +56,7 @@ class User < ActiveRecord::Base
                                            :thumb => "100x100>"}
 
 
-  ############################ Validations: #################################
+  ############################ ==Validations: #################################
   # Stat. Integrität: Email muss vorhanden, unique und min 8 char lang sein
   # Name, Adresse, Plz, Stadt müssen vorhanden sein
   # Die boolschen Datenfelder zur Bestimmung der Sichtbarkeiten müssen gesetzt 
@@ -50,10 +66,22 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :address, :zipcode, :city 
   validate :booleans_not_nil
 
+  def booleans_not_nil 
+    if(self.user_type == nil and self.sex == nil and 
+       self.email_notifications == nil and self.visible_phone == nil and 
+       self.visible_email == nil and self.visible_address == nil and 
+       self.visible_age == nil and self.visible_im == nil and 
+       self.visible_cars == nil and self.visible_cip == nil and 
+       self.visible_city == nil and self.business == nil)
+      errors.add(:field, 'Irgendein Boolean nimmt den Wert Null ein, und das dar nicht sein, also gar nicht')
+    end
+  end
+
+
 
  
   
-  ############################# Beziehungen: #################################
+  ############################# ==Beziehungen: #################################
   #Beziehung vom Modell User zu Trip über die Joinrelation Passengers 
   #(:through => Passengers) als passenger_trips
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, 
@@ -86,13 +114,14 @@ class User < ActiveRecord::Base
   has_many :written_ratings, :class_name => "Rating", :foreign_key => "author_id", :dependent => :destroy
   has_many :received_ratings, :class_name => "Rating", :foreign_key => "receiver_id", :dependent => :destroy
  
-  #Methoden:
+  ################################################### ==Methoden: ####################################################
   #toString Methode für User
   def to_s
     name
   end
   
   #Vergangene angebotene Trips des Users
+  #@return Trip [] erg
   def driven
    erg=[] 
    driver_trips.each do |x|
@@ -104,6 +133,7 @@ class User < ActiveRecord::Base
   end
 
   #Noch nicht vergangene angebotene Trips des Users
+  #return Trip [] erg
   def to_drive
     erg=[]
     driver_trips.each do |x|
@@ -115,6 +145,7 @@ class User < ActiveRecord::Base
   end
 
   #Vergangene Suchen des Users
+  #@return Trip [] erg
   def driven_with
     erg=[]
     passenger_trips.each do |x|
@@ -126,6 +157,7 @@ class User < ActiveRecord::Base
   end
 
   #Noch laufende Suchen des Users
+  #@return Trip [] erg
   def to_drive_with
     erg=[]
     passenger_trips.each do |x|
@@ -136,20 +168,21 @@ class User < ActiveRecord::Base
     return erg
   end
 
+  #Methode zur Ermittlung des durchschnittlichen Ratings des Users 
+  #@return float 3, wenn User noch keine Bewertungen hat
+  #@return float Sum(Ratings)/Anz(Ratings)
   def get_avg_rating
     count = 0
     erg = 0
-    #if self.received_ratings.empty? 
-    #  return 3
-   # else
-      self.received_ratings.each do |x|
+    self.received_ratings.each do |x|
         erg = erg + x.mark
         count +=1
-      end
-      return erg.to_f / count.to_f
-    #end
+    end
+    return erg.to_f / count.to_f
   end
-
+  
+  #Methode die alle Erhaltenen Ratings des Users zählt
+  #@return integer count
   def count_ratings
     count = 0
     self.received_ratings.each do |x|
@@ -158,6 +191,8 @@ class User < ActiveRecord::Base
     return count
   end
 
+  #Methode, die alle gesendeten Nachrichten eines Users, die nicht gelöscht sind, zurückliefert
+  #@return Message [] absteigend sortiert nach Datum
   def get_written_messages
     erg = []
     self.written_messages.each do |m|
@@ -168,6 +203,8 @@ class User < ActiveRecord::Base
     erg.sort{|a,b| b.created_at <=> a.created_at}
   end
 
+  #Methode, die alle empfangenen Nachrichten eines Users, die nicht gelöscht sind, zurückliefert
+  #@return Message [] absteigend sortiert nach Datum
   def get_received_messages
     erg = []
     self.received_messages.each do |m|
@@ -177,11 +214,16 @@ class User < ActiveRecord::Base
     end
     erg.sort{|a,b| b.created_at <=> a.created_at}
   end
-
+  
+  #Methode, die die relative Anzahl an Ignorierungen eines Users zurückliefert
+  #@return float Ignorierungen_des_Users / Alle_User
   def get_relative_ignorations
     self.ignoreds.count.to_f / User.all.count.to_f
   end
-
+  
+  #Methode, die alle, für den User sichtbaren Autos zurückliefert.
+  #Wenn ein User bei einem Trip Mitfahrer ist, so wird das Auto das Fahrers für ihn sichtbar
+  #@return Car Set
   def get_visible_cars
     erg = Set.new
     self.passenger_trips.each do |c|
@@ -191,7 +233,10 @@ class User < ActiveRecord::Base
     end
   erg
   end
-
+  
+  #Methode, die alle, für einen User sichtbaren User zurückliefert
+  #User werden für sichtbar, wenn der Benutzer mit diesen über einen Trip in verbindung gebracht werden kann
+  #@return User [] 
   def get_visible_users
     erg = Array.new
     self.passengers.each do |p|
@@ -211,61 +256,48 @@ class User < ActiveRecord::Base
     end
     return erg
   end
-
-  def booleans_not_nil 
-    if(self.user_type == nil and self.sex == nil and 
-       self.email_notifications == nil and self.visible_phone == nil and 
-       self.visible_email == nil and self.visible_address == nil and 
-       self.visible_age == nil and self.visible_im == nil and 
-       self.visible_cars == nil and self.visible_cip == nil and 
-       self.visible_city == nil and self.business == nil)
-      errors.add(:field, 'Irgendein Boolean nimmt den Wert Null ein, und das dar nicht sein, also gar nicht')
-    end
-  end
-
-  def get_coming_requests
-    erg = []
-    self.requests.each do |r|
-      if r.created_at > Time.now
-        erg << r
-      end
-    end
-    return
-  end
-
+  
+  #@return gesammte als Mitfahrer zurückgelegte Distanz
   def toured_distance_p
     distance = 0
-    self.passenger_trips.each do |t|
+    self.driven_with.each do |t|
       distance += t.distance
     end
     distance
   end
-
+  #@return gesammte als Mitfahrer gefahrene Zeit
   def toured_time_p
     time = 0
-    self.passenger_trips.each do |t|
+    self.driven_with.each do |t|
       time += t.duration
     end
     time
   end
-
+  
+  #@return gesammte als Fahrer zurückgelgete Distanz
   def toured_distance_d
     distance = 0
-    self.driver_trips.each do |t|
+    self.driven.each do |t|
       distance += t.distance
     end
     distance
   end
-
+  
+  #@return gesammte als Fahrer gefahrene Zeit
   def toured_time_d
     time = 0
-    self.driver_trips.each do |t|
+    self.driven_trips.each do |t|
       time += t.duration
     end
     time
   end
-
-  def already_rated (rater, trp)
+  
+  #Methode die ermittelt, ob der aktuelle User vom übergebenen User zum übergebenen Trip schon bewertet wurde
+  #@param User rater
+  #@param Trip trp
+  #@return false, wenn noch keine Bewertung abgegeben wurde
+  #@return true, wenn eine Bewertung abgegeben wurde
+  def allready_rated (rater, trp)
     check = false
     rater.written_ratings.each do |r|
       if r.receiver_id = self.id and r.trip_id = trp.id then check = true
@@ -273,9 +305,12 @@ class User < ActiveRecord::Base
     end
     check
   end
-
+  
+  #Lässt einen User sich um eine Mitfahrgelegenheit bewerben
+  #@param Trip trp um den sich beworben werden soll
   def bewerben (trp)
-    Passenger.new("user_id" => self.id, "trip_id" => trp.id, "confirmed" => false)
+    t = Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
+    t.save
   end
     
  
