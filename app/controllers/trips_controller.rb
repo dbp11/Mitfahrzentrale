@@ -27,12 +27,22 @@ class TripsController < ApplicationController
     @MITFAHRER = 1
     @POTENTIELLER_MITFAHRER = 2
     @GAST = 3
-    @status = @FAHRER
+    
     @trip = Trip.find(params[:id])
     @commited_passenger = @trip.get_committed_passengers
     @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
     @occupied_seats = @trip.get_occupied_seats
+    if current_user == @trip.user
+      @status = @FAHRER
+    elsif @trip.passengers.where("user_id = current_user.id").confirmed
+      @status = @MITFAHRER
+    elsif @trip.passengers.where("user_id = current_user.id").unconfirmed
+      @status = @POTENTIELLER_MITFAHRER
+    else
+      @status = @GAST
+    end
+    
     
     respond_to do |format|
       format.html # show.html.erb
