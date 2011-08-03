@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
         erg << m
       end
     end
-    return erg
+    erg.sort{|a,b| b.created_at <=> a.created_at}
   end
 
   def get_received_messages
@@ -123,10 +123,40 @@ class User < ActiveRecord::Base
         erg << m
       end
     end
-    return erg
+    erg.sort{|a,b| b.created_at <=> a.created_at}
   end
 
   def get_relative_ignorations
     self.ignoreds.count.to_f / User.all.count.to_f
-  end 
+  end
+
+  def get_visible_cars
+    erg = Set.new
+    self.passenger_trips.each do |c|
+      if c.passengers.confirmed? and c.start_time > Time.now
+        erg << c.car
+      end
+    end
+  erg
+  end
+
+  def get_visible_users
+    erg = Array.new
+    self.passengers.each do |p|
+      if p.confirmed? and p.trip.start_time > Time.now
+        p.trip.users.each do |u|
+          erg << u
+        end
+      end
+      erg << p.trip.user
+    end
+    self.driver_trips.each do |d|
+      if d.start_time > Time.now
+        d.users.each do |u|
+          erg << u
+        end
+      end
+    end
+    return erg
+  end
 end

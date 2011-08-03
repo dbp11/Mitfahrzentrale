@@ -24,7 +24,6 @@ Mitfahrzentrale::Application.routes.draw do
   devise_for :users do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
-
   resources :users, :only => [:show, :edit, :update]
 
   resources :users do
