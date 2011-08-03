@@ -86,16 +86,20 @@ class User < ActiveRecord::Base
   #(:through => Passengers) als passenger_trips
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, 
     :source => :trip 
+
   #Beziehung vom User zu Trip, wobei der User hier, anders als bei
   #Passenger_Trips nicht Mitfahrer, sondern Fahrer ist
   has_many :driver_trips, :class_name => "Trip", :foreign_key => "user_id"
   has_many :cars, :dependent => :destroy
+  
   #Beziehung von User zur Jointable Passengers - Diese Relation ist notwendig 
   #um zu überprüfen, ob ein User als Mitfahrer akzeptiert oder abgelehnt wurde
   has_many :passengers, :dependent => :destroy
+  
   #Beziehung vom User zu Requests. Requests stellen die Gesuche dar, also
   #Strecken, die man als Nutzer gerne als Mitfahrer begehen würde. 
   has_many :requests, :dependent => :destroy
+  
   #Selbstreferenzierende Beziehung User ignores User
   #Bei dieser Relation wird ein User mit einem anderen User in der Jointable
   #Ignores in Beziehung gesetzt.
@@ -105,6 +109,7 @@ class User < ActiveRecord::Base
   "ignored_id", :association_foreign_key => "ignoring_id"  
   has_and_belongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key =>
   "ignoring_id", :association_foreign_key => "ignored_id"
+  
   #Beziehung User schreibt User Nachricht/Rating
   #Anders als bei der selbstreferenzierenden User_ignores_User-Beziehung müssen für die Beziehungen Message und Rating
   #jeweils eigene Modellklassen erstellt werden, da diese zusätzlich einen Text als Datenfeld besitzen, d.h. 
@@ -317,5 +322,5 @@ class User < ActiveRecord::Base
       end
 
   end    
- 
+    
 end
