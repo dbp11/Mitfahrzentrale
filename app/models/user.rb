@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true, :presence => true, :length => {:minimum => 8}
   #Vermeidung von Nullwerten 
   validates_presence_of :name, :address, :zipcode, :city 
+  
+  validate :booleans_not_nil
+
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars
@@ -159,4 +162,26 @@ class User < ActiveRecord::Base
     end
     return erg
   end
+
+  def booleans_not_nil 
+    if(self.user_type == nil and self.sex == nil and 
+       self.email_notifications == nil and self.visible_phone == nil and 
+       self.visible_email == nil and self.visible_address == nil and 
+       self.visible_age == nil and self.visible_im == nil and 
+       self.visible_cars == nil and self.visible_cip == nil and 
+       self.visible_city == nil and self.business == nil)
+      errors.add(:field, 'Irgendein Boolean nimmt den Wert Null ein, und das dar nicht sein, also gar nicht')
+    end
+  end
+
+  def get_coming_requests
+    erg = []
+    self.requests.each do |r|
+      if r.created_at > Time.now
+        erg << r
+      end
+    end
+    return
+  end
+ 
 end
