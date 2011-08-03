@@ -11,7 +11,7 @@
       %th Bild
       %th Modell
       %th Sitzpl&auml;tze
-      %th Verbrauch
+      %th Preis/km
       %th Raucher
       %th Kennzeichen
       %th Beschreibung
@@ -26,7 +26,7 @@
           %td= image_tag( '/images/cars/Default_car_icon.png', :size => "100x100") 
         %td= link_to car.car_type, car
         %td= car.seats
-        %td= car.fuel_consumption
+        %td= car.price_km
         %td
           = car.smoker? ? "Ja" : "Nein"
         %td= car.licence

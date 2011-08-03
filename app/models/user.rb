@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     :instantmessenger, :visible_age, :visible_address, :visible_zip, 
     :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
-  has_attached_file :picture, :styles => { :medium =>  "300x300>", 
+  has_attached_file :pic, :styles => { :medium =>  "300x300>", 
                                            :thumb => "100x100>"}
 
 

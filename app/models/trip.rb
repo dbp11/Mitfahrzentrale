@@ -24,7 +24,7 @@ class Trip < ActiveRecord::Base
   def to_s
     id 
   end
-
+  
 
   #Methode die alle passenden Requests sucht
   #@return Array von Requests
@@ -152,19 +152,17 @@ class Trip < ActiveRecord::Base
     end
   end
 
-  def user_committed (compared_user)
-    self.passengers.where("user_id = ?", compared_user.id).first.confirmed?
-  end
-  
   def user_uncommitted (compared_user)
-    if self.passengers.where("user_id = ?", compared_user.id).first.confirmed?
-      false
-    else true
-    end
+    get_uncommitted_passengers.include?(compared_user)
   end
 
-  def is_confirmed (x)
-    self.passengers.where("trip_id = ?",  self.id).where("user_id = ?", x.id).confirmed?
+  def user_committed (compared_user)
+  get_committed_passengers.include?(compared_user)
+  end
+
+  def is_confirmed (compared_user)
+    self.passengers.where("trip_id = ?",  self.id).where("user_id = ?",
+                                          compared_user.id).confirmed?
   end
 
 end

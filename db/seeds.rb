@@ -8,11 +8,11 @@ user4 = User.new :email => "Hotel-am-Stadtring@aol.com", :password => "hotelamst
 user5 = User.new :email => "Antenne-Bayern-GmbH-&-Co.-KG@gmx.com", :password => "antenne",:password_confirmation => "antenne" ,:name => "Antenne Bayern GmbH & Co. KG ", :user_type => true, :sex => false, :address => "Münchener Straße 101C" , :addressN => 48.7428648, :addressE => 11.4344352, :zipcode => 85737, :phone => "089992770", :instantmessenger => "", :city => "Ismaning", :email_notifications => true, :visible_phone => false, :visible_email => true, :visible_address => false, :visible_age => true, :visible_im => false, :visible_cars => true, :birthday => Date.new(1898,12,12), :visible_zip => true,:user_type => false, :visible_city => true, :business => true
 
 #Creates 5 cars
-car1 = Car.new :user_id => 1, :seats => 5, :licence => "10234", :fuel_consumption => 5.5, :smoker => true, :description => "Kein Kofferraum", :car_type => "BMW"
-car2 = Car.new :user_id => 2, :seats => 2, :licence => "40321", :fuel_consumption => 6.7, :smoker => false, :description => "Kofferraum verfügbar aber kein Platz", :car_type => "Mercedes"
-car3 = Car.new :user_id => 3, :seats => 3, :licence => "12345", :fuel_consumption => 8.9, :smoker => true, :description => "Auto rostet und keine Reifen", :car_type => "Ford"
-car4 = Car.new :user_id => 4, :seats => 4, :licence => "54321", :fuel_consumption => 11.1, :smoker => false, :description => "Test test", :car_type => "Porsche"
-car5 = Car.new :user_id => 5, :seats => 2, :licence => "45646", :fuel_consumption => 20.3, :smoker => true, :description => "aha aha! Hier soll etwas sinnvolles stehen?", :car_type => "VW"
+car1 = Car.new :user_id => 1, :seats => 5, :licence => "10234", :price_km => 5.5, :smoker => true, :description => "Kein Kofferraum", :car_type => "BMW"
+car2 = Car.new :user_id => 2, :seats => 2, :licence => "40321", :price_km => 6.7, :smoker => false, :description => "Kofferraum verfügbar aber kein Platz", :car_type => "Mercedes"
+car3 = Car.new :user_id => 3, :seats => 3, :licence => "12345", :price_km => 8.9, :smoker => true, :description => "Auto rostet und keine Reifen", :car_type => "Ford"
+car4 = Car.new :user_id => 4, :seats => 4, :licence => "54321", :price_km => 11.1, :smoker => false, :description => "Test test", :car_type => "Porsche"
+car5 = Car.new :user_id => 5, :seats => 2, :licence => "45646", :price_km => 20.3, :smoker => true, :description => "aha aha! Hier soll etwas sinnvolles stehen?", :car_type => "VW"
 #Creates 5 messages
 msg1 = Message.new :message => "Münster - Während der Ölmulti Aral und die münsterische Westfalen AG beginnen, E10 auch in Nordrhein-Westfalen anzubieten, bleibt der umstrittene Biosprit auf dem Markt ein Flop. Nur 20 bis 30 Prozent der Fahrer entscheiden sich nach einer Erhebung des Branchenverbands MWV für den Sprit mit dem auf zehn Prozent erhöhten Bioethanol-Anteil, wenn er an der jeweiligen Tankstelle verkauft wird.
 

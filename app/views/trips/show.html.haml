@@ -83,46 +83,52 @@
       %table.trips_table
         %tr
           %td.center{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
-        - if c_passengers == nil or c_passengers.count <= 0
+        - if @status != @FAHRER and @status != @MITFAHRER
           %tr
-            %td{:colspan => "4"} keine Mitfahrer vorhanden
-        - else
-          %tr
-            %td Benutzername
-            %td.left{:colspan => "3"} Rating
-          - c_passengers.each do |passenger|
+            %td.center{:colspan => "3"} Sie haben keine Berechtigung, Mitfahrer zu untersuchen
+        - if @status == @FAHRER or @status == @MITFAHRER
+          - if c_passengers == nil or c_passengers.count <= 0
             %tr
-              %td= link_to "#{passenger}", passenger
-              %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
-              %td.right
-                = link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => trip.id, :uid => passenger.id))
-                = link_to "Austragen", passenger
-                = link_to("Bewerten", url_for(:action => "new", :controller => "ratings", :uid => passenger.id, :tid => trip.id))
-              %td#minimal
+              %td.center{:colspan => "3"} keine Mitfahrer vorhanden
+          -else
+            %tr
+              %td Benutzername
+              %td.left{:colspan => "3"} Rating
+            - c_passengers.each do |passenger|
+              %tr
+                %td= link_to "#{passenger}", passenger
+                %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
+                %td.right
+                  = link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => trip.id, :uid => passenger.id))
+                  = link_to "Austragen", passenger
+                  = link_to("Bewerten", url_for(:action => "new", :controller => "ratings", :uid => passenger.id, :tid => trip.id))
+                %td#minimal
 
       %table.trips_table
         %tr
-          -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
-          %td.center= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
-        -#wenn nil oder keine Bewerbungen vorhanden, dann Hinweis ausgeben
+          %td.center{:colspan => "4"}= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
         - if u_passengers == nil or u_passengers.count <= 0
           %tr
-            %td.center keine Bewerbungen vorhanden
-          -#sonst alle Bewerbungen ausgeben
+            %td.center{:colspan => "3"} keine Bewerbungen vorhanden
         - else
-          %tr
-            %td Benutzername
-            %td.left{:colspan => "3"} Rating
-          - u_passengers.each do |passenger|
+          - if @status != @FAHRER and @status != @POTENTIELLER_MITFAHRER
             %tr
-              %td= link_to "#{passenger}", passenger
-              %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
-              -#wird so nicht funkionieren. Mit Controllern abreden.
-              %td.right= link_to "annehmen", passenger
-              -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
-              -#Link für den Fahrer, um die Anfrage abzulehnen
-              %td.right= link_to "ablehnen", passenger
+              %td.center{:colspan => "3"} Sie haben keine Berechtigung, Bewerber zu untersuchen
+          - if @status == @FAHRER or @status == @POTENTIELLER_MITFAHRER
+            %tr
+              %td Benutzername
+              %td.left{:colspan => "3"} Rating
+            - u_passengers.each do |passenger|
+              - if @status == @FAHRER or passenger == user
+                %tr
+                  %td= link_to "#{passenger}", passenger
+                  %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
+                  %td.right= link_to("annehmen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :accept => true))
+                  %td.right= link_to("ablehnen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :decline => true))
     %td
+      %script  src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAxJ8zWqcltXqiJtFYbrVBWBT-ZTKVLgdLz0ZRRJYP7ttYbtpFeBRZn6ERsJgdoYOA68Nhg54r5N4mtA" type="text/javascript"
+      .map 
+        %script type="text/javascript" load();
       %h2 Hier kommt die Karten hin
       %br/
       %h2 (evtl als Miniatur mit
@@ -130,3 +136,5 @@
       %h2 Link zur Gro&szlig;ansicht)
   %tr
     %td{:colspan => "2"}= link_to("Bewerben", url_for(:action => "update", :controller => "trips", :request => true))
+  %tr
+    %td{:colspan => "2"}= "@status = #{@status}\n@FAHRER = #{@FAHRER}\n@MITFAHRER = #{@MITFAHRER}\n@POTENTIELLER_MITFAHRER = #{@POTENTIELLER_MITFAHRER}\n@GAST = #{@GAST}"
