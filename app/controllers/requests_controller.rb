@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
   # GET /requests.json
   def index
     temp = current_user.id
+    # Auf Methode warten, nur noch offene, in der Zukunft liegende Requests 
     @requests = Request.all
 
     respond_to do |format|
