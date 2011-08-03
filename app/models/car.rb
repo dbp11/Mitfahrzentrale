@@ -4,6 +4,7 @@ class Car < ActiveRecord::Base
   
   #Beziehung: user_has_cars
   belongs_to :user
+  has_many :trips
 
   #Kontrolle ob das Kennzeichen eine Gülitige Länge hat
   validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}

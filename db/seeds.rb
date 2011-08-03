@@ -2,10 +2,10 @@
 
 #Creates 5 User
 user1 = User.create! :email => "dkruempe@uos.com", :password => "dkruempe",:password_confirmation => "dkruempe", :name => "Dominik Krümpelmann", :user_type => true, :sex => true, :address => "Großer Esch 20", :addressN => 52.57975, :addressE => 8.13409, :zipcode => 48496, :phone => "054571598", :instantmessenger => "icq: 5465465", :city => "Hopsten", :email_notifications => true, :visible_phone => true, :visible_email => true, :visible_address => true, :visible_age => true, :visible_im => false, :visible_cars => true, :birthday => Date.new(1989,12,28), :visible_zip => true
-user2 = User.create! :email => "mibloemer@uos.de", :password => "mibloemer",:password_confirmation => "mibloemer", :name => "Michael Blömer", :user_type => false, :sex => true, :address => "Alfred-Delp-Str. 30"   , :addressN => 52.26419, :addressE => 8.014429999999999, :zipcode => 49080, :phone => "0456465", :instantmessenger => "icq: 4564644", :city => "Osnabrück", :email_notifications => false, :visible_phone => true, :visible_email => false, :visible_address => false, :visible_age => true, :visible_im => false, :visible_cars => true, :birthday => Date.new(1990,6,6), :visible_zip => false
-user3 = User.create! :email => "ufischer@t-online.de", :password => "ufischer", :password_confirmation => "ufischer" ,:name => "Uwe Fischer", :user_type => true, :sex => false, :address => "Leipziger Platz 10"   , :addressN => 52.50922740000001, :addressE => 13.3795693, :zipcode => 10117, :phone => "030206701034", :instantmessenger => "msn: addy@msn.com", :city => "Berlin", :email_notifications => true, :visible_phone => false, :visible_email => true, :visible_address => false, :visible_age => true, :visible_im => true, :visible_cars => false, :birthday => Date.new(1880, 12,12), :visible_zip => true
-user4 = User.create! :email => "Hotel-am-Stadtring@aol.com", :password => "hotelamstadtring",:password_confirmation => "hotelamstadtring" ,:name => "Hotel am Stadtring GmbH", :user_type => true, :sex => false, :address => "Stadtring 33"   , :addressN => 52.43704, :addressE => 7.062279999999999, :zipcode => 48527, :phone => "0592188330", :instantmessenger => "icq: 454654664", :city => "Lingen", :email_notifications => true, :visible_phone => true, :visible_email => false, :visible_address => true, :visible_age => false, :visible_im => true, :visible_cars => false, :birthday => Date.new(1454,1,6), :visible_zip => false
-user5 = User.create! :email => "Antenne-Bayern-GmbH-&-Co.-KG@gmx.com", :password => "antenne",:password_confirmation => "antenne" ,:name => "Antenne Bayern GmbH & Co. KG ", :user_type => true, :sex => false, :address => "Münchener Straße 101C"   , :addressN => 48.7428648, :addressE => 11.4344352, :zipcode => 85737, :phone => "089992770", :instantmessenger => "", :city => "Ismaning", :email_notifications => true, :visible_phone => false, :visible_email => true, :visible_address => false, :visible_age => true, :visible_im => false, :visible_cars => true, :birthday => Date.new(1898,12,12), :visible_zip => true
+user2 = User.create! :email => "mibloemer@uos.de", :password => "mibloemer",:password_confirmation => "mibloemer", :name => "Michael Blömer", :user_type => false, :sex => true, :address => "Alfred-Delp-Str. 30" , :addressN => 52.26419, :addressE => 8.014429999999999, :zipcode => 49080, :phone => "0456465", :instantmessenger => "icq: 4564644", :city => "Osnabrück", :email_notifications => false, :visible_phone => true, :visible_email => false, :visible_address => false, :visible_age => true, :visible_im => false, :visible_cars => true, :birthday => Date.new(1990,6,6), :visible_zip => false
+user3 = User.create! :email => "ufischer@t-online.de", :password => "ufischer", :password_confirmation => "ufischer" ,:name => "Uwe Fischer", :user_type => true, :sex => false, :address => "Leipziger Platz 10" , :addressN => 52.50922740000001, :addressE => 13.3795693, :zipcode => 10117, :phone => "030206701034", :instantmessenger => "msn: addy@msn.com", :city => "Berlin", :email_notifications => true, :visible_phone => false, :visible_email => true, :visible_address => false, :visible_age => true, :visible_im => true, :visible_cars => false, :birthday => Date.new(1880, 12,12), :visible_zip => true
+user4 = User.create! :email => "Hotel-am-Stadtring@aol.com", :password => "hotelamstadtring",:password_confirmation => "hotelamstadtring" ,:name => "Hotel am Stadtring GmbH", :user_type => true, :sex => false, :address => "Stadtring 33" , :addressN => 52.43704, :addressE => 7.062279999999999, :zipcode => 48527, :phone => "0592188330", :instantmessenger => "icq: 454654664", :city => "Lingen", :email_notifications => true, :visible_phone => true, :visible_email => false, :visible_address => true, :visible_age => false, :visible_im => true, :visible_cars => false, :birthday => Date.new(1454,1,6), :visible_zip => false
+user5 = User.create! :email => "Antenne-Bayern-GmbH-&-Co.-KG@gmx.com", :password => "antenne",:password_confirmation => "antenne" ,:name => "Antenne Bayern GmbH & Co. KG ", :user_type => true, :sex => false, :address => "Münchener Straße 101C" , :addressN => 48.7428648, :addressE => 11.4344352, :zipcode => 85737, :phone => "089992770", :instantmessenger => "", :city => "Ismaning", :email_notifications => true, :visible_phone => false, :visible_email => true, :visible_address => false, :visible_age => true, :visible_im => false, :visible_cars => true, :birthday => Date.new(1898,12,12), :visible_zip => true
 
 #Creates 5 cars
 car1 = Car.create! :user_id => 1, :seats => 5, :licence => "10234", :fuel_consumption => 5.5, :smoker => true, :description => "Kein Kofferraum"
@@ -151,10 +151,10 @@ Mit Robin Dutt holte Sportdirektor Rudi Völler einen ambitionierten Trainer. Du
 
 » Das muss sich ändern: Ändern muss sich nichts. Dennoch könnte der überschaubare Kader im Hinblick auf die Champions League zu einem Problem werden. Das ist bei Bayer Leverkusen die Frage aller Fragen: Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga?
 
-» Einlauftipp: Leverkusen ist reif für den Titel. Eigentlich und ohne Zweifel. Wahrscheinlich sind die Ränge eins bis drei. Am Ende wird Bayer Dritter.", :writer_id => 1, :receiver_id => 3, :delete_writer => true, :delete_receiver => false, :subject => "Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga?   "
-msg8 = Message.create! :message => "	
+» Einlauftipp: Leverkusen ist reif für den Titel. Eigentlich und ohne Zweifel. Wahrscheinlich sind die Ränge eins bis drei. Am Ende wird Bayer Dritter.", :writer_id => 1, :receiver_id => 3, :delete_writer => true, :delete_receiver => false, :subject => "Wie schafft Robin Dutt mit vergleichsweise kleiner Kopfzahl den Ritt durch Königsklasse, Pokal und Bundesliga? "
+msg8 = Message.create! :message => "
 FUSSBALL | 1. BUNDESLIGA
-Schriftgröße: 
+Schriftgröße:
 01.08.2011
 Kommentare26 Kommentare
 Bundesliga-Vorschau: VfB Stuttgart
@@ -178,21 +178,21 @@ Schlechte Sommerzeiten
 Neben dem Verletzungspech in der Abwehr wurde das Thema Christian Träsch ebenfalls zu einem Ärgernis der Sommerpause. Der VfB musste Träsch letztlich in Richtung Wolfsburg ziehen lassen, um ihn im nächsten Jahr nicht ablösefrei zu verlieren. Nach dem Abgang von Sami Khedira und Jens Lehmann und der hohen Verletzungsanfälligkeit von Kapitän Delpierre hätte Träsch eine wichtige Rolle als Führungsspieler einnehmen können. Ob Cacau, Christian Gentner oder Serdar Tasci in diese Rolle schlüpfen können, bleibt fraglich. Zwar mag es dem Kader an Führungsspielern fehlen, dennoch haben die Stuttgarter taktisch einige Möglichkeiten.
 Weiterführende Links:
 
-      Bundesliga-Vorschau: Mainz 05
-      Bundesliga-Vorschau: Kaiserslautern
-      Bundesliga-Vorschau: Nürnberg
-      Bundesliga-Vorschau: HSV
-      Bundesliga-Vorschau: 1. FC Köln
-      Bundesliga-Vorschau: Hertha BSC
-      Bundesliga-Vorschau: VfL Wolfsburg
-      Bundesliga-Vorschau: SC Freiburg
-      Bundesliga-Vorschau: Bayer Leverkusen
-      Bundesliga-Vorschau: 1899 Hoffenheim
-      Bundesliga-Vorschau: FC Augsburg
-      Bundesliga-Vorschau: FC Schalke
-      Bundesliga-Vorschau: Werder Bremen
-      Bundesliga-Vorschau: Hannover 96
-      Bundesliga-Vorschau: Gladbach
+Bundesliga-Vorschau: Mainz 05
+Bundesliga-Vorschau: Kaiserslautern
+Bundesliga-Vorschau: Nürnberg
+Bundesliga-Vorschau: HSV
+Bundesliga-Vorschau: 1. FC Köln
+Bundesliga-Vorschau: Hertha BSC
+Bundesliga-Vorschau: VfL Wolfsburg
+Bundesliga-Vorschau: SC Freiburg
+Bundesliga-Vorschau: Bayer Leverkusen
+Bundesliga-Vorschau: 1899 Hoffenheim
+Bundesliga-Vorschau: FC Augsburg
+Bundesliga-Vorschau: FC Schalke
+Bundesliga-Vorschau: Werder Bremen
+Bundesliga-Vorschau: Hannover 96
+Bundesliga-Vorschau: Gladbach
 
 Bruno Labbadia arbeitete mit seinem Team zunächst weiter am Erfolgssystem aus der Rückrunde. Neben dem 4-2-3-1 hat der Trainer aber auch eine Art 4-1-3-2 einstudiert. Wir wollen variabel sein, auf verschiedene Situationen reagieren können. Das hängt gar nicht so sehr vom Gegner ab, sondern vor allem von unseren Spielern, erklärte Labbadia auf bundesliga.de. Mit Johan Audel, Timo Gebhart, Traoré, Shinji Okazaki und Martin Harnik hat der Trainer einige Optionen für die offensiven Außenpositionen.
 
@@ -233,17 +233,17 @@ Bei den Bayern setzte Jupp Heynckes, der die DFB-Pokal-Trophäe als Trainer nur 
 Dem Geburtstagskind Lieberknecht stand auf bajuwarischer Seite Schweinsteiger gegenüber, der seinen 27. Geburtstag feierte und sich später auch noch selber beschenken sollte. Zunächst eröffnete Schiedsrichter Felix Zwayer die Partie und sah gleich aggressiv auftretende Gastgeber und konzentrierte Gäste aus München. Ein geruhsamer abendlicher Spaziergang im mit lauen Temperaturen gesegneten Niedersachsen sollte es aus Sicht der Braunschweiger nicht geben, die Bayern hatten ihrerseits die leichte Schulter, auf die die Braunschweiger aufzuspringen erhofften, in der Heimat gelassen.
 Weiterführende Links:
 
-      1. Pokalrunde: Ost-West-Konflikte 2011
+1. Pokalrunde: Ost-West-Konflikte 2011
 
 Nackenschlag in der Früh
 
 Das Spiel war keine zehn Minuten alt, als es den ersten Aufreger gab, der ein grimmsches Märchen direkt zum Scheitern verurteilte. Denn Ken Reichel holte Müller im Strafraum unsanft von den Beinen und dies hatte einen Strafstoß zur Folge, den Gomez dankend in den Maschen versenkte (9.). Die Eintracht hatte zu dem Zeitpunkt das Spiel zwar angenommen, doch noch keine nennenswerte eigene Aktion starten können.
 
 Dies sollte sich auch nicht groß ändern, denn der Rekordmeister agierte klug und verstand es, den Zweitligisten vom eigenen Strafraum fernzuhalten. Einzig Dennis Kruppke hatte nach Flanke von Nico Zimmermann eine gute Gelegenheit, der Ball prallte aber von seinem Gesicht am Pfosten vorbei. In einer zumeist lebendigen Partie fehlte es zwar an der erhofften Spannung, dafür gab es einen weiteren Elfmeter zu sehen, als Braunschweig sich gerade anschickte, eine Art Ebenbürtigkeit zu entwickeln.
-zurück 	
-Stimmen zum Spiel: 	1/3
+zurück
+Stimmen zum Spiel: 1/3
 Dennis Kruppke: Wir brauchen da nicht groß drumherum reden: Wir haben heute die Grenzen aufgezeigt bekommen. Die Bayern waren mindestens eine Klasse besser als wir.
-	vor
+vor
 
 Diesmal war es Mirko Boland, der Müller im Sechzehner ungeschickt umrempelte und Schweinsteiger so zu einem Geburtstagsgeschenk in Form des 2:0 verhalf. Ein erneutes Märchen, das am 16. Oktober 1982 beim 2:0-Erfolg gegen jene Münchner seine ersten Zeilen geschrieben hatte und fünf Fortsetzungen produzierte, schien mit dem Halbzeitpfiff von Zwayer undenkbar und die Sieben auf mehrere Streiche kein möglicher Bestseller in der Fußball-Bücherei.
 
@@ -295,10 +295,10 @@ req4.save
 req5.save
 #Creates trips
 tri1 = Trip.new :user_id => 1, :car_id => 1, :starts_at_N => 52.27133, :starts_at_E => 7.4452, :ends_at_E => 8.13409, :ends_at_N => 52.57975, :address_start => "Hafenbahn 10 48431 Rheine", :address_end => "Großer Esch 20 48496 Hopsten", :start_time => Time.now-1.day, :comment => "Biete eine Fahrt an!", :baggage => true, :free_seats => 5
-tri2 = Trip.new :user_id => 2, :car_id => 2, :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_E => 8.807081, :ends_at_N => 53.074981,:address_start => "München"   , :address_end => "Bremen"   , :start_time => Time.now-1.day, :comment => "Platz für alle :D!", :baggage => true, :free_seats => 4
-tri3 = Trip.new :user_id => 3, :car_id => 3, :starts_at_N => 53.553813, :starts_at_E => 9.991586, :ends_at_E => 13.4113999, :ends_at_N => 52.523401, :address_start => "Hamburg"   , :address_end => "Berlin", :start_time => Time.now-1.day, :comment => "Ahoi", :baggage => false, :free_seats => 3
-tri4 = Trip.new :user_id => 4, :car_id => 4, :starts_at_N => 52.2766061, :starts_at_E => 7.43840300000001, :ends_at_E => 7.3237899999999, :ends_at_N => 52.52306, :address_start => "Rheine"   , :address_end => "Lingen", :start_time => Time.now-1.day, :comment => "Boom Boom", :baggage => true, :free_seats => 5
-tri5 = Trip.new :user_id => 5, :car_id => 5, :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_E => 8.0531882, :ends_at_N => 52.267281, :address_start => "Meppen"   , :address_end => "Osnabrück", :start_time => Time.now-1.day, :comment => "Schnell schnell!", :baggage => false, :free_seats => 4
+tri2 = Trip.new :user_id => 2, :car_id => 2, :starts_at_N => 48.1391265, :starts_at_E => 11.5801863, :ends_at_E => 8.807081, :ends_at_N => 53.074981,:address_start => "München" , :address_end => "Bremen" , :start_time => Time.now-1.day, :comment => "Platz für alle :D!", :baggage => true, :free_seats => 4
+tri3 = Trip.new :user_id => 3, :car_id => 3, :starts_at_N => 53.553813, :starts_at_E => 9.991586, :ends_at_E => 13.4113999, :ends_at_N => 52.523401, :address_start => "Hamburg" , :address_end => "Berlin", :start_time => Time.now-1.day, :comment => "Ahoi", :baggage => false, :free_seats => 3
+tri4 = Trip.new :user_id => 4, :car_id => 4, :starts_at_N => 52.2766061, :starts_at_E => 7.43840300000001, :ends_at_E => 7.3237899999999, :ends_at_N => 52.52306, :address_start => "Rheine" , :address_end => "Lingen", :start_time => Time.now-1.day, :comment => "Boom Boom", :baggage => true, :free_seats => 5
+tri5 = Trip.new :user_id => 5, :car_id => 5, :starts_at_N => 52.6875079, :starts_at_E => 7.2911623, :ends_at_E => 8.0531882, :ends_at_N => 52.267281, :address_start => "Meppen" , :address_end => "Osnabrück", :start_time => Time.now-1.day, :comment => "Schnell schnell!", :baggage => false, :free_seats => 4
 tri1.set_route
 tri2.set_route
 tri3.set_route
