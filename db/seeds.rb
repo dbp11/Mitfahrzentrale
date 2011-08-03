@@ -269,6 +269,11 @@ ps2 = Passenger.create! :user_id => 3, :trip_id => 2, :confirmed => false
 ps3 = Passenger.create! :user_id => 4, :trip_id => 3, :confirmed => true
 ps4 = Passenger.create! :user_id => 5, :trip_id => 4, :confirmed => false
 ps5 = Passenger.create! :user_id => 1, :trip_id => 5, :confirmed => true
+ps6 = Passenger.create! :user_id => 1, :trip_id => 5, :confirmed => true
+ps7 = Passenger.create! :user_id => 1, :trip_id => 2, :confirmed => true
+ps8 = Passenger.create! :user_id => 1, :trip_id => 3, :confirmed => true
+ps9 = Passenger.create! :user_id => 1, :trip_id => 4, :confirmed => true
+ps10 = Passenger.create! :user_id => 2, :trip_id => 3, :confirmed => true
 
 #Creates ratings
 ra1 = Rating.create! :comment => "Auto im schlechten Zustand!", :mark => 6, :trip_id => 1, :receiver_id => 1, :author_id => 2
