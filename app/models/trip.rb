@@ -10,6 +10,8 @@ class Trip < ActiveRecord::Base
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
+  validate :driver_passenger
+
   validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
   
   #Freie Sitzplätze dürfen nicht negativ sein
@@ -127,4 +129,23 @@ class Trip < ActiveRecord::Base
   def get_route_distance
     return (distance / 1000).round(3) + "Km"
   end
+  # Methode zum überprüfen, dass ein Fahrer nicht gleichzeitig Mitfahrer in seinem eigenen Trip ist.
+  def driver_passenger
+    if self.user and self.users
+      errors.add(:field, 'Fahrer kann nicht gleichzeitig Mitfahrer sein')
+    end
+  end
+
+  def user_committed (compared_user)
+    self.passengers.where(user_id = compared_user.id).first.confirmed?
+  end
+  
+  def user_uncommitted (compared_user)
+    if self.passengers.where(user_id = compared_user.id).first.confirmed?
+      false
+    else true
+    end
+  end
+
+
 end
