@@ -16,8 +16,8 @@ class Passenger < ActiveRecord::Base
   
   
   #Validation
+  validates_presence_of :user_id, :trip_id
   validate :confirmed_not_nil, :not_his_own_driver
-  
 
   #Methode die prüft ob der Wert confirmed nicht Null ist
   def confirmed_not_nil

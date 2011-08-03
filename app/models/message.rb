@@ -20,7 +20,7 @@ class Message < ActiveRecord::Base
   validates_length_of :subject, :in => 1..120
   validates_length_of :message, :in => 1..2000
   validate :no_true_true, :delete_writer_nil, :delete_receiver_nil
-  validates_presence_of :message, :subject
+  validates_presence_of :message, :subject, :writer_id, :receiver_id 
   
   #no_true_true für Validate
   def no_true_true
