@@ -17,7 +17,11 @@
   %p
     = f.label :"Passwort wiederholen*"
     %br/
+<<<<<<< .merge_file_wVrPu2
     = f.password_field :password_confirmation, :required=>"required"
+=======
+    = f.password_field :password_confirmation
+>>>>>>> .merge_file_DuChRX
   %p
     = f.label :"Geburtsdatum"
     %br/
@@ -26,6 +30,7 @@
                     :end_year => 2011,
                     :order => [:day, :month, :year],
                     :use_month_numbers => true
+<<<<<<< .merge_file_wVrPu2
   %p
     = f.label :"Straße und Hausnummer*"
     %br/
@@ -44,24 +49,29 @@
 
   %p
     = f.label :zipcode
+=======
+  %p
+    = f.label :"Straße und Hausnummer*"
+    %br/
+    = f.text_field:address, :required=>"required"
+
+  %p
+    = f.label :"PLZ*"
+>>>>>>> .merge_file_DuChRX
     %br/
     = f.number_field:zipcode, :required=>"required",
                               :min=>"10000",
-                              :max=>"99999",
-
+                              :max=>"99999"
   %p
-    %br
-    = f.label :city
-  %p
-    %br
+    = f.label :"Stadt*"
+    %br/
     = f.text_field:city, :required=>"required"
 
   %p
-    %br
+    %br/
     = f.label :Geschlecht
-  %p
     %br
-    = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "1" : "0"), :id=>"form_table_second"
+    = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
 
   %p
     = f.label :Telefon
