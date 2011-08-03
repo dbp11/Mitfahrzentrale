@@ -1,6 +1,8 @@
 = stylesheet_link_tag :cars
 .cars
   %h1 Deine Fahrzeuge
+  .other_side
+    = link_to image_tag( '/images/cars/car_button_add_high.png', :alt => "Neues Fahrzeug", :size => "50x50") + "Neu", new_car_path
 
   
   
@@ -33,7 +35,4 @@
         %td= link_to image_tag( '/images/cars/car_button_delete_high.png', :size => "40x40"), car, :confirm => 'Bist du sicher?', :method => :delete
 
   
-  %b Neues Fahrzeug
-  %br
-  = link_to image_tag( '/images/cars/car_button_add_high.png', :size => "50x50"), new_car_path
 

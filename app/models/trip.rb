@@ -115,6 +115,13 @@ class Trip < ActiveRecord::Base
     return count
   end
 
+  def get_passengers
+    erg = []
+    self.passengers.all.each do |p|
+      erg << p.user
+    end
+    return erg
+  end
 
   #liefert alle user dieses Trips, die schon committed wurden
   def get_committed_passengers

@@ -66,6 +66,18 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :address, :zipcode, :city 
   validate :booleans_not_nil
 
+  def booleans_not_nil 
+    if(self.user_type == nil and self.sex == nil and 
+       self.email_notifications == nil and self.visible_phone == nil and 
+       self.visible_email == nil and self.visible_address == nil and 
+       self.visible_age == nil and self.visible_im == nil and 
+       self.visible_cars == nil and self.visible_cip == nil and 
+       self.visible_city == nil and self.business == nil)
+      errors.add(:field, 'Irgendein Boolean nimmt den Wert Null ein, und das dar nicht sein, also gar nicht')
+    end
+  end
+
+
 
  
   
@@ -209,7 +221,7 @@ class User < ActiveRecord::Base
     self.ignoreds.count.to_f / User.all.count.to_f
   end
   
-  #Methode, die alle, für den User sichtbaren, Autos zurückliefert.
+  #Methode, die alle, für den User sichtbaren Autos zurückliefert.
   #Wenn ein User bei einem Trip Mitfahrer ist, so wird das Auto das Fahrers für ihn sichtbar
   #@return Car Set
   def get_visible_cars
@@ -221,7 +233,10 @@ class User < ActiveRecord::Base
     end
   erg
   end
-
+  
+  #Methode, die alle, für einen User sichtbaren User zurückliefert
+  #User werden für sichtbar, wenn der Benutzer mit diesen über einen Trip in verbindung gebracht werden kann
+  #@return User [] 
   def get_visible_users
     erg = Array.new
     self.passengers.each do |p|
@@ -241,60 +256,47 @@ class User < ActiveRecord::Base
     end
     return erg
   end
-
-  def booleans_not_nil 
-    if(self.user_type == nil and self.sex == nil and 
-       self.email_notifications == nil and self.visible_phone == nil and 
-       self.visible_email == nil and self.visible_address == nil and 
-       self.visible_age == nil and self.visible_im == nil and 
-       self.visible_cars == nil and self.visible_cip == nil and 
-       self.visible_city == nil and self.business == nil)
-      errors.add(:field, 'Irgendein Boolean nimmt den Wert Null ein, und das dar nicht sein, also gar nicht')
-    end
-  end
-
-  def get_coming_requests
-    erg = []
-    self.requests.each do |r|
-      if r.created_at > Time.now
-        erg << r
-      end
-    end
-    return
-  end
-
+  
+  #@return gesammte als Mitfahrer zurückgelegte Distanz
   def toured_distance_p
     distance = 0
-    self.passenger_trips.each do |t|
+    self.driven_with.each do |t|
       distance += t.distance
     end
     distance
   end
-
+  #@return gesammte als Mitfahrer gefahrene Zeit
   def toured_time_p
     time = 0
-    self.passenger_trips.each do |t|
+    self.driven_with.each do |t|
       time += t.duration
     end
     time
   end
-
+  
+  #@return gesammte als Fahrer zurückgelgete Distanz
   def toured_distance_d
     distance = 0
-    self.driver_trips.each do |t|
+    self.driven.each do |t|
       distance += t.distance
     end
     distance
   end
-
+  
+  #@return gesammte als Fahrer gefahrene Zeit
   def toured_time_d
     time = 0
-    self.driver_trips.each do |t|
+    self.driven_trips.each do |t|
       time += t.duration
     end
     time
   end
-
+  
+  #Methode die ermittelt, ob der aktuelle User vom übergebenen User zum übergebenen Trip schon bewertet wurde
+  #@param User rater
+  #@param Trip trp
+  #@return false, wenn noch keine Bewertung abgegeben wurde
+  #@return true, wenn eine Bewertung abgegeben wurde
   def allready_rated (rater, trp)
     check = false
     rater.written_ratings.each do |r|
@@ -303,9 +305,12 @@ class User < ActiveRecord::Base
     end
     check
   end
-
+  
+  #Lässt einen User sich um eine Mitfahrgelegenheit bewerben
+  #@param Trip trp um den sich beworben werden soll
   def bewerben (trp)
-    Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
+    t = Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
+    t.save
   end
     
  
