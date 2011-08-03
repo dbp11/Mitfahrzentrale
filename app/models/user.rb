@@ -159,4 +159,14 @@ class User < ActiveRecord::Base
     end
     return erg
   end
+  def get_coming_requests
+    erg = []
+    self.requests.each do |r|
+      if r.created_at > Time.now
+        erg << r
+      end
+    end
+    return
+  end
+ 
 end
