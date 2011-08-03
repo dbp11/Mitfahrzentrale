@@ -83,6 +83,9 @@
       %table.trips_table
         %tr
           %td.center{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
+        - if @status != @FAHRER and @status != @MITFAHRER
+          %tr
+            %td.center{:colspan => "3"} Sie haben keine Berechtigung, Mitfahrer zu untersuchen
         - if @status == @FAHRER or @status == @MITFAHRER
           - if c_passengers == nil or c_passengers.count <= 0
             %tr
@@ -110,7 +113,7 @@
         - else
           - if @status != @FAHRER and @status != @POTENTIELLER_MITFAHRER
             %tr
-              %td.center{:colspan => "3"} Sie haben keine Berechtigung, Bewerber zu Untersuchen
+              %td.center{:colspan => "3"} Sie haben keine Berechtigung, Bewerber zu untersuchen
           - if @status == @FAHRER or @status == @POTENTIELLER_MITFAHRER
             %tr
               %td Benutzername
@@ -120,8 +123,8 @@
                 %tr
                   %td= link_to "#{passenger}", passenger
                   %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
-                  %td.right= link_to "annehmen", passenger
-                  %td.right= link_to "ablehnen", passenger
+                  %td.right= link_to("annehmen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :accept => true))
+                  %td.right= link_to("ablehnen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :decline => true))
     %td
       %h2 Hier kommt die Karten hin
       %br/
