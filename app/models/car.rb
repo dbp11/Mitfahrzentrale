@@ -14,9 +14,9 @@ class Car < ActiveRecord::Base
   validates :licence, :uniqueness => true, :presence => true, :length => {:in => 1..10}
 
   #Validation ein Auto muss ein Nummernschild, Bezeichnung und Sitzplätze haben
-  validates_presence_of :seats, :licence, :car_type 
+  validates_presence_of :seats, :licence, :car_type, :user_id 
   
-  validates_numericality_of :fuel_consumption
+  validates_numericality_of :fuel_consumption, :message => "Deine Eingabe muss aus Zahlen bestehen"
   validates_inclusion_of :fuel_consumption, :in => 0..99
   validates_length_of :description, :in => 0..160
   

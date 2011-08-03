@@ -13,7 +13,7 @@ class Trip < ActiveRecord::Base
   
   validate :driver_passenger, :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
 
-  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
+  validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance, :user_id, :car_id
   
   #Freie Sitzplätze dürfen nicht negativ sein
   validates_length_of :free_seats, :minimum => 1

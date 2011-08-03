@@ -57,7 +57,6 @@
 %table.trips_base_table
   %tr
     %td
-      -#Tabelle mit Informationen über die Fahrt
       %table.trips_table
         %tr
           %td.center{:colspan => "4"} Fahrtinformationen
@@ -74,65 +73,60 @@
         %tr
           %td.left_bold#minimal Fahrer:
           %td.left{:colspan => "3"}
-            = link_to("#{fahrer.name}", fahrer) +" "+ link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :uid => fahrer.id, :tid => trip.id))
-
-      -#Tabelle mit Informationen über Fahrer, Mitfahrer, potentielle Mitfahrer
-        in Abhängigkeit vom Status des aktuellen Benutzers
-      %table{:border => "1"}
+            = link_to("#{fahrer.name}", fahrer)
+            = link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :uid => fahrer.id, :tid => trip.id)) + " "
+            = link_to("Bewerten", url_for(:action => "new", :controller => "ratings", :uid => fahrer.id, :tid => trip.id))
         %tr
-          -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
-          %th{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
-        -#wenn keine Mitfahrer vorhanden, dann Hinweis in Tabelle ausgeben
+          %td.left_bold#minimal Auto:
+          %td.left{:colspan => "3"}= link_to("#{trip.car.car_type}", trip.car) +" (#{trip.car.description.truncate(60)})"
+
+      %table.trips_table
+        %tr
+          %td.center{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
         - if c_passengers == nil or c_passengers.count <= 0
           %tr
-            %td keine Mitfahrer vorhanden
-          -#wenn Mitfahrer vorhanden sind, dann diese tabellarisch ausgeben
-          - else
-            %tr
-              %td Benutzername
-              %td Rating
-            - c_passengers.each do |passenger|
-            %tr
-              -#nur Fahrer und Mitfahrer dürfen die Links zu den anderen Mitfahrern
-              -#inkl. Namen der Mitfahrer sehen
-              - if can? :read, trip
-                %td= link_to "#{passenger}", passenger
-              %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
-              -#nur Fahrer und Mitfahrer können Nachrichten an die Mitfahrer versenden.
-              -#jedoch kein Versenden an sich selbst (Variable benötigt)
-              - if can? :read, trip and passenger != user
-                -#der Link wird so wohl nicht funktionieren. Mit Controller klären
-                %td= link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => trip.id, :uid => passenger.id))
-              -#nur der Fahrer kann Leute aus der Fahrt entfernen und der Nutzer kann sich selbst austragen
-              - if can? :read, trip or passenger == @user
-                -#der Link ist so nicht korrekt. Mit Controllern abklären, wie das laufen soll
-                %td= link_to "Austragen", passenger
-      -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
-      - if can? :read, trip
-        %br/
-        %table{:border => "1"}
+            %td{:colspan => "4"} keine Mitfahrer vorhanden
+        - else
           %tr
-            -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
-            %th= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
-          -#wenn nil oder keine Bewerbungen vorhanden, dann Hinweis ausgeben
-          - if u_passengers == nil or u_passengers.count <= 0
+            %td Benutzername
+            %td.left{:colspan => "3"} Rating
+          - c_passengers.each do |passenger|
             %tr
-              %td keine Bewerbungen vorhanden
-            -#sonst alle Bewerbungen ausgeben
-          - else
-            - u_passengers.each do |passenger|
-              %tr
-                %td= link_to 'show', passenger
-                %td Bewertung
-                %td= passenger.received_ratings
-                -#wird so nicht funkionieren. Mit Controllern abreden.
-                %td= link_to 'annehmen', passenger
-                -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
-                -#Link für den Fahrer, um die Anfrage abzulehnen
-                %td= passenger == user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
+              %td= link_to "#{passenger}", passenger
+              %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
+              %td.right
+                = link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => trip.id, :uid => passenger.id))
+                = link_to "Austragen", passenger
+                = link_to("Bewerten", url_for(:action => "new", :controller => "ratings", :uid => passenger.id, :tid => trip.id))
+              %td#minimal
+
+      %table.trips_table
+        %tr
+          -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
+          %td.center= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
+        -#wenn nil oder keine Bewerbungen vorhanden, dann Hinweis ausgeben
+        - if u_passengers == nil or u_passengers.count <= 0
+          %tr
+            %td.center keine Bewerbungen vorhanden
+          -#sonst alle Bewerbungen ausgeben
+        - else
+          %tr
+            %td Benutzername
+            %td.left{:colspan => "3"} Rating
+          - u_passengers.each do |passenger|
+            %tr
+              %td= link_to "#{passenger}", passenger
+              %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
+              -#wird so nicht funkionieren. Mit Controllern abreden.
+              %td.right= link_to "annehmen", passenger
+              -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
+              -#Link für den Fahrer, um die Anfrage abzulehnen
+              %td.right= link_to "ablehnen", passenger
     %td
       %h2 Hier kommt die Karten hin
       %br/
       %h2 (evtl als Miniatur mit
       %br/
       %h2 Link zur Gro&szlig;ansicht)
+  %tr
+    %td{:colspan => "2"}= link_to("Bewerben", url_for(:action => "update", :controller => "trips", :request => true))

@@ -99,6 +99,10 @@ class TripsController < ApplicationController
   # PUT /trips/1.json
   def update
     @trip = Trip.find(params[:id])
+    if params[:request] == true
+      current_user.bewerben(@trip.id)
+      redirect_to @trip, notice: 'Erfolgreich beworben'
+    end
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
