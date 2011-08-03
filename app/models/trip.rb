@@ -11,7 +11,7 @@ class Trip < ActiveRecord::Base
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
-  validate :driver_passenger, :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
+  validate :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
 
   validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
   
@@ -160,9 +160,12 @@ class Trip < ActiveRecord::Base
   get_committed_passengers.include?(compared_user)
   end
 
-  def is_confirmed (compared_user)
-    self.passengers.where("trip_id = ?",  self.id).where("user_id = ?",
-                                          compared_user.id).confirmed?
+  def accept (compared_user)
+    self.passengers.where("user_id = ?", compared_user.id).first.confirmed = true
+  end
+
+  def delete_unaccepted (compared_user)
+    self.passengers.where("user_id = ?", compared_user.id).first.destroy
   end
 
 end
