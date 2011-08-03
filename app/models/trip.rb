@@ -152,6 +152,14 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def finished
+    if self.start_time < Time.now
+      return true
+    else
+      return false
+    end
+  end
+
   def user_uncommitted (compared_user)
     get_uncommitted_passengers.include?(compared_user)
   end
