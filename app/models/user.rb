@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :address, :zipcode, :city 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars, :picture_file_size, :picture_file_name, :picture_content_type, :business
   
   
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
