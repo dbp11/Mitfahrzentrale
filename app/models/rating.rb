@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 class Rating < ActiveRecord::Base
-  
+  include ActiveModel::Validations 
+
 #############################   Beziehungen   ############################
   #:Beziehungen
   #Beziehung: trip_gets_rating
