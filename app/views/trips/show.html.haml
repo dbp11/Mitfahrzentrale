@@ -2,34 +2,46 @@
   übergebene Variablen:
     - @user
       der aktuell zugreifende Benutzer
-
     - @trip
       die Fahrt, um die es gerade geht
-
     - @free_seats
       noch freie Sitzplätze
-
     - @occupied_seats
       Anzahl besetzter Plätze
-
     - @commited_passenger
       Array mit allen Mitfahrern
-
     - @uncommited_passenger
       Array mit potentiellen Mitfahrern, die noch nicht akzeptiert wurden
+    - Variablen, zum bedingten Ausgeben von Informationen, abhängig davon, welchen Status
+      der aktuelle Benutzer hat:
+        * @status
+          Status des aktuellen Benutzers (s.u.)
+        * @FAHRER
+          der aktuelle Benutzer ist Fahrer
+        * @MITFAHRER
+          der aktuelle Benutzer ist Mitfahrer
+        * @POTENTIELLER_MITFAHRER
+          der aktuelle Benutzer hat sich als Mitfahrer beworben, wurde aber noch nicht
+          angenommen
+        * @GAST
+          der aktuelle Benutzer ist weder Fahrer, noch Mitfahrer, noch hat er eine
+          Bewerbung zur Mitfahrt abgeschickt (also reiner Beobachter - z.B. über die
+          Suche zu dieser Fahrt gekommen)
+
+  übergebene Methoden:
+    - passenger.get_avg_rating
+      gibt das aktuelle Rating (Durchschnitt aller Bewertungen) aus
+    - passenger.count_ratings
+      gibt aus, wie oft der Benutzer bewertet wurde
 
   to do:
-    - Array mit den Mitfahrern einbinden (Darstellen der Mitfahrer)
-    - Array mit den potentiellen Mitfahrern einbinden (Übersicht für den Fahrer)
-    - Formular in HAML übersetzen
-
-  brauche:
-    - Variable, die den aktuellen Benutzer darstellt, um unten prüfen zu können, ob
-      der gerade auszugebene User der aktuell angemeldete ist (damit er keine Link
-      angezeigt bekommt, um sich selbst Nachrichten zu schreiben)
-    - Methode, um zu einem übergebenen Nutzer die Bewertung zu bekommen
-    - Methode, um zu einem übergebenen Nutzer die Anzahl der Votes zu bekommen
-    - Methode, die zeigt, ob der Trip voll besetzt ist
+    - Bedingte Ausgabe für die einzelnen Benutzer-Status implementieren
+    - Senden von Nachrichten an angezeitge Benutzer implementieren
+    - Anzeigen des Fahrers
+    - Anzeigen des Autos
+    - Anzeigen der Karte
+    - Annehmen/Ablehnen von Bewerbungen für Fahrer
+    - Austragen von Mitfahrern (für Fahrer) oder sich selbst
 
 -# Die Tabelle hat zwei Spalten: Eine für den die Tabelle der Mitfahrer etc, eine für die Map
 
@@ -37,80 +49,90 @@
 - u_passengers = @uncommited_passenger
 - f_seats = @free_seats
 - o_seats = @occupied_seats
+- fahrer = @trip.user
+- trip = @trip
+- user = @user
 
-%table{:border => "1"}
+
+%table.trips_base_table
   %tr
     %td
       -#Tabelle mit Informationen über die Fahrt
-      %table{:border => "1"}
+      %table.trips_table
         %tr
-          %td Abfahrt:
-          = form_tag do
-            %td= text_field_tag(:date_start, @trip.start_time.to_date, :disabled => true)
-            %td= text_field_tag(:time_start, @trip.start_time.to_time, :disabled => true)
-            %td= text_field_tag(:starts_at, @trip.address_start, :disabled => true)
+          %td.center{:colspan => "4"} Fahrtinformationen
         %tr
-          %td Ankunft:
-          = form_tag do
-            %td
-            %td
-            %td= text_field_tag(:ends_at, @trip.address_end, :disabled => true)
+          %td.left_bold#minimal Abfahrt:
+          %td.left= trip.address_start
+          %td.center#minimal= trip.start_time.strftime("%d.%m.%Y")
+          %td.center#minimal= trip.start_time.strftime("%H:%M")
+        %tr
+          %td.left_bold#minimal Ankunft:
+          %td.left= trip.address_end
+          %td.center#minimal
+          %td.center#minimal
+        %tr
+          %td.left_bold#minimal Fahrer:
+          %td.left{:colspan => "3"}
+            = link_to("#{fahrer.name}", fahrer) +" "+ link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :uid => fahrer.id, :tid => trip.id))
+
       -#Tabelle mit Informationen über Fahrer, Mitfahrer, potentielle Mitfahrer
-      -#in Abhängigkeit vom Status des aktuellen Benutzers
-  %tr
-    %td &nbsp;
-  %tr
-    %table{:border => "1"}
-      %tr
-        -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
-        %th{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
-      -#wenn keine Mitfahrer vorhanden, dann Hinweis in Tabelle ausgeben
-      - if c_passengers == nil or c_passengers.count <= 0
-        %tr
-          %td keine Mitfahrer vorhanden
-        -#wenn Mitfahrer vorhanden sind, dann diese tabellarisch ausgeben
-        - else
-          %tr
-            %td Benutzername
-            %td Rating
-          - c_passengers.each do |passenger|
-          %tr
-            -#nur Fahrer und Mitfahrer dürfen die Links zu den anderen Mitfahrern
-            -#inkl. Namen der Mitfahrer sehen
-            - if can? :read, @trip
-              %td= link_to "#{passenger}", passenger
-            %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
-            -#nur Fahrer und Mitfahrer können Nachrichten an die Mitfahrer versenden.
-            -#jedoch kein Versenden an sich selbst (Variable benötigt)
-            - if can? :read, @trip and passenger != @user
-              -#der Link wird so wohl nicht funktionieren. Mit Controller klären
-              %td= link_to "Nachricht schicken", Message
-            -#nur der Fahrer kann Leute aus der Fahrt entfernen und der Nutzer kann sich selbst austragen
-            - if can? :read, @trip or passenger == @user
-              -#der Link ist so nicht korrekt. Mit Controllern abklären, wie das laufen soll
-              %td= link_to "Austragen", passenger
-  %tr
-    %td &nbsp;
-  %tr
-    -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
-    - if can? :read, @trip
+        in Abhängigkeit vom Status des aktuellen Benutzers
       %table{:border => "1"}
         %tr
-          -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
-          %th= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
-        -#wenn nil oder keine Bewerbungen vorhanden, dann Hinweis ausgeben
-        - if u_passengers == nil or u_passengers.count <= 0
+          -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
+          %th{:colspan => "4"}= "Mitfahrer (#{o_seats}/#{f_seats})"
+        -#wenn keine Mitfahrer vorhanden, dann Hinweis in Tabelle ausgeben
+        - if c_passengers == nil or c_passengers.count <= 0
           %tr
-            %td keine Bewerbungen vorhanden
-          -#sonst alle Bewerbungen ausgeben
-        - else
-          - u_passengers.each do |passenger|
+            %td keine Mitfahrer vorhanden
+          -#wenn Mitfahrer vorhanden sind, dann diese tabellarisch ausgeben
+          - else
             %tr
-              %td= link_to 'show', passenger
-              %td Bewertung
-              %td= passenger.received_ratings
-              -#wird so nicht funkionieren. Mit Controllern abreden.
-              %td= link_to 'annehmen', passenger
-              -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
-              -#Link für den Fahrer, um die Anfrage abzulehnen
-              %td= passenger == @user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
+              %td Benutzername
+              %td Rating
+            - c_passengers.each do |passenger|
+            %tr
+              -#nur Fahrer und Mitfahrer dürfen die Links zu den anderen Mitfahrern
+              -#inkl. Namen der Mitfahrer sehen
+              - if can? :read, trip
+                %td= link_to "#{passenger}", passenger
+              %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
+              -#nur Fahrer und Mitfahrer können Nachrichten an die Mitfahrer versenden.
+              -#jedoch kein Versenden an sich selbst (Variable benötigt)
+              - if can? :read, trip and passenger != user
+                -#der Link wird so wohl nicht funktionieren. Mit Controller klären
+                %td= link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => trip.id, :uid => passenger.id))
+              -#nur der Fahrer kann Leute aus der Fahrt entfernen und der Nutzer kann sich selbst austragen
+              - if can? :read, trip or passenger == @user
+                -#der Link ist so nicht korrekt. Mit Controllern abklären, wie das laufen soll
+                %td= link_to "Austragen", passenger
+      -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
+      - if can? :read, trip
+        %br/
+        %table{:border => "1"}
+          %tr
+            -#wenn u_passengers == nil, dann "0" ausgeben, sonst Anzahl u_passengers
+            %th= "Anfragen (#{u_passengers == nil ? "0" : u_passengers.count})"
+          -#wenn nil oder keine Bewerbungen vorhanden, dann Hinweis ausgeben
+          - if u_passengers == nil or u_passengers.count <= 0
+            %tr
+              %td keine Bewerbungen vorhanden
+            -#sonst alle Bewerbungen ausgeben
+          - else
+            - u_passengers.each do |passenger|
+              %tr
+                %td= link_to 'show', passenger
+                %td Bewertung
+                %td= passenger.received_ratings
+                -#wird so nicht funkionieren. Mit Controllern abreden.
+                %td= link_to 'annehmen', passenger
+                -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
+                -#Link für den Fahrer, um die Anfrage abzulehnen
+                %td= passenger == user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
+    %td
+      %h2 Hier kommt die Karten hin
+      %br/
+      %h2 (evtl als Miniatur mit
+      %br/
+      %h2 Link zur Gro&szlig;ansicht)

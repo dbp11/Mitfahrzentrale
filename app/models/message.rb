@@ -10,6 +10,7 @@ class Message < ActiveRecord::Base
    
   #Validation
   validate :no_true_true, :delete_writer_nil, :delete_receiver_nil
+  validates_presence_of :message, :subject
   
   #Methoden:
   #no_true_true für Validate
