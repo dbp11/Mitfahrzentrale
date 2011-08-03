@@ -59,7 +59,6 @@ class MessagesController < ApplicationController
 		# error
 
 	end
-	@message.subject = @message.subject[0,120]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -78,6 +77,7 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @message.delete_receiver = false
     @message.delete_writer = false
+
 
     respond_to do |format|
       if @message.save

@@ -5,62 +5,34 @@
 body.ratings {
 	// Add the ratings class to your body tag
 	// Then, place scoped styles here.
-	#main {
-		.form_table {
-			width: 70%;
-			td {
-				padding: 0;
-			}
-			tr:first-child {
-				.form_table_left {
-					width: 8em;
-				}
-				.form_table_right {
-					text-align: left;
-				}
-			}
-			.form_table_both {
-				textarea {
-					width: 100%;
-					height: 7em;
-				}
-				input {
-					width: 100%;
-				}
-			}
-			.form_table_right {
-				text-align: right;
-			}
+	.rating_table {
+		margin-bottom: 1.5em;
+/*		border: solid 2px;*/
+		width: 60%;
+		tr:first-child {
+			background-color: #777777;
+			font-weight: bold;
 		}
-		.rating_table {
-			margin-bottom: 1.5em;
-	/*		border: solid 2px;*/
-			width: 60%;
-			tr:first-child {
-				background-color: #777777;
-				font-weight: bold;
-			}
-			td {
-				/*border: solid 1px;*/
-				padding-top: 0.1em;
-				padding-bottom: 0.1em;
-				padding-left: 0.5em;
-				padding-right: 0.5em;
-			}
-			.rating_table_left {
-				/*width: 400px;*/
-			}
-			.rating_table_right {
-				/*width: 2em;*/
-				text-align: right;
-				/*font-weight: bold;*/
-			}
-			.rating_table_comment {
-				padding-top: 0.3em;
-				padding-bottom: 0.3em;
-				background-color: #AAAAAA;
-				border-top: solid 1px;
-			}
+		td {
+			/*border: solid 1px;*/
+			padding-top: 0.1em;
+			padding-bottom: 0.1em;
+			padding-left: 0.5em;
+			padding-right: 0.5em;
+		}
+		.rating_table_left {
+			/*width: 400px;*/
+		}
+		.rating_table_right {
+			/*width: 2em;*/
+			text-align: right;
+			/*font-weight: bold;*/
+		}
+		.rating_table_comment {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+			background-color: #AAAAAA;
+			border-top: solid 1px;
 		}
 	}
 }

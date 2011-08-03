@@ -1,5 +1,4 @@
-# encoding: utf-8
-%h2 Bewertung erstellen
+%h1 New rating
 
 = form_for @rating do |f|
 	-if @rating.errors.any?
@@ -8,32 +7,27 @@
 			%ul
 				- @rating.errors.full_messages.each do |msg|
 					%li= msg
-	- @rating.author = current_user
-	= f.hidden_field :receiver_id
-	= f.hidden_field :author_id
-	= f.hidden_field :trip_id
 	%p
 		= 'Bewertung für '
 		- if @rating.receiver == @rating.trip.user
 			= 'Fahrer '
 		- else
 			= 'Mitfahrer '
-		= link_to(@rating.receiver.name, url_for(@rating.receiver))
+		= @rating.receiver.name
 		= ' auf der Fahrt '
-		= link_to(@rating.trip, url_for(@rating.trip))
+		= @rating.trip
 	%table.form_table
-		%tr
+		%tr.form_table_row
 			%td.form_table_left
-				= f.label("Note:")
+				= f.label :mark
 			%td.form_table_right
-				= f.select("mark",{"1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"})
-		%tr
-			%td.form_table_both{:colspan => "2"}
-				= f.label("Kommentar")
-				%br
-				= f.text_area(:comment, :required => "required")
-		%tr
+				= f.select("mark",{"1" => "1", "2" => "2"})
+		%tr.form_table_row
 			%td.form_table_left
-				= link_to('Zurück', "javascript:history.back()")
+				= f.label :comment
 			%td.form_table_right
+				= f.text_area :comment
+		%tr.form_table_row
+			%td.form_table_left
+			%td.form_tanle_right
 				= f.submit 'Bewerten'
