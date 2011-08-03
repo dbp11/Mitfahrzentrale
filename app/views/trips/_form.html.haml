@@ -43,6 +43,9 @@
           - 10.times do |i|
             %option{:value => (i+1)}= (i+1)
     %tr
+      %td Gep&auml;ck
+      %td= check_box_tag(:baggage)
+    %tr
       %td
         = submit_tag("Erstellen")
 
