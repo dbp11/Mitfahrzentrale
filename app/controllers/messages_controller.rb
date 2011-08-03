@@ -45,7 +45,7 @@ class MessagesController < ApplicationController
 		if params[:tid]
 			# message relatet to a trip
 			temp = Trip.find(params[:tid])
-			@message.subject = "[["+ url_for(params[:tid], :only_pyth => false) + "|" + "LINKTEXT HIER" +"]]"
+			@message.subject = "[["+ url_for(temp) + "|" + "LINKTEXT HIER" +"]]"
 		else
 			# new message
 			# all set
