@@ -35,9 +35,9 @@ class TripsController < ApplicationController
     @occupied_seats = @trip.get_occupied_seats
     if current_user == @trip.user
       @status = @FAHRER
-    elsif @trip.passengers.where("user_id = current_user.id").confirmed
+    elsif @trip.user_committed (current_user)
       @status = @MITFAHRER
-    elsif @trip.passengers.where("user_id = current_user.id").unconfirmed
+    elsif @trip.user_uncommitted (current_user)
       @status = @POTENTIELLER_MITFAHRER
     else
       @status = @GAST
