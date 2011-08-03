@@ -14,6 +14,7 @@
         text-align: center;
       }
     a img:hover {
+
       -webkit-animation: resize 700ms;
       -webkit-animation-iteration-count: infinite;
       -webkit-animation-direction: alternate;
@@ -33,7 +34,7 @@
 }
 @-webkit-keyframes resize {
   from { height: 40px; width: 40px;}
-  to{ height: 45px; width: 45px;}
+  to{ height: 40px; width: 40px;}
 }
 
 
