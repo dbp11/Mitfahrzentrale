@@ -6,6 +6,20 @@ body.messages {
   // Add the messages class to your body tag
   // Then, place scoped styles here.
 	#main {
+		.form_table {
+			width: 70%;
+			.form_table_both {
+				textarea {
+					width: 100%;
+				}
+				input {
+					width: 100%;
+				}
+			}
+			.form_table_right {
+				text-align: right;
+			}
+		}
 		.other_site {
 			width: 70%;
 			text-align: right;
@@ -20,6 +34,7 @@ body.messages {
 			margin: 0;
 			margin-bottom: 1.5em;
 			width: 70%;
+			word-wrap: break-word;
 			td {
 				padding-top: 0.1em;
 				padding-bottom: 0.1em;
