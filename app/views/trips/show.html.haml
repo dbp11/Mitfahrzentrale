@@ -125,10 +125,11 @@
                   %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
                   %td.right= link_to("annehmen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :accept => true))
                   %td.right= link_to("ablehnen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :decline => true))
-    %td
-      %script  src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAxJ8zWqcltXqiJtFYbrVBWBT-ZTKVLgdLz0ZRRJYP7ttYbtpFeBRZn6ERsJgdoYOA68Nhg54r5N4mtA" type="text/javascript"
-      .map 
-        %script type="text/javascript" load();
+    %td  
+      %script{ :src => "http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAxJ8zWqcltXqiJtFYbrVBWBT-ZTKVLgdLz0ZRRJYP7ttYbtpFeBRZn6ERsJgdoYOA68Nhg54r5N4mtAascript", :type => "text/javascript" }
+      %div#map 
+        :javascript
+          load();
       %h2 Hier kommt die Karten hin
       %br/
       %h2 (evtl als Miniatur mit
