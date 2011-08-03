@@ -30,11 +30,12 @@ class Trip < ActiveRecord::Base
     erg = []
 
     Request.all.each do |t|
-      if (start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
+      if self.get_free_seats >= 1 and start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
           ((Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
            [starts_at_N, starts_at_E], :units => :km) <= t.start_radius) and
           ((Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
-           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius)) then 
+           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius) and 
+           (!t.baggage and !self.baggage or self.baggage) then 
         erg << t
       end
     end
