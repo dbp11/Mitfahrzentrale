@@ -21,9 +21,9 @@
     %br
     = f.text_field :licence, :required => true 
   .field
-    = f.label :fuel_consumption, "Kraftstoffverbrauch"
+    = f.label :fuel_consumption, "Kraftstoffverbrauch [l pro 100 km] (1.0,...,3.3)"
     %br
-    = f.number_field :fuel_consumption
+    = f.text_field :fuel_consumption
   .field
     = f.label :smoker, "Raucher"
     %br
