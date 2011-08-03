@@ -62,13 +62,20 @@ class RequestsController < ApplicationController
     else
       @request.baggage = true
     end
+    #@request.start_radius = params[:start_radius]
+    #@request.end_radius = params[:end_radius]
+    @request.end_radius = 10
+    @request.start_radius = 10
+    #Radius noch implementieren, dann die Dummy Felder rausnehmen
+    @request.set_route
     respond_to do |format|
       if @request.save
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created, location: @request }
       else
-        format.html { render action: "new" }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, notice: 'FEHLER' }
+        #format.html { render action: "new" }
+        #format.json { render json: @request.errors, status: :unprocessable_entity }
       end
     end
   end
