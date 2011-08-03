@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
  
   #Selbstreferenzierende Beziehung User ignores User
   has_and_belongs_to_many :ignorings, :class_name => "User", :join_table => "ignore", :foreign_key => "ignored_id", :association_foreign_key => "ignoring_id"  
-  has_and_belongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
+  has_and_be
+elongs_to_many :ignoreds, :class_name => "User", :join_table => "ignore", :foreign_key => "ignoring_id", :association_foreign_key => "ignored_id"
   
   #Beziehung User schreibt User Nachricht/Rating
   has_many :received_messages, :class_name => "Message", :foreign_key =>"receiver_id", :dependent => :destroy
@@ -159,6 +160,7 @@ class User < ActiveRecord::Base
     end
     return erg
   end
+
   def get_coming_requests
     erg = []
     self.requests.each do |r|
@@ -167,6 +169,38 @@ class User < ActiveRecord::Base
       end
     end
     return
+  end
+
+  def toured_distance_p
+    distance = 0
+    self.passenger_trips.each do |t|
+      distance += t.distance
+    end
+    distance
+  end
+
+  def toured_time_p
+    time = 0
+    self.passenger_trips.each do |t|
+      time += t.duration
+    end
+    time
+  end
+
+  def toured_distance_d
+    distance = 0
+    self.driver_trips.each do |t|
+      distance += t.distance
+    end
+    distance
+  end
+
+  def toured_time_d
+    time = 0
+    self.driver_trips.each do |t|
+      time += t.duration
+    end
+    time
   end
  
 end
