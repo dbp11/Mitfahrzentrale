@@ -13,7 +13,7 @@ class Request < ActiveRecord::Base
   #Validation
   validates_presence_of :duration, :distance, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :start_time, :end_time, :start_radius, :end_radius
   
-  validate :destroy_old_requests, :start_time_in_past, :end_time_bigger_start_time, :baggage_not_nil, :start_address_same_as_end_address
+  validate :start_time_in_past, :end_time_bigger_start_time, :baggage_not_nil, :start_address_same_as_end_address
 
   def start_time_in_past
     if self.start_time < Time.now
@@ -52,11 +52,12 @@ class Request < ActiveRecord::Base
     erg = []
 
     Trip.all.each do |t|
-      if (t.start_time.to_f.between?(start_f, end_f) and 
+      if t.get_free_seats >= 1 and t.start_time.to_f.between?(start_f, end_f) and 
           ((Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
            [starts_at_N, starts_at_E], :units => :km) <= self.start_radius) and
           ((Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
-           [ends_at_N, ends_at_E], :units => :km)  <= self.end_radius)) then 
+           [ends_at_N, ends_at_E], :units => :km)  <= self.end_radius) and 
+           (!self.baggage and !t.baggage or t.baggage) then 
         erg << t
       end
     end
@@ -99,7 +100,6 @@ class Request < ActiveRecord::Base
     self.distance = route[0]["distance"]["value"]
     self.duration = route[0]["duration"]["value"]
   end
- 
 
 end
 

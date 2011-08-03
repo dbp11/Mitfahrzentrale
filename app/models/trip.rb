@@ -14,7 +14,7 @@ class Trip < ActiveRecord::Base
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
-  validate :driver_passenger, :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
+  validate :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
 
   validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
   
@@ -57,11 +57,12 @@ class Trip < ActiveRecord::Base
     erg = []
 
     Request.all.each do |t|
-      if (start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
+      if self.get_free_seats >= 1 and start_f.between?(t.start_time.to_f, t.end_time.to_f) and 
           ((Geocoder::Calculations.distance_between [t.starts_at_N, t.starts_at_E], 
            [starts_at_N, starts_at_E], :units => :km) <= t.start_radius) and
           ((Geocoder::Calculations.distance_between [t.ends_at_N, t.ends_at_E], 
-           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius)) then 
+           [ends_at_N, ends_at_E], :units => :km)  <= t.end_radius) and 
+           (!t.baggage and !self.baggage or self.baggage) then 
         erg << t
       end
     end
