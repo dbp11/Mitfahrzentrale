@@ -7,7 +7,7 @@ class Request < ActiveRecord::Base
   #Validation
   validates_presence_of :duration, :distance, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :start_time, :end_time, :start_radius, :end_radius
   
-  validate :destroy_old_requests, :start_time_in_past, :end_time_bigger_start_time, :baggage_not_nil, :start_address_same_as_end_address
+  validate :start_time_in_past, :end_time_bigger_start_time, :baggage_not_nil, :start_address_same_as_end_address
 
   #Methode die alle zum Radius des suchenden Users die passenden Trips sucht
   #@return Array von Trips
@@ -65,10 +65,6 @@ class Request < ActiveRecord::Base
     self.duration = route[0]["duration"]["value"]
   end
   
-  #def destroy_old_requests
-   # self.each do |x|
-    #if x.end_time.weeks_ago(2)
-
   def start_time_in_past
     if self.start_time < Time.now
       errors.add(:fields, 'Die Startzeit liegt in der Vergangenheit')
