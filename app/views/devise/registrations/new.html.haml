@@ -1,5 +1,6 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+%h1 
+  Registrieren
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:name=>"Formular", :action=>"create"}) do |f|
   = devise_error_messages!
   %p
     = f.label :"Name*"
@@ -12,11 +13,11 @@
   %p
     = f.label :"Passwort*"
     %br/
-    = f.password_field :password
+    = f.password_field :password, :required=>"required"
   %p
     = f.label :"Passwort wiederholen*"
     %br/
-    = f.password_field :password_confirmation
+    = f.password_field :password_confirmation, :required=>"required"
   %p
     = f.label :"Geburtsdatum"
     %br/
@@ -32,32 +33,20 @@
 
   %p
     = f.label :"PLZ*"
-    %br/
-    = f.number_field:zipcode, :required=>"required",
-                              :min=>"10000",
-                              :max=>"99999"
+    %br
+      = f.text_field:zipcode, :required=>"required", :class=>"integer", 
+                              :maxlength=>"5", :size=>"30", :remote=>"true",
+                              :onblur => "if(this.value.length<5){alert('PlZ zu kurz'); this.focus();}"
   %p
     = f.label :"Stadt*"
     %br/
-    = f.text_field:city, :required=>"required"
-
-  %p
-<<<<<<< HEAD
-    = f.label :"Geschlecht*"
-    %br/
-=======
-    %br
-    = f.label :roles
-  %p
-    %br
-    = f.collection_select :role, User::ROLES, :to_s, :humanize 
+    = f.text_field:city
 
   %p
     %br
     = f.label :Geschlecht
   %p
     %br
->>>>>>> 16d4bd98a4c056283a04bc2f6996e8ddcb10feca
     = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "Maennlich" : "Weiblich"), :id=>"form_table_second"
 
   %p

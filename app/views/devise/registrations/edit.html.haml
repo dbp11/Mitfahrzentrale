@@ -51,10 +51,7 @@
       %td.form_table_left
         = f.label :Geschlecht
       %td.form_table_right 
-        - if @user.sex? 
-          = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], "1")
-        - else
-          = f.select:sex, options_for_select([["Maennlich", "1"], ["Weiblich", "0"]], "0")
+        = f.select:sex,  options_for_select([["Maennlich","1"], ["Weiblich","0"]], @user.sex? ? "1" : "0")
 
     %tr.form_table_row
       %td.form_table_left
@@ -69,19 +66,9 @@
       %td.form_table_right
         = f.label :"PLZ*"
       %td.form_table_left
-        :javascript
-          function zipcheck(){
-            var element=null; 
-            element=document.Formular.zipcode;  
-            if(element.value.length<5){
-              alert('PLZ zu kurz'); 
-              element.focus(); 
-              return false;
-            } 
-            return true;
-          }
+        = f.text_field:zipcode, :required=>"required", :maxlength=>"5", :size=>"30", :class=>"integer", 
+      :onblur => "var a='/(\w.+)'; var b = (this.value).search(/[^0-9]+/);if(this.value.length<5){alert('PLZ zukurz oder falsch!'); this.focus();} if(b>=0){alert('PLZ enthält falsche Zeichen!'); this.focus;}"
 
-        = f.text_field:zipcode, :required=>"required", :class=>"integer", :maxlength=>"5", :size=>"30", :name=>"zipcode", :onblur => "zipcheck();"
       %td{:class=>"label", :id=>"form_table_middle"}sichtbar
       %td.form_table_end
         = f.check_box:visible_zip
