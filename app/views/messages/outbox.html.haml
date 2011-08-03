@@ -1,6 +1,6 @@
 %h2 Gesendete Nachrichten
 %div.other_site
-	= link_to("Empfangene Nachrichten", url_for(:action => "index", :controller => "messages"))
+	= link_to( image_tag( '/images/messages/message_button_inbox.png', :size => "50x50"), url_for(:action => "index", :controller => "messages"))
 
 - @messages.each do |message|
 	%table.message_table
