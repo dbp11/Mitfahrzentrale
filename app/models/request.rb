@@ -91,8 +91,7 @@ class Request < ActiveRecord::Base
   def start_address_same_as_end_address
     if (starts_at_N == ends_at_N and starts_at_E == ends_at_E)
       errors.add(:field, 'Startadresse = Endadresse, Fahrt lohnt sich nicht')
-    end
-    
+    end    
   end
 
 end

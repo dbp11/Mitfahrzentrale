@@ -35,33 +35,43 @@
 -#
 
 = form_tag("create", :method => "post") do
-	%table
-		%tr
-			%td Von
-			-# entweder das textfield unten oder eine select-box
-			%td= text_field_tag(:address_start, nil, :required => "required")
-		%tr
-			%td Nach
-			-# entweder das textfield unten oder eine select-box
-			%td= text_field_tag(:address_end, nil, :required => "required")
-		%tr
-			%td Start-Datum
-			%td
-				%input{:name => "date_start", :required => "required", :type => "date"}/
-			%td Start-Uhrzeit
-			%td
-				%input{:name => "time_start", :required => "required", :type => "time"}/
-		%tr
-			%td Ende-Datum
-			%td
-				%input{:name => "date_end", :required => "required", :type => "date"}/
-			%td Ende-Uhrzeit
-			%td
-				%input{:name => "time_end", :required => "required", :type => "time"}/
-		%tr
-			%td Gep&auml;ck
-			%td= check_box_tag(:baggage)
-		%tr
-			%td
-			%td= submit_tag("Erstellen")
+  %table
+    %tr
+      %td Von
+      -# entweder das textfield unten oder eine select-box
+      %td= text_field_tag(:address_start, nil, :required => "required")
+      %td
+        %select{:name => "start_radius", :required => "required"}
+          %option{:value => "0"} Radius
+          = 10.times do |i|
+            %option{:value => 5*(i+1)}= "bis #{5*(i+1)}km"
+    %tr
+      %td Nach
+      -# entweder das textfield unten oder eine select-box
+      %td= text_field_tag(:address_end, nil, :required => "required")
+      %td
+        %select{:name => "end_radius", :required => "required"}
+          %option{:value => "0"} Radius
+          = 10.times do |i|
+            %option{:value => 5*(i+1)}= "bis #{5*(i+1)}km"
+    %tr
+      %td Start-Datum
+      %td
+        %input{:name => "date_start", :required => "required", :type => "date"}/
+      %td Start-Uhrzeit
+      %td
+        %input{:name => "time_start", :required => "required", :type => "time"}/
+    %tr
+      %td Ende-Datum
+      %td
+        %input{:name => "date_end", :required => "required", :type => "date"}/
+      %td Ende-Uhrzeit
+      %td
+        %input{:name => "time_end", :required => "required", :type => "time"}/
+    %tr
+      %td Gep&auml;ck
+      %td= check_box_tag(:baggage)
+    %tr
+      %td
+      %td= submit_tag("Erstellen")
 

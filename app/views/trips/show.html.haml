@@ -49,32 +49,35 @@
 - u_passengers = @uncommited_passenger
 - f_seats = @free_seats
 - o_seats = @occupied_seats
+- fahrer = @trip.user
+- trip = @trip
+- user = @user
 
-%table{:border => "1"}
+
+%table.trips_base_table
   %tr
     %td
       -#Tabelle mit Informationen über die Fahrt
       %table.trips_table
         %tr
-          %td.center Fahrtinformationen
+          %td.center{:colspan => "4"} Fahrtinformationen
         %tr
-          %td
-            %table.trips_table
-              %tr
-                %td Abfahrt:
-                = form_tag do
-                  %td= text_field_tag(:date_start, @trip.start_time.to_date, :disabled => true)
-                  %td= text_field_tag(:time_start, @trip.start_time.to_time, :disabled => true)
-                  %td= text_field_tag(:starts_at, @trip.address_start, :disabled => true)
-              %tr
-                %td Ankunft:
-                = form_tag do
-                  %td
-                  %td
-                  %td= text_field_tag(:ends_at, @trip.address_end, :disabled => true)
-              -#Tabelle mit Informationen über Fahrer, Mitfahrer, potentielle Mitfahrer
-              -#in Abhängigkeit vom Status des aktuellen Benutzers
-      %br/
+          %td.left_bold#minimal Abfahrt:
+          %td.left= trip.address_start
+          %td.center#minimal= trip.start_time.strftime("%d.%m.%Y")
+          %td.center#minimal= trip.start_time.strftime("%H:%M")
+        %tr
+          %td.left_bold#minimal Ankunft:
+          %td.left= trip.address_end
+          %td.center#minimal
+          %td.center#minimal
+        %tr
+          %td.left_bold#minimal Fahrer:
+          %td.left{:colspan => "3"}
+            = link_to("#{fahrer.name}", fahrer) +" "+ link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :uid => fahrer.id, :tid => trip.id))
+
+      -#Tabelle mit Informationen über Fahrer, Mitfahrer, potentielle Mitfahrer
+        in Abhängigkeit vom Status des aktuellen Benutzers
       %table{:border => "1"}
         %tr
           -#wenn c_passengers == nil, dann "0" ausgeben, sonst Anzahl c_passengers, dazu Anzahl Gesamtplätze
@@ -92,20 +95,20 @@
             %tr
               -#nur Fahrer und Mitfahrer dürfen die Links zu den anderen Mitfahrern
               -#inkl. Namen der Mitfahrer sehen
-              - if can? :read, @trip
+              - if can? :read, trip
                 %td= link_to "#{passenger}", passenger
               %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
               -#nur Fahrer und Mitfahrer können Nachrichten an die Mitfahrer versenden.
               -#jedoch kein Versenden an sich selbst (Variable benötigt)
-              - if can? :read, @trip and passenger != @user
+              - if can? :read, trip and passenger != user
                 -#der Link wird so wohl nicht funktionieren. Mit Controller klären
-                %td= link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => @trip.id, :uid => passenger.id))
+                %td= link_to("Nachricht schicken", url_for(:action => "new", :controller => "messages", :tid => trip.id, :uid => passenger.id))
               -#nur der Fahrer kann Leute aus der Fahrt entfernen und der Nutzer kann sich selbst austragen
-              - if can? :read, @trip or passenger == @user
+              - if can? :read, trip or passenger == @user
                 -#der Link ist so nicht korrekt. Mit Controllern abklären, wie das laufen soll
                 %td= link_to "Austragen", passenger
       -#nur der Fahrer kann die User sehen, die sich auf diese Fahrt beworben haben
-      - if can? :read, @trip
+      - if can? :read, trip
         %br/
         %table{:border => "1"}
           %tr
@@ -126,7 +129,7 @@
                 %td= link_to 'annehmen', passenger
                 -#dito. entweder Link für den potentiellen mitfahrer, um die Anfrage zurück zu nehmen oder
                 -#Link für den Fahrer, um die Anfrage abzulehnen
-                %td= passenger == @user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
+                %td= passenger == user ? link_to('Anfrage zurücknehmen', passenger) : link_to('ablehnen', passenger)
     %td
       %h2 Hier kommt die Karten hin
       %br/

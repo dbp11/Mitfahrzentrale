@@ -152,4 +152,16 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def user_committed (compared_user)
+    self.passengers.where(user_id = compared_user.id).first.confirmed?
+  end
+  
+  def user_uncommitted (compared_user)
+    if self.passengers.where(user_id = compared_user.id).first.confirmed?
+      false
+    else true
+    end
+  end
+
+
 end
