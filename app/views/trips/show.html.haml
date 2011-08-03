@@ -123,8 +123,12 @@
                 %tr
                   %td= link_to "#{passenger}", passenger
                   %td= "#{passenger.get_avg_rating} (#{passenger.count_ratings})"
-                  %td.right= link_to("annehmen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :accept => true))
-                  %td.right= link_to("ablehnen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :decline => true))
+                  - if @status == @FAHRER
+                    %td.right= link_to("annehmen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :accept => true))
+                    %td.right= link_to("ablehnen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :decline => true))
+                  - else
+                    %td
+                    %td.right= link_to("austragen", url_for(:action => "update", :controller => "trips", :uid => passenger.id, :decline => true)
     %td
       %h2 Hier kommt die Karten hin
       %br/
@@ -133,5 +137,3 @@
       %h2 Link zur Gro&szlig;ansicht)
   %tr
     %td{:colspan => "2"}= link_to("Bewerben", url_for(:action => "update", :controller => "trips", :request => true))
-  %tr
-    %td{:colspan => "2"}= "@status = #{@status}\n@FAHRER = #{@FAHRER}\n@MITFAHRER = #{@MITFAHRER}\n@POTENTIELLER_MITFAHRER = #{@POTENTIELLER_MITFAHRER}\n@GAST = #{@GAST}"

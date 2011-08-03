@@ -27,7 +27,7 @@
       %td.center#minimal Uhrzeit
     - @future_trips.each do |trip|
       %tr
-        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip
+        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip, :class => "number_link"
         %td.left_bold#minimal Abfahrt:
         %td.left= trip.address_start
         %td.center#minimal= trip.start_time.strftime("%d.%m.%Y")
@@ -95,7 +95,7 @@
       %td.center#minimal Uhrzeit
     - @future_ridden_trips.each do |trip|
       %tr
-        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip
+        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip, :class => "number_link"
         %td.left_bold#minimal Abfahrt:
         %td.left
           -#%input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
@@ -134,7 +134,7 @@
       %td.center#minimal Uhrzeit
     - @ridden_trips.each do |trip|
       %tr
-        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip
+        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip, :class => "number_link"
         %td.left_bold#minimal Abfahrt:
         %td.left
           -#%input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
