@@ -309,7 +309,8 @@ class User < ActiveRecord::Base
   #Lässt einen User sich um eine Mitfahrgelegenheit bewerben
   #@param Trip trp um den sich beworben werden soll
   def bewerben (trp)
-    Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
+    t = Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
+    t.save
   end
     
  
