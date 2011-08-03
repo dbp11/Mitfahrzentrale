@@ -3,6 +3,11 @@
 # erstellt, Messages versandt, Ratings gegeben, an ihm die Profileinstellungen gespeichert. Folglich ist der User, 
 # in hinsicht der Beziehungen, die komplexeste Klasse.
 # Er besitzt folgende Datenfelder:
+# *email :string -- E-Mail Adresse des Benutzers
+# *encrypted_password :string -- verschlüsseltes Passwort des Benutzers (Devise Plugin)
+# *reset_password_token :string -- Zurücksetzen des Passwortkürzels
+# *reset_password_sent_at :datetime -- letztes Zurücksetzen des Passwort
+# *remember_created_at :datetime -- Remember_Me Anlage am
 # *sign_in_count :integer -- Anzahl der Logins
 # *current_sign_in_at :datetime -- Aktuell eingeloggt um
 # *last_sign_in_at :datetime -- Zuletzt eingeloggt am
@@ -15,16 +20,27 @@
 # *addressN :float -- <i>Von Geocoder benötigt:</i> nördliche Breite der Adresse 
 # *addressE :float -- <i>Von Geocoder benötigt:</i> östliche Länge der Adresse
 # *zipcode :integer -- Postleitzahl
-# *
-#
-
-
-
-
-
+# *instantmessenger :string -- Instantmessenger
+# *city :string Wohnort
+# *birthday :date -- Geburtsdatum des Users 
+# *phone :string Telephonnummer
+# *business :boolean -- Ist User Gewerbs- oder Privatanbieter
+# *email_notifications -- E-Mail-Benachrichtigungen an- oder ausschalten
+# *visible_phone :boolean -- Sichtbarkeit der Telephonnummer an- oder ausschalten
+# *visible_email :boolean -- Sichtbarkeit der E-Mail an- oder ausschalten
+# *visible_address :boolean -- Sichtbarkeit der Adresse an- oder ausschalten
+# *visible_age :boolean -- Sichtbarkeit des Alter an- oder ausschalten
+# *visible_im :boolean -- Sichtbarkeit des Instantmessenger an- oder ausschalten
+# *visible_cars :boolean -- Sichtbarkeit der Autos an- oder ausschalten
+# *visible_zip :boolean -- Sichtbarkeit der Postleitzahl an- oder ausschalten
+# *visible_city :boolean -- Sichtbarkeit der Stadt an- oder ausschalten
+# *picture_file_name :string -- <i>Von Paperclip gefordert</i> Name des gespeicherten Bildes
+# *picture_content_type :string -- <i>Von Paperclip gefordert</i> Dateityp des Bildes
+# *picture_file_size :integer -- <i>Von Paperclip gefordert </i> Größe des Bildes
+# *picture_updated_at :datetime -- <i>Von Paperclip gefordert </i> letzte Bildänderung
 class User < ActiveRecord::Base
 
-  ####################### Railsplugin Devise ################################
+  ####################### ==Railsplugin Devise ################################
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, 
   # :timeoutable and :omniauthable
@@ -40,7 +56,7 @@ class User < ActiveRecord::Base
                                            :thumb => "100x100>"}
 
 
-  ############################ Validations: #################################
+  ############################ ==Validations: #################################
   # Stat. Integrität: Email muss vorhanden, unique und min 8 char lang sein
   # Name, Adresse, Plz, Stadt müssen vorhanden sein
   # Die boolschen Datenfelder zur Bestimmung der Sichtbarkeiten müssen gesetzt 
@@ -53,7 +69,7 @@ class User < ActiveRecord::Base
 
  
   
-  ############################# Beziehungen: #################################
+  ############################# ==Beziehungen: #################################
   #Beziehung vom Modell User zu Trip über die Joinrelation Passengers 
   #(:through => Passengers) als passenger_trips
   has_many :passenger_trips, :class_name => "Trip", :through => :passengers, 
@@ -86,13 +102,14 @@ class User < ActiveRecord::Base
   has_many :written_ratings, :class_name => "Rating", :foreign_key => "author_id", :dependent => :destroy
   has_many :received_ratings, :class_name => "Rating", :foreign_key => "receiver_id", :dependent => :destroy
  
-  #Methoden:
+  ################################################### ==Methoden: ####################################################
   #toString Methode für User
   def to_s
     name
   end
   
   #Vergangene angebotene Trips des Users
+  #@return Trip [] erg
   def driven
    erg=[] 
    driver_trips.each do |x|
@@ -104,6 +121,7 @@ class User < ActiveRecord::Base
   end
 
   #Noch nicht vergangene angebotene Trips des Users
+  #return Trip [] erg
   def to_drive
     erg=[]
     driver_trips.each do |x|
@@ -115,6 +133,7 @@ class User < ActiveRecord::Base
   end
 
   #Vergangene Suchen des Users
+  #@return Trip [] erg
   def driven_with
     erg=[]
     passenger_trips.each do |x|
@@ -126,6 +145,7 @@ class User < ActiveRecord::Base
   end
 
   #Noch laufende Suchen des Users
+  #@return Trip [] erg
   def to_drive_with
     erg=[]
     passenger_trips.each do |x|
@@ -136,20 +156,21 @@ class User < ActiveRecord::Base
     return erg
   end
 
+  #Methode zur Ermittlung des durchschnittlichen Ratings des Users 
+  #@return float 3, wenn User noch keine Bewertungen hat
+  #@return float Sum(Ratings)/Anz(Ratings)
   def get_avg_rating
     count = 0
     erg = 0
-    #if self.received_ratings.empty? 
-    #  return 3
-   # else
-      self.received_ratings.each do |x|
+    self.received_ratings.each do |x|
         erg = erg + x.mark
         count +=1
-      end
-      return erg.to_f / count.to_f
-    #end
+    end
+    return erg.to_f / count.to_f
   end
-
+  
+  #Methode die alle Erhaltenen Ratings des Users zählt
+  #@return integer count
   def count_ratings
     count = 0
     self.received_ratings.each do |x|
@@ -158,6 +179,8 @@ class User < ActiveRecord::Base
     return count
   end
 
+  #Methode, die alle gesendeten Nachrichten eines Users, die nicht gelöscht sind, zurückliefert
+  #@return Message [] absteigend sortiert nach Datum
   def get_written_messages
     erg = []
     self.written_messages.each do |m|
@@ -168,6 +191,8 @@ class User < ActiveRecord::Base
     erg.sort{|a,b| b.created_at <=> a.created_at}
   end
 
+  #Methode, die alle empfangenen Nachrichten eines Users, die nicht gelöscht sind, zurückliefert
+  #@return Message [] absteigend sortiert nach Datum
   def get_received_messages
     erg = []
     self.received_messages.each do |m|
@@ -177,11 +202,16 @@ class User < ActiveRecord::Base
     end
     erg.sort{|a,b| b.created_at <=> a.created_at}
   end
-
+  
+  #Methode, die die relative Anzahl an Ignorierungen eines Users zurückliefert
+  #@return float Ignorierungen_des_Users / Alle_User
   def get_relative_ignorations
     self.ignoreds.count.to_f / User.all.count.to_f
   end
-
+  
+  #Methode, die alle, für den User sichtbaren, Autos zurückliefert.
+  #Wenn ein User bei einem Trip Mitfahrer ist, so wird das Auto das Fahrers für ihn sichtbar
+  #@return Car Set
   def get_visible_cars
     erg = Set.new
     self.passenger_trips.each do |c|
@@ -265,7 +295,7 @@ class User < ActiveRecord::Base
     time
   end
 
-  def already_rated (rater, trp)
+  def allready_rated (rater, trp)
     check = false
     rater.written_ratings.each do |r|
       if r.receiver_id = self.id and r.trip_id = trp.id then check = true
@@ -275,7 +305,7 @@ class User < ActiveRecord::Base
   end
 
   def bewerben (trp)
-    Passenger.new("user_id" => self.id, "trip_id" => trp.id, "confirmed" => false)
+    Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
   end
     
  
