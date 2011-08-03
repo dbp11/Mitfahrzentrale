@@ -313,5 +313,4 @@ class User < ActiveRecord::Base
     t.save
   end
     
- 
 end

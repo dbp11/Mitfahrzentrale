@@ -34,5 +34,4 @@ class Rating < ActiveRecord::Base
   def to_s
     comment
   end
-
 end

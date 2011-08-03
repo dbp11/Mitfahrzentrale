@@ -39,5 +39,4 @@ class Car < ActiveRecord::Base
     "Nummernschild: " + licence + "\n" +
     "Raucher: " + smoker? ? "ja" : "nein"
   end
-
 end
