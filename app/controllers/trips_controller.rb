@@ -83,6 +83,7 @@ class TripsController < ApplicationController
       @trip.free_seats = params[:free_seats]
     end
     @trip.set_route
+    @trip.baggage = true
 
     respond_to do |format|
       if @trip.save
@@ -99,11 +100,6 @@ class TripsController < ApplicationController
   # PUT /trips/1.json
   def update
     @trip = Trip.find(params[:id])
-    if params[:request] == true
-      current_user.bewerben(@trip.id)
-      redirect_to @trip, notice: 'Erfolgreich beworben'
-    end
-
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
