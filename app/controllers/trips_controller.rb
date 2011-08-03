@@ -29,6 +29,9 @@ class TripsController < ApplicationController
     @GAST = 3
     @status = @FAHRER
     @trip = Trip.find(params[:id])
+    if params[:request]
+      current_user.bewerben(@trip)
+    end
     @commited_passenger = @trip.get_committed_passengers
     @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
@@ -100,6 +103,10 @@ class TripsController < ApplicationController
   # PUT /trips/1.json
   def update
     @trip = Trip.find(params[:id])
+    if params[:request]
+      current_user.bewerben(@trip)
+    end
+
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
