@@ -78,11 +78,11 @@ class User < ActiveRecord::Base
   end
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars, :picture_file_size, :picture_file_name, :picture_content_type, :picture_update_at, :business
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :address, :zipcode, :birthday, :city, :sex, :phone, :instantmessenger, :visible_age, :visible_address, :visible_zip, :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars, :pic_file_size, :pic_file_name, :pic_content_type, :pic_update_at, :business, :pic
   
   
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
-  has_attached_file :picture, :styles => { :medium =>  "300x300>", :thumb => "100x100>"}
+  has_attached_file :pic, :styles => { :medium =>  "300x300>", :thumb => "500x500>"}
 
 
  
