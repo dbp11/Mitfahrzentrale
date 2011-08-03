@@ -13,6 +13,7 @@ class Rating < ActiveRecord::Base
   
 
   #Validation
+  validates_presence_of :trip_id, :receiver_id, :author_id
   validates_numericality_of :mark, :only_interger => true, :message => "Note kann nur ganze Zahl sein"
   validates_inclusion_of :mark, :in => 1..6, :message => "Note kann nur von 1 bis 6 verteilt werden"
 
