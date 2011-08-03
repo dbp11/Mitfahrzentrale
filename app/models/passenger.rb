@@ -16,12 +16,19 @@ class Passenger < ActiveRecord::Base
   
   
   #Validation
-  validate :confirmed_not_nil
+  validate :confirmed_not_nil, :not_his_own_driver
+  
 
   #Methode die prüft ob der Wert confirmed nicht Null ist
   def confirmed_not_nil
     if(self.confirmed == nil)
       errors.add(:field, 'confirmed muss true oder false sein')
+    end
+  end
+
+  def not_his_own_driver
+    if self.user.in(self.trip.users)
+      errors.add(:field, 'driver must not be his own passenger')
     end
   end
 
