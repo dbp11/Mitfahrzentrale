@@ -29,24 +29,14 @@
       %tr
         %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip
         %td.left_bold#minimal Abfahrt:
-        %td.left
-          -#%input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
-          = trip.address_start
-        %td.center#minimal
-          -#%input{:type => "date", :readonly => "readonly", :value => trip.start_time.to_date}/
-          = trip.start_time.strftime("%d.%m.%Y")
-        %td.center#minimal
-          -#%input{:type => "time", :readonly => "readonly", :value => trip.start_time.to_time}/
-          = trip.start_time.strftime("%H.%M")
+        %td.left= trip.address_start
+        %td.center#minimal= trip.start_time.strftime("%d.%m.%Y")
+        %td.center#minimal= trip.start_time.strftime("%H.%M")
       %tr
         %td.left_bold#minimal Ankunft:
-        %td.left
-          -#%input{:type => "text", :readonly => "readonly", :value => trip.address_end}/
-          = trip.address_end
+        %td.left= trip.address_end
         %td.center#minimal
-          -#%input{:type => "date", :readonly => "readonly", :value => trip.end_time.to_date}/
         %td.center#minimal
-          -#%input{:type => "time", :readonly => "readonly", :value => trip.end_time.to_time}/
 
 %br/
 %br/
@@ -66,7 +56,7 @@
       %td.center#minimal Uhrzeit
     - @completed_trips.each do |trip|
       %tr
-        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip
+        %td.number_col#minimal{:rowspan => "2"}= link_to "##{trip.id}", trip, :class => "number_link"
         %td.left_bold#minimal Abfahrt:
         %td.left
           -#%input{:type => "text", :readonly => "readonly", :value => trip.address_start}/
