@@ -9,18 +9,24 @@
 					%li= msg
 	= f.hidden_field :writer_id
 	= f.hidden_field :receiver_id
-	.field
-		= f.label("An:")
-		= link_to(@message.receiver.name, url_for(:action => "show", :controller => "users", :id => @message.receiver.id))
-	.field
-		= f.label(:subject, "Betreff")
-		%br
-		= f.text_field(:subject)
-	.field
-		= f.label(:message, "Nachricht")
-		%br
-		= f.text_area :message
-	.actions
-		= link_to('Zurück', "javascript:history.go(-1)")
-		= f.submit 'Senden'
+	%table.form_table
+		%tr
+			%td.form_table_both{:colspan => "2"}
+				= f.label("An:")
+				= link_to(@message.receiver.name, url_for(:action => "show", :controller => "users", :id => @message.receiver.id))
+		%tr
+			%td.form_table_both{:colspan => "2"}
+				= f.label(:subject, "Betreff")
+				%br
+				= f.text_field(:subject, :maxlength => "120", :required => "required")
+		%tr
+			%td.form_table_both{:colspan => "2"}
+				= f.label(:message, "Nachricht")
+				%br
+				= f.text_area(:message, :required => "required")
+		%tr
+			%td.form_table_left
+				= link_to('Zurück', "javascript:history.back()")
+			%td.form_table_right
+				= f.submit 'Senden'
 
