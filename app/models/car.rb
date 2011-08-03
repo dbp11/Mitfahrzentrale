@@ -2,16 +2,30 @@
 
 class Car < ActiveRecord::Base
   
-  #Beziehung: user_has_cars
+#############################   Beziehungen   ############################
   belongs_to :user
   has_many :trips
 
+
+#############################   Validations   ############################
+  
+  
   #Kontrolle ob das Kennzeichen eine Gülitige Länge hat
-  validates :licence, :uniqueness => true, :presence => true, :length => {:minimum => 1}
+  validates :licence, :uniqueness => true, :presence => true, :length => {:in => 1..10}
 
   #Validation ein Auto muss ein Nummernschild, Bezeichnung und Sitzplätze haben
-  validates_presence_of :seats, :licence, :description 
+  validates_presence_of :seats, :licence, :car_type, :user_id 
   
+  validates_numericality_of :fuel_consumption
+  validates_inclusion_of :fuel_consumption, :in => 0..99
+  validates_length_of :description, :in => 0..160
+  
+
+
+########################   Methoden für Controller   #######################
+  
+  
+
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
   has_attached_file :carpic, :styles => { :medium =>  "400x400>", :thumb => "100x100>"}
 

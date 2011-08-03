@@ -1,6 +1,6 @@
 %h2 Gesendete Nachrichten
 %div.other_site
-	= link_to("Empfangene Nachrichten", url_for(:action => "index", :controller => "messages"))
+	= link_to( image_tag( '/images/messages/message_button_inbox.png', :size => "50x50"), url_for(:action => "index", :controller => "messages"))
 
 - @messages.each do |message|
 	%table.message_table
@@ -14,7 +14,7 @@
 			%td.message_table_both{:colspan => "2"}
 				%div
 					%span Betreff:
-					= message.subject
+					= raw(h(message.subject).gsub(/\[\[([^\|]*)\|([^\]]*)\]\]/,'<a href=\1>\2</a>'))
 		%tr
 			%td.message_table_both{:colspan => "2"}
 				= raw(h(message.message).gsub(/[\n]/,"<br />"))
