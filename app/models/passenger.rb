@@ -6,9 +6,14 @@
 class Passenger < ActiveRecord::Base
    include ActiveModel::Validations 
 
+#############################   Beziehungen   ############################
+    
   #Beziehungen  
   belongs_to :user
   belongs_to :trip
+  
+#############################   Validations   ############################
+  
   
   #Validation
   validate :confirmed_not_nil
@@ -19,5 +24,7 @@ class Passenger < ActiveRecord::Base
       errors.add(:field, 'confirmed muss true oder false sein')
     end
   end
+
+########################   Methoden für Controller   #######################
 
 end

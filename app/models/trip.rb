@@ -1,6 +1,8 @@
 class Trip < ActiveRecord::Base
   include ActiveModel::Validations
 
+#############################   Beziehungen   ############################
+
   #Modellierung der Beziehungen
   belongs_to :user
   belongs_to :car 
@@ -8,6 +10,7 @@ class Trip < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :passengers, :dependent => :destroy
   
+#############################   Validations   ############################
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
@@ -17,8 +20,29 @@ class Trip < ActiveRecord::Base
   
   #Freie Sitzplätze dürfen nicht negativ sein
   validates_length_of :free_seats, :minimum => 1
+ # Methode prüft ob ein erstellter Trip in der Vergangenheit liegt
+  def start_time_in_past
+    if start_time < Time.now
+      errors.add(:fields, 'Startzeit liegt in der Vergangenheit')
+    end
+  end
+  
+  #Start- und Endaddresse dürfen nicht übereinstimmen
+  def start_address_same_as_end_address
+    if (starts_at_N == ends_at_N and starts_at_E == ends_at_E)
+      errors.add(:field, 'Startadresse = Endadresse, Fahrt lohnt sich nicht')
+    end    
+  end
 
+  #Baggage darf nicht Null sein
+  def baggage_not_nil
+    if(self.baggage == nil)
+      errors.add(:field, 'Baggage ist Null')
+    end
+  end
 
+########################   Methoden für Controller   #######################
+  
   #Methoden:
   #toString Methode für Trips
   def to_s
@@ -131,27 +155,7 @@ class Trip < ActiveRecord::Base
     return (distance / 1000).round(3) + "Km"
   end
 
-  # Methode prüft ob ein erstellter Trip in der Vergangenheit liegt
-  def start_time_in_past
-    if start_time < Time.now
-      errors.add(:fields, 'Startzeit liegt in der Vergangenheit')
-    end
-  end
-  
-  #Start- und Endaddresse dürfen nicht übereinstimmen
-  def start_address_same_as_end_address
-    if (starts_at_N == ends_at_N and starts_at_E == ends_at_E)
-      errors.add(:field, 'Startadresse = Endadresse, Fahrt lohnt sich nicht')
-    end    
-  end
-
-  #Baggage darf nicht Null sein
-  def baggage_not_nil
-    if(self.baggage == nil)
-      errors.add(:field, 'Baggage ist Null')
-    end
-  end
-
+ 
   def user_committed (compared_user)
     self.passengers.where(user_id = compared_user.id).first.confirmed?
   end
