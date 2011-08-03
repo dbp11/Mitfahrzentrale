@@ -61,6 +61,5 @@ class Request < ActiveRecord::Base
     self.distance = route[0]["distance"]["value"]
     self.duration = route[0]["duration"]["value"]
   end
-
 end
 

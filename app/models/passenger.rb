@@ -4,10 +4,20 @@
 
 
 class Passenger < ActiveRecord::Base
-  
+   include ActiveModel::Validations 
+
   #Beziehungen  
   belongs_to :user
   belongs_to :trip
+  
+  #Validation
+  validate :confirmed_not_nil
 
+  #Methode die prüft ob der Wert confirmed nicht Null ist
+  def confirmed_not_nil
+    if(self.confirmed == nil)
+      errors.add(:field, 'confirmed muss true oder false sein')
+    end
+  end
 
 end

@@ -8,6 +8,10 @@ class Rating < ActiveRecord::Base
   #Bziehung: user_gets_rating
   belongs_to :receiver, :class_name =>"User"
 
+  #Validation
+  validates_presence_of :mark
+
+
   #to String Methode für Ratings
   def to_s
     comment

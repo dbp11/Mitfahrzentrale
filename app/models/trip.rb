@@ -1,4 +1,5 @@
 class Trip < ActiveRecord::Base
+  include ActiveModel::Validations
 
   #Modellierung der Beziehungen
   belongs_to :user
@@ -10,12 +11,12 @@ class Trip < ActiveRecord::Base
 
   #Validation, eine Fahrt muss ein Datum, Startort, Zielort, freie Sitzplätze haben
   
-  validate :driver_passenger
+  validate :driver_passenger, :start_time_in_past, :start_address_same_as_end_address, :baggage_not_nil
 
   validates_presence_of :address_start, :address_end, :start_time, :free_seats, :starts_at_N, :starts_at_E, :ends_at_N, :ends_at_E, :duration, :distance
   
   #Freie Sitzplätze dürfen nicht negativ sein
-  validates_length_of :free_seats, :in => 1..200
+  validates_length_of :free_seats, :minimum => 1
 
 
   #Methoden:
@@ -129,10 +130,25 @@ class Trip < ActiveRecord::Base
   def get_route_distance
     return (distance / 1000).round(3) + "Km"
   end
-  # Methode zum überprüfen, dass ein Fahrer nicht gleichzeitig Mitfahrer in seinem eigenen Trip ist.
-  def driver_passenger
-    if self.user and self.users
-      errors.add(:field, 'Fahrer kann nicht gleichzeitig Mitfahrer sein')
+
+  # Methode prüft ob ein erstellter Trip in der Vergangenheit liegt
+  def start_time_in_past
+    if start_time < Time.now
+      errors.add(:fields, 'Startzeit liegt in der Vergangenheit')
+    end
+  end
+  
+  #Start- und Endaddresse dürfen nicht übereinstimmen
+  def start_address_same_as_end_address
+    if (starts_at_N == ends_at_N and starts_at_E == ends_at_E)
+      errors.add(:field, 'Startadresse = Endadresse, Fahrt lohnt sich nicht')
+    end    
+  end
+
+  #Baggage darf nicht Null sein
+  def baggage_not_nil
+    if(self.baggage == nil)
+      errors.add(:field, 'Baggage ist Null')
     end
   end
 
