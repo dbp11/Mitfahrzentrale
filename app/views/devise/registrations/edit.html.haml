@@ -2,7 +2,7 @@
 
 %h1.head
   Profil bearbeiten
-%p
+%p.under
   Mit * gekennzeichnete Felder müssen ausgefüllt sein
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :name=>"Formular" }) do |f|
   = devise_error_messages!
@@ -20,12 +20,12 @@
         = f.email_field :email
     %tr.form_table_row
       %td.form_table_left
-        = f.label :password
+        = f.label :'Neues Passwort'
       %td.form_table_right
         = f.password_field :password
     %tr.form_table_row
       %td.form_table_left
-        = f.label :"Passwort wiederholen"
+        = f.label :"Neues Passwort wiederholen"
       %td.form_table_right
         = f.password_field :password_confirmation
     %tr.form_table_row
@@ -67,7 +67,7 @@
         = f.label :"PLZ*"
       %td.form_table_left
         = f.text_field:zipcode, :required=>"required", :maxlength=>"5", :size=>"30", :class=>"integer", 
-      :onblur => "var a='/(\w.+)'; var b = (this.value).search(/[^0-9]+/);if(this.value.length<5){alert('PLZ zukurz oder falsch!'); this.focus();} if(b>=0){alert('PLZ enthält falsche Zeichen!'); this.focus;}"
+      :onblur =>" var b = (this.value).search(/[^0-9]+/);if(this.value.length<5){alert('PLZ zu kurz!'); this.focus();} if(b>=0){alert('PLZ enthält falsche Zeichen!'); this.focus;}"
 
       %td{:class=>"label", :id=>"form_table_middle"}sichtbar
       %td.form_table_end
