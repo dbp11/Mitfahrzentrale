@@ -27,7 +27,9 @@ class TripsController < ApplicationController
     @MITFAHRER = 1
     @POTENTIELLER_MITFAHRER = 2
     @GAST = 3
-    @status = @FAHRER
+
+    @user = current_user
+    
     @trip = Trip.find(params[:id])
     if params[:request]
       current_user.bewerben(@trip)
@@ -36,6 +38,20 @@ class TripsController < ApplicationController
     @uncommited_passenger = @trip.get_uncommitted_passengers
     @free_seats = @trip.get_free_seats
     @occupied_seats = @trip.get_occupied_seats
+    if current_user == @trip.user
+      flash[:notice] = "FAHRER"
+      @status = @FAHRER
+    elsif @trip.user_committed (current_user)
+      flash[:notice] = "MITFAHRER"
+      @status = @MITFAHRER
+    elsif @trip.user_uncommitted (current_user)
+      flash[:notice] = "POTENTIELLER_MITFAHRER"
+      @status = @POTENTIELLER_MITFAHRER
+    else
+      flash[:notice] = "GAST"
+      @status = @GAST
+    end
+    
     
     respond_to do |format|
       format.html # show.html.erb

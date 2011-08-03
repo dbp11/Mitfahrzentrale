@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     :instantmessenger, :visible_age, :visible_address, :visible_zip, 
     :visible_phone, :visible_city, :visible_im, :visible_email, :visible_cars
   #Von Paperclip gefordertes Statement zum Anhängen von Bildern
-  has_attached_file :picture, :styles => { :medium =>  "300x300>", 
+  has_attached_file :pic, :styles => { :medium =>  "300x300>", 
                                            :thumb => "100x100>"}
 
 
@@ -309,9 +309,13 @@ class User < ActiveRecord::Base
   #Lässt einen User sich um eine Mitfahrgelegenheit bewerben
   #@param Trip trp um den sich beworben werden soll
   def bewerben (trp)
-    t = Passenger.new("user_id" => self.id, "trip_id" => trp.id, :confirmed => false)
-    t.save
-  end
-    
+      if self.passengers.where("user_id = ?", self.id).where("trip_id = ?", trp.id).count > 0
+        false
+      else
+        self.passengers.create(trip_id: trp.id, confirmed: false)
+        true
+      end
+
+  end    
  
 end
