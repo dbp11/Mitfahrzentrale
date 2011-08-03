@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .cars {
+  .other_side {
+    text-align: right;
+  }
   table tbody {
     border: 1px solid;
     border-width: 1px;
@@ -14,6 +17,7 @@
         text-align: center;
       }
     a img:hover {
+
       -webkit-animation: resize 700ms;
       -webkit-animation-iteration-count: infinite;
       -webkit-animation-direction: alternate;
@@ -33,7 +37,7 @@
 }
 @-webkit-keyframes resize {
   from { height: 40px; width: 40px;}
-  to{ height: 30px; width: 30px;}
+  to{ height: 40px; width: 40px;}
 }
 
 
