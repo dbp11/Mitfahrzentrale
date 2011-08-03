@@ -40,4 +40,5 @@ class Passenger < ActiveRecord::Base
 
 ########################   Methoden für Controller   #######################
 
+
 end
